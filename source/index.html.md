@@ -10573,7 +10573,7 @@ This operation does not require authentication
 
 ```json
 {
-  "totalPages": 6
+  "totalPages": 5
 }
 
 ```
