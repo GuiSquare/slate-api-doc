@@ -1,11 +1,10 @@
 ---
 title: Falcon Alpha Phoenix
 language_tabs:
-  - bash: Shell
+  - shell: cURL
   - http: HTTP
   - ruby: Ruby
-  - javascript: JavaScript
-  - javascript--nodejs: Node.JS
+  - javascript--nodejs: JavaScript
   - go: Go
   - java: Java
 toc_footers:
@@ -21,7 +20,7 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-This is the first version of the PaxFamilia 'public' API. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/). **(W.I.P.)**
+This is the first version of the PaxFamilia 'public' API. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/).
 
 Base URLs:
 
@@ -40,13 +39,13 @@ License: <a href="http://www.license.com">License Name</a>
    keep it safe, losing it will incur an identity scrutinization process to get a new one.
    NOTE - PaxFamilia reserves the right to invalidate this Api-key in case of gross missuse or any
    kind of suspicious activity / server overload
-2) Use the Authentication (/users/login) resource to generate a JWT with email + password + api-key in the
+2) Use the User Session (/users/login) resource to generate a JWT with email + password + api-key in the
    body params. The email and password must be of a company employee account to which the admin_right
    :api_user has been given, to do so the company admin must edit that employee's account. This will
    return a JWT in the response header and body which is valid for 2hrs.
 
 * API Key (JsonWebToken)
-    - Parameter Name: **Authorization**, in: header. 2) Use the Authentication (/users/login) resource to generate a JWT with email + password + api-key in the
+    - Parameter Name: **Authorization**, in: header. 2) Use the User Session (/users/login) resource to generate a JWT with email + password + api-key in the
    body params. The email and password must be of a company employee account to which the admin_right
    :api_user has been given, to do so the company admin must edit that employee's account. This will
    return a JWT in the response header and body which is valid for 2hrs.
@@ -60,6 +59,15 @@ License: <a href="http://www.license.com">License Name</a>
 <a id="opIdgetApiLogs"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/api-logs \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
 
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/api-logs HTTP/1.1
@@ -83,26 +91,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/api-logs
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/api-logs',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -248,6 +236,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/draft \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups/draft HTTP/1.1
 
@@ -272,27 +270,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/draft',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -553,6 +530,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate HTTP/1.1
 
@@ -575,26 +561,6 @@ result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate',
-  method: 'patch',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -716,6 +682,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend HTTP/1.1
 
@@ -740,27 +716,6 @@ result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend',
-  method: 'patch',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -924,6 +879,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion HTTP/1.1
 
@@ -948,27 +913,6 @@ result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion',
-  method: 'patch',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -1132,6 +1076,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: */*' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships HTTP/1.1
 
@@ -1156,27 +1110,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json',
-  'Accept':'*/*',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -1360,6 +1293,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules HTTP/1.1
 
@@ -1384,27 +1327,6 @@ result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules',
-  method: 'patch',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -1587,6 +1509,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/company-memberships \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/company-memberships HTTP/1.1
 
@@ -1611,27 +1543,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/company
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -1821,6 +1732,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/company-memberships \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/company-memberships HTTP/1.1
 
@@ -1843,26 +1763,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/company-
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -2008,6 +1908,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 PATCH https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} HTTP/1.1
 
@@ -2032,27 +1942,6 @@ result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/compan
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}',
-  method: 'patch',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -2230,6 +2119,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X DELETE https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 DELETE https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} HTTP/1.1
 
@@ -2252,26 +2150,6 @@ result = RestClient.delete 'https://[your-subdomain].paxfamilia.com/api/v1/compa
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -2403,6 +2281,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/company-units \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/company-units HTTP/1.1
 
@@ -2427,27 +2315,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/company
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/company-units',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -2622,6 +2489,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/company-units \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/company-units HTTP/1.1
 
@@ -2644,26 +2520,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/company-
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/company-units',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -2806,6 +2662,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations HTTP/1.1
 
@@ -2830,27 +2696,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -3061,6 +2906,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/dummy-users \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/dummy-users HTTP/1.1
 
@@ -3085,27 +2940,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/dummy-u
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/dummy-users',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -3283,6 +3117,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/dummy-users \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/dummy-users HTTP/1.1
 
@@ -3305,26 +3148,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/dummy-us
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/dummy-users',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -3468,6 +3291,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets HTTP/1.1
 
@@ -3492,27 +3325,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -3685,6 +3497,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities HTTP/1.1
 
@@ -3709,27 +3531,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -3931,6 +3732,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships HTTP/1.1
 
@@ -3955,27 +3766,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -4165,6 +3955,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups HTTP/1.1
 
@@ -4189,27 +3989,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups'
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -4375,6 +4154,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/groups \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/groups HTTP/1.1
 
@@ -4397,26 +4185,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/groups',
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -4554,6 +4322,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X DELETE https://[your-subdomain].paxfamilia.com/api/v1/groups/{id} \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 DELETE https://[your-subdomain].paxfamilia.com/api/v1/groups/{id} HTTP/1.1
 
@@ -4576,26 +4353,6 @@ result = RestClient.delete 'https://[your-subdomain].paxfamilia.com/api/v1/group
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -4711,6 +4468,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate HTTP/1.1
 
@@ -4733,26 +4499,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -4996,6 +4742,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family HTTP/1.1
 
@@ -5018,26 +4773,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -5181,6 +4916,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances HTTP/1.1
 
@@ -5205,27 +4950,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -5538,6 +5262,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 PATCH https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values HTTP/1.1
 
@@ -5562,27 +5296,6 @@ result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/estate
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values',
-  method: 'patch',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -5730,6 +5443,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids HTTP/1.1
 
@@ -5754,27 +5477,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/estates
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -5933,6 +5635,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids HTTP/1.1
 
@@ -5957,27 +5669,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/estates
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -6131,6 +5822,15 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/is-alive \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 GET https://[your-subdomain].paxfamilia.com/api/v1/is-alive HTTP/1.1
 
@@ -6153,26 +5853,6 @@ result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/is-alive
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/is-alive',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -6282,6 +5962,16 @@ ApiKey & JsonWebToken
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/update-id \
+  -H 'Content-Type: application/vnd.api+json' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'X-Api-Key: 4P1k3y87sGd' \
+  -H 'Authorization: 4P1k3y87sGd'
+
+```
+
 ```http
 PATCH https://[your-subdomain].paxfamilia.com/api/v1/update-id HTTP/1.1
 
@@ -6306,27 +5996,6 @@ result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/update
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/vnd.api+json',
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/update-id',
-  method: 'patch',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -6456,13 +6125,21 @@ To perform this operation, you must be authenticated by means of one of the foll
 ApiKey & JsonWebToken
 </aside>
 
-<h1 id="falcon-alpha-phoenix-authentication">Authentication</h1>
+<h1 id="falcon-alpha-phoenix-user-session">User Session</h1>
 
 ## Generate JSON Web Token with valid user credentials + Api-Key
 
 <a id="opIdcreateAuthToken"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/users/login \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
 
 ```http
 POST https://[your-subdomain].paxfamilia.com/api/v1/users/login HTTP/1.1
@@ -6486,25 +6163,6 @@ result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/users/l
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://[your-subdomain].paxfamilia.com/api/v1/users/login',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
 
 ```
 
@@ -10588,7 +10246,7 @@ This operation does not require authentication
 {
   "@context": "http://schema.org/",
   "@type": "WebAPI",
-  "description": "This is the first version of the PaxFamilia 'public' API. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/). **(W.I.P.)**",
+  "description": "This is the first version of the PaxFamilia 'public' API. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/).",
   "documentation": "https://www.paxfamilia.com/",
   "termsOfService": "https://www.paxfamilia.com/hubfs/Conditions%20g%C3%A9n%C3%A9rales/CGU_PaxFamilia_B2B_V3_clean%2026112018.pdf?hsLang=fr-fr",
 

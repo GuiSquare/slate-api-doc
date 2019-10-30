@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Multilang
   def block_code(code, full_lang_name)
     if full_lang_name

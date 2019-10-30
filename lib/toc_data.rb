@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 
-def toc_data(page_content)
+def toc_data(page_content) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   html_doc = Nokogiri::HTML::DocumentFragment.parse(page_content)
 
   # get a flat list of headers
@@ -15,7 +17,7 @@ def toc_data(page_content)
     })
   end
 
-  [3,2].each do |header_level|
+  [3, 2].each do |header_level|
     header_to_nest = nil
     headers = headers.reject do |header|
       if header[:level] == header_level
