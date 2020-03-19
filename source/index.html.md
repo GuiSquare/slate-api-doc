@@ -2,7 +2,6 @@
 title: Falcon Alpha Phoenix
 language_tabs:
   - shell: cURL
-  - http: HTTP
   - ruby: Ruby
   - javascript--nodejs: JavaScript
   - go: Go
@@ -20,41 +19,27 @@ headingLevel: 2
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-This is the first version of the PaxFamilia 'public' API. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/).
+This is the first version of the **PaxFamilia API**. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/).
 
 Base URLs:
 
-* <a href="https://[your-subdomain].paxfamilia.com/api/v1">https://[your-subdomain].paxfamilia.com/api/v1</a>
+* <a href="https://subdomain.api.paxfamilia.com/v1">https://subdomain.api.paxfamilia.com/v1</a>
 
 <a href="https://www.paxfamilia.com/hubfs/Conditions%20g%C3%A9n%C3%A9rales/CGU_PaxFamilia_B2B_V3_clean%2026112018.pdf?hsLang=fr-fr">Terms of service</a>
 Email: <a href="mailto:msousa@paxfamilia.com">Support</a>
-License: <a href="http://www.license.com">License Name</a>
+ License: Copyright - Do Not Distribute
 
 # Authentication
 
 * API Key (ApiKey)
-    - Parameter Name: **X-Api-Key**, in: header. 1) After activating the Public API for your company's subdomain ask your company admin to generate an
-   Api-Key at ".com/management/{your-company-comercial-name}/user_profile" and keep it safely.
-   ATTENTION - this Api-Key will be hidden after this and it is the responsibility of you company to
-   keep it safe, losing it will incur an identity scrutinization process to get a new one.
-   NOTE - PaxFamilia reserves the right to invalidate this Api-key in case of gross missuse or any
-   kind of suspicious activity / server overload
-2) Use the User Session (/users/login) resource to generate a JWT with email + password + api-key in the
-   body params. The email and password must be of a company employee account to which the admin_right
-   :api_user has been given, to do so the company admin must edit that employee's account. This will
-   return a JWT in the response header and body which is valid for 2hrs.
+    - Parameter Name: **X-Api-Key**, in: header. . **1** After activating the Public API for your company's subdomain ask your company admin to generate an `Api-Key` in the [user profile section](/en/management/company_commercial_name/user_profile) and keep it safely. **ATTENTION:** this `Api-Key` will be hidden after this and it is the responsibility of your company to keep it safe, losing it will incur an identity scrutinization process to get a new one. **NOTE** PaxFamilia reserves the right to invalidate this `Api-key` in case of gross missuse or any kind of suspicious activity / server overload.
 
 * API Key (JsonWebToken)
-    - Parameter Name: **Authorization**, in: header. 2) Use the User Session (/users/login) resource to generate a JWT with email + password + api-key in the
-   body params. The email and password must be of a company employee account to which the admin_right
-   :api_user has been given, to do so the company admin must edit that employee's account. This will
-   return a JWT in the response header and body which is valid for 2hrs.
-3) Every call to the remaining resources in this API must be done with that JWT in the
-   'Authorization' header and the Api-Key in the 'X-Api-Key' header.
+    - Parameter Name: **Authorization**, in: header. . **2** Use the User Session (/users/login) resource to generate a `Jason Web Token` with *email* + *password* + *api-key* in the body params. The email and password must be of a company employee account to which the admin_right `:api_user` has been given, to do so the company admin must edit that employee's account. This will return a `JWT` in the response header and body which is valid for 2hrs. . **3** Every call to the remaining resources in this API must be done with that `JWT` in the *'Authorization'* header and the `Api-Key` in the *'X-Api-Key'* header.
 
 <h1 id="falcon-alpha-phoenix-api-logs">Api Logs</h1>
 
-## Retrieves the list of api logs
+## getApiLogs
 
 <a id="opIdgetApiLogs"></a>
 
@@ -62,17 +47,10 @@ License: <a href="http://www.license.com">License Name</a>
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/api-logs \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/api-logs \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/api-logs HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -86,7 +64,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/api-logs',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/api-logs',
   params: {
   }, headers: headers
 
@@ -104,7 +82,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/api-logs',
+fetch('https://subdomain.api.paxfamilia.com/v1/api-logs',
 {
   method: 'GET',
 
@@ -136,7 +114,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/api-logs", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/api-logs", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -147,7 +125,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/api-logs");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/api-logs");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -165,11 +143,13 @@ System.out.println(response.toString());
 
 `GET /api-logs`
 
-<h3 id="retrieves-the-list-of-api-logs-parameters">Parameters</h3>
+*Retrieves the list of api logs*
+
+<h3 id="getapilogs-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|paginationQuery|query|string|false|page object query with number and size in the format page%5Bnumber%5D=1&page%5Bsize%5D=50 which would be page[number]=1&page[size]=50 before encoding the square brackets|
+|paginationQuery|query|string|false|Page object query with number and size in the format `page%5Bnumber%5D=1&page%5Bsize%5D=50` which would be `page[number]=1&page[size]=50` before encoding the square brackets.|
 
 > Example responses
 
@@ -196,11 +176,11 @@ System.out.println(response.toString());
     }
   ],
   "links": {
-    "self": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
-    "first": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
-    "prev": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
-    "next": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
-    "last": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
+    "self": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
+    "first": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
+    "prev": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
+    "next": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
+    "last": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
   },
   "meta": {
     "totalPages": 5
@@ -208,20 +188,51 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="retrieves-the-list-of-api-logs-responses">Responses</h3>
+<h3 id="getapilogs-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Api logs found|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
 
-<h3 id="retrieves-the-list-of-api-logs-responseschema">Response Schema</h3>
+<h3 id="getapilogs-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[ApiLog](#schemaapilog)]|true|none|none|
+|»» id|string|true|none|Api log ID|
+|»» type|string|true|none|Resource type - `apiLog`|
+|»» attributes|object|true|none|none|
+|»»» id|string|false|none|Api log ID|
+|»»» companyMembershipId|string|false|none|Employee public id if their is an employee associated to this log|
+|»»» success|boolean|true|none|Request success or failure|
+|»»» status|string|false|none|Request status HTTP code in word form|
+|»»» description|string|false|none|Any valid description needed, for **success** usually amount saved, for **failure** usually error message|
+|»»» groupPublicId|string|false|none|Group public id associated to the log when it is a group scoped resource, such as: `estateAsset`, `estateLiability`|
+|»»» resourceId|string|false|none|Public id of the resource in question when in the case of a specific resource error|
+|»»» controller|string|false|none|Resource controller from which the log originated|
+|»»» action|string|false|none|Resource action from which the log originated|
+|»»» requestMethod|string|false|none|HTTP request method|
+|»» links|[PaginationLinks](#schemapaginationlinks)|false|none|none|
+|»»» self|string|true|none|Link to the current page of the collection.|
+|»»» first|string|true|none|Link to the first page of the collection.|
+|»»» prev|string|true|none|Link to the previous page of the collection.|
+|»»» next|string|true|none|Link to the next page of the collection.|
+|»»» last|string|true|none|Link to the last page of the collection.|
+|»» meta|[PaginationMeta](#schemapaginationmeta)|false|none|none|
+|»»» totalPages|number|false|none|Total pages paginated|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|apiLog|
+|requestMethod|POST|
+|requestMethod|PATCH|
+|requestMethod|DELETE|
+|requestMethod|GET|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -230,7 +241,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-lifecycle">Lifecycle</h1>
 
-## Creates one Group with its DummyUsers and current spouse GroupMembership
+## addDraft
 
 <a id="opIdaddDraft"></a>
 
@@ -238,19 +249,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/draft \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups/draft \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups/draft HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -265,7 +268,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/draft',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups/draft',
   params: {
   }, headers: headers
 
@@ -305,6 +308,7 @@ const inputBody = '{
         "internalName": "Lucas Niets Beson",
         "id": "group_id_123",
         "clientId": "family_head_id_123",
+        "locale": "nl",
         "companyAdvisorId": "987gfr"
       },
       "groupMembership": {
@@ -331,7 +335,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/draft',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/draft',
 {
   method: 'POST',
   body: inputBody,
@@ -364,7 +368,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups/draft", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups/draft", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -375,7 +379,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/draft");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/draft");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -393,6 +397,8 @@ System.out.println(response.toString());
 
 `POST /groups/draft`
 
+*Creates one `Group` with its `DummyUsers` and current spouse `GroupMembership`*
+
 > Body parameter
 
 ```json
@@ -426,6 +432,7 @@ System.out.println(response.toString());
         "internalName": "Lucas Niets Beson",
         "id": "group_id_123",
         "clientId": "family_head_id_123",
+        "locale": "nl",
         "companyAdvisorId": "987gfr"
       },
       "groupMembership": {
@@ -446,11 +453,71 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-group-with-its-dummyusers-and-current-spouse-groupmembership-parameters">Parameters</h3>
+<h3 id="adddraft-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
+|data|body|[Draft](#schemadraft)|true|none|
+|» type|body|string|true|Resource type, not the same as `group` to not confuse with that one, this includes `group`, `groupMembership` and `dummyUser` as a whole|
+|» attributes|body|object|true|none|
+|»» dummyUsers|body|[[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)]|true|DummyUser objects that represent the `familyHead` and optionally, the `partner`|
+|»»» id|body|string|false|Internal client/person id. Will be generated randomly if not provided|
+|»»» lastName|body|string|true|Last name of the client.|
+|»»» firstName|body|string|true|First name of the client.|
+|»»» email|body|string|false|Email of the client. Optional.|
+|»»» gender|body|string|true|Gender of the client.|
+|»»» birthday|body|string|false|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
+|»»» nationality|body|string|true|Country code of nationality. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» countryCode|body|string|true|Country code of residence. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» zipcode|body|string|false|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
+|»» group|body|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|
+|»»» id|body|string|true|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»»» internalName|body|string|false|Internal client name, won't be visible to client|
+|»»» companyAdvisorId|body|string|true|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»»» clientId|body|string|true|ID of the 'main' client. Must be an existing dummy user.|
+|»»» locale|body|string|false|Default language for the group. Defaults to the locale of the company advisor.|
+|»»» state|body|string|false|State of the group|
+|»» groupMembership|body|[GroupMembership/properties/attributes](#schemagroupmembership/properties/attributes)|false|none|
+|»»» dummyUserId|body|string|true|Id of an existing dummy user.|
+|»»» coHolder|body|boolean|false|Is the person a main data subject of the group|
+|»»» dead|body|boolean|false|Is the person deceased?|
+|»»» fatherId|body|string|false|Internal reference to the father, must be an ID of an existing dummy user.|
+|»»» motherId|body|string|false|Internal reference to the mother, must be an ID of an existing dummy user.|
+|»»» currentSpouseId|body|string|false|Internal reference to the partner, must be an ID of an existing dummy user.|
+|»»» spouseType|body|string|false|Type of partner relationship if current spouse exist.|
+|»»» regimeType|body|string|false|Type of matrimonial regime if `spouseType` is spouse|
+|»»» adoption|body|string|false|Type of adoption if any|
+|»»» extendedMinority|body|boolean|false|Does the group membership have an extended minority?|
+|»»» provisionalAdministration|body|boolean|false|Does the group membership have a provisional administration?|
+|»»» judicialProtection|body|boolean|false|Does the group membership have a judicial protection?|
+|»»» extrajudicialProtection|body|boolean|false|Does the group membership have an extrajudicial protection?|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|draft|
+|»»» gender|M|
+|»»» gender|F|
+|»»» locale|fr|
+|»»» locale|nl|
+|»»» locale|en|
+|»»» state|draft|
+|»»» state|active|
+|»»» state|suspended|
+|»»» state|marked_for_deletion|
+|»»» spouseType|spouse|
+|»»» spouseType|legal_cohabitant|
+|»»» spouseType|simple_cohabitant|
+|»»» regimeType|legal_regime|
+|»»» regimeType|separate_ownership|
+|»»» regimeType|acquests_participation|
+|»»» regimeType|separate_ownership_with_community_addition|
+|»»» regimeType|conventional_community|
+|»»» regimeType|full_community|
+|»»» adoption|none|
+|»»» adoption|simple|
+|»»» adoption|full|
 
 > Example responses
 
@@ -487,6 +554,7 @@ System.out.println(response.toString());
         "internalName": "Lucas Niets Beson",
         "id": "group_id_123",
         "clientId": "family_head_id_123",
+        "locale": "nl",
         "companyAdvisorId": "987gfr"
       },
       "groupMembership": {
@@ -507,24 +575,90 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-group-with-its-dummyusers-and-current-spouse-groupmembership-responses">Responses</h3>
+<h3 id="adddraft-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Draft created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-group-with-its-dummyusers-and-current-spouse-groupmembership-responseschema">Response Schema</h3>
+<h3 id="adddraft-responseschema">Response Schema</h3>
+
+Status Code **201**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[Draft](#schemadraft)|true|none|none|
+|»» type|string|true|none|Resource type, not the same as `group` to not confuse with that one, this includes `group`, `groupMembership` and `dummyUser` as a whole|
+|»» attributes|object|true|none|none|
+|»»» dummyUsers|[[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)]|true|none|DummyUser objects that represent the `familyHead` and optionally, the `partner`|
+|»»»» id|string|false|none|Internal client/person id. Will be generated randomly if not provided|
+|»»»» lastName|string|true|none|Last name of the client.|
+|»»»» firstName|string|true|none|First name of the client.|
+|»»»» email|string|false|none|Email of the client. Optional.|
+|»»»» gender|string|true|none|Gender of the client.|
+|»»»» birthday|string|false|none|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
+|»»»» nationality|string|true|none|Country code of nationality. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»» countryCode|string|true|none|Country code of residence. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»» zipcode|string|false|none|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
+|»»» group|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|none|
+|»»»» id|string|true|none|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»»»» internalName|string|false|none|Internal client name, won't be visible to client|
+|»»»» companyAdvisorId|string|true|none|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»»»» clientId|string|true|none|ID of the 'main' client. Must be an existing dummy user.|
+|»»»» locale|string|false|none|Default language for the group. Defaults to the locale of the company advisor.|
+|»»»» state|string|false|none|State of the group|
+|»»» groupMembership|[GroupMembership/properties/attributes](#schemagroupmembership/properties/attributes)|false|none|none|
+|»»»» dummyUserId|string|true|none|Id of an existing dummy user.|
+|»»»» coHolder|boolean|false|none|Is the person a main data subject of the group|
+|»»»» dead|boolean|false|none|Is the person deceased?|
+|»»»» fatherId|string|false|none|Internal reference to the father, must be an ID of an existing dummy user.|
+|»»»» motherId|string|false|none|Internal reference to the mother, must be an ID of an existing dummy user.|
+|»»»» currentSpouseId|string|false|none|Internal reference to the partner, must be an ID of an existing dummy user.|
+|»»»» spouseType|string|false|none|Type of partner relationship if current spouse exist.|
+|»»»» regimeType|string|false|none|Type of matrimonial regime if `spouseType` is spouse|
+|»»»» adoption|string|false|none|Type of adoption if any|
+|»»»» extendedMinority|boolean|false|none|Does the group membership have an extended minority?|
+|»»»» provisionalAdministration|boolean|false|none|Does the group membership have a provisional administration?|
+|»»»» judicialProtection|boolean|false|none|Does the group membership have a judicial protection?|
+|»»»» extrajudicialProtection|boolean|false|none|Does the group membership have an extrajudicial protection?|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|draft|
+|gender|M|
+|gender|F|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|state|draft|
+|state|active|
+|state|suspended|
+|state|marked_for_deletion|
+|spouseType|spouse|
+|spouseType|legal_cohabitant|
+|spouseType|simple_cohabitant|
+|regimeType|legal_regime|
+|regimeType|separate_ownership|
+|regimeType|acquests_participation|
+|regimeType|separate_ownership_with_community_addition|
+|regimeType|conventional_community|
+|regimeType|full_community|
+|adoption|none|
+|adoption|simple|
+|adoption|full|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Activates Group
+## activateGroup
 
 <a id="opIdactivateGroup"></a>
 
@@ -532,17 +666,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate \
+curl -X PATCH https://subdomain.api.paxfamilia.com/v1/groups/{id}/activate \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -556,7 +683,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate',
+result = RestClient.patch 'https://subdomain.api.paxfamilia.com/v1/groups/{id}/activate',
   params: {
   }, headers: headers
 
@@ -574,7 +701,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{id}/activate',
 {
   method: 'PATCH',
 
@@ -606,7 +733,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate", data)
+    req, err := http.NewRequest("PATCH", "https://subdomain.api.paxfamilia.com/v1/groups/{id}/activate", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -617,7 +744,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/activate");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{id}/activate");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -635,15 +762,17 @@ System.out.println(response.toString());
 
 `PATCH /groups/{id}/activate`
 
-<h3 id="activates-group-parameters">Parameters</h3>
+*Activates Group*
+
+<h3 id="activategroup-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|none|
+|id|path|string|true|Internal ID of the group|
 
 > Example responses
 
-> 201 Response
+> 202 Response
 
 ```json
 {
@@ -651,8 +780,9 @@ System.out.println(response.toString());
     "id": "acbdj6472",
     "type": "group",
     "attributes": {
-      "internalName": "Lucas Niets",
       "id": "acbdj6472",
+      "internalName": "Lucas Niets",
+      "state": "active",
       "clientId": "a675742",
       "companyAdvisorId": "987gfr"
     }
@@ -660,23 +790,51 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="activates-group-responses">Responses</h3>
+<h3 id="activategroup-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Group Activated|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Group Activated|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="activates-group-responseschema">Response Schema</h3>
+<h3 id="activategroup-responseschema">Response Schema</h3>
+
+Status Code **202**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[Group](#schemagroup)|true|none|none|
+|»» id|string|true|none|Internal group ID.|
+|»» type|string|true|none|Resource type - `group`|
+|»» attributes|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|none|
+|»»» id|string|true|none|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»»» internalName|string|false|none|Internal client name, won't be visible to client|
+|»»» companyAdvisorId|string|true|none|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»»» clientId|string|true|none|ID of the 'main' client. Must be an existing dummy user.|
+|»»» locale|string|false|none|Default language for the group. Defaults to the locale of the company advisor.|
+|»»» state|string|false|none|State of the group|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|group|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|state|draft|
+|state|active|
+|state|suspended|
+|state|marked_for_deletion|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Suspends Group
+## suspendGroup
 
 <a id="opIdsuspendGroup"></a>
 
@@ -684,19 +842,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend \
+curl -X PATCH https://subdomain.api.paxfamilia.com/v1/groups/{id}/suspend \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -711,7 +861,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend',
+result = RestClient.patch 'https://subdomain.api.paxfamilia.com/v1/groups/{id}/suspend',
   params: {
   }, headers: headers
 
@@ -739,7 +889,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{id}/suspend',
 {
   method: 'PATCH',
   body: inputBody,
@@ -772,7 +922,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend", data)
+    req, err := http.NewRequest("PATCH", "https://subdomain.api.paxfamilia.com/v1/groups/{id}/suspend", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -783,7 +933,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/suspend");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{id}/suspend");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -801,6 +951,8 @@ System.out.println(response.toString());
 
 `PATCH /groups/{id}/suspend`
 
+*Suspends Group*
+
 > Body parameter
 
 ```json
@@ -816,30 +968,29 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="suspends-group-parameters">Parameters</h3>
+<h3 id="suspendgroup-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|none|
-|body|body|object|true|none|
-|» data|body|object|true|none|
+|id|path|string|true|Internal ID of the group|
+|data|body|object|true|none|
+|» id|body|string|true|Internal ID of the group|
+|» type|body|string|true|Resource type - `group`|
+|» attributes|body|object|true|none|
 |»» id|body|string|true|Internal ID of the group|
-|»» type|body|string|true|none|
-|»» attributes|body|object|true|none|
-|»»» id|body|string|true|Internal ID of the group|
-|»»» cause|body|string|true|cause of the suspension|
+|»» cause|body|string|true|Cause of the suspension|
 
 #### Enumerated Values
 
 |Parameter|Value|
 |---|---|
-|»» type|group|
-|»»» cause|divorce|
-|»»» cause|death|
+|» type|group|
+|»» cause|divorce|
+|»» cause|death|
 
 > Example responses
 
-> 201 Response
+> 202 Response
 
 ```json
 {
@@ -847,8 +998,9 @@ System.out.println(response.toString());
     "id": "acbdj6472",
     "type": "group",
     "attributes": {
-      "internalName": "Lucas Niets",
       "id": "acbdj6472",
+      "internalName": "Lucas Niets",
+      "state": "active",
       "clientId": "a675742",
       "companyAdvisorId": "987gfr"
     }
@@ -856,24 +1008,52 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="suspends-group-responses">Responses</h3>
+<h3 id="suspendgroup-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Group Suspended|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Group Suspended|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="suspends-group-responseschema">Response Schema</h3>
+<h3 id="suspendgroup-responseschema">Response Schema</h3>
+
+Status Code **202**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[Group](#schemagroup)|true|none|none|
+|»» id|string|true|none|Internal group ID.|
+|»» type|string|true|none|Resource type - `group`|
+|»» attributes|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|none|
+|»»» id|string|true|none|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»»» internalName|string|false|none|Internal client name, won't be visible to client|
+|»»» companyAdvisorId|string|true|none|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»»» clientId|string|true|none|ID of the 'main' client. Must be an existing dummy user.|
+|»»» locale|string|false|none|Default language for the group. Defaults to the locale of the company advisor.|
+|»»» state|string|false|none|State of the group|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|group|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|state|draft|
+|state|active|
+|state|suspended|
+|state|marked_for_deletion|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Marks Group for Deletion
+## markGroupForDeletion
 
 <a id="opIdmarkGroupForDeletion"></a>
 
@@ -881,19 +1061,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion \
+curl -X PATCH https://subdomain.api.paxfamilia.com/v1/groups/{id}/mark-for-deletion \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -908,7 +1080,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion',
+result = RestClient.patch 'https://subdomain.api.paxfamilia.com/v1/groups/{id}/mark-for-deletion',
   params: {
   }, headers: headers
 
@@ -936,7 +1108,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{id}/mark-for-deletion',
 {
   method: 'PATCH',
   body: inputBody,
@@ -969,7 +1141,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion", data)
+    req, err := http.NewRequest("PATCH", "https://subdomain.api.paxfamilia.com/v1/groups/{id}/mark-for-deletion", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -980,7 +1152,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/mark_for_deletion");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{id}/mark-for-deletion");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -996,7 +1168,9 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /groups/{id}/mark_for_deletion`
+`PATCH /groups/{id}/mark-for-deletion`
+
+*Marks Group for Deletion*
 
 > Body parameter
 
@@ -1013,28 +1187,27 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="marks-group-for-deletion-parameters">Parameters</h3>
+<h3 id="markgroupfordeletion-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|none|
-|body|body|object|true|none|
-|» data|body|object|true|none|
+|id|path|string|true|Internal ID of the group|
+|data|body|object|true|none|
+|» id|body|string|true|Internal ID of the group|
+|» type|body|string|true|Resource type - `group`|
+|» attributes|body|object|true|none|
 |»» id|body|string|true|Internal ID of the group|
-|»» type|body|string|true|none|
-|»» attributes|body|object|true|none|
-|»»» id|body|string|true|Internal ID of the group|
-|»»» days|body|number|false|days until deletion|
+|»» days|body|number|false|days until deletion|
 
 #### Enumerated Values
 
 |Parameter|Value|
 |---|---|
-|»» type|group|
+|» type|group|
 
 > Example responses
 
-> 201 Response
+> 202 Response
 
 ```json
 {
@@ -1042,8 +1215,9 @@ System.out.println(response.toString());
     "id": "acbdj6472",
     "type": "group",
     "attributes": {
-      "internalName": "Lucas Niets",
       "id": "acbdj6472",
+      "internalName": "Lucas Niets",
+      "state": "active",
       "clientId": "a675742",
       "companyAdvisorId": "987gfr"
     }
@@ -1051,17 +1225,45 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="marks-group-for-deletion-responses">Responses</h3>
+<h3 id="markgroupfordeletion-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Group Marked for Deletion|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Group Marked for Deletion|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="marks-group-for-deletion-responseschema">Response Schema</h3>
+<h3 id="markgroupfordeletion-responseschema">Response Schema</h3>
+
+Status Code **202**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[Group](#schemagroup)|true|none|none|
+|»» id|string|true|none|Internal group ID.|
+|»» type|string|true|none|Resource type - `group`|
+|»» attributes|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|none|
+|»»» id|string|true|none|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»»» internalName|string|false|none|Internal client name, won't be visible to client|
+|»»» companyAdvisorId|string|true|none|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»»» clientId|string|true|none|ID of the 'main' client. Must be an existing dummy user.|
+|»»» locale|string|false|none|Default language for the group. Defaults to the locale of the company advisor.|
+|»»» state|string|false|none|State of the group|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|group|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|state|draft|
+|state|active|
+|state|suspended|
+|state|marked_for_deletion|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1070,7 +1272,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-asset-ownerships">Asset Ownerships</h1>
 
-## Resets one or more Asset Ownerships
+## resetAssetOwnerships
 
 <a id="opIdresetAssetOwnerships"></a>
 
@@ -1078,19 +1280,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/asset-ownerships \
   -H 'Content-Type: application/json' \
   -H 'Accept: */*' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships HTTP/1.1
-
-Content-Type: application/json
-Accept: */*
 
 ```
 
@@ -1105,7 +1299,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/asset-ownerships',
   params: {
   }, headers: headers
 
@@ -1143,7 +1337,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/asset-ownerships',
 {
   method: 'POST',
   body: inputBody,
@@ -1176,7 +1370,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/asset-ownerships", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1187,7 +1381,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/asset-ownerships");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/asset-ownerships");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1204,6 +1398,8 @@ System.out.println(response.toString());
 ```
 
 `POST /groups/{groupId}/asset-ownerships`
+
+*Resets one or more Asset Ownerships*
 
 > Body parameter
 
@@ -1230,55 +1426,100 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="resets-one-or-more-asset-ownerships-parameters">Parameters</h3>
+<h3 id="resetassetownerships-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|groupId|path|string|true|none|
-|body|body|object|false|none|
-|» data|body|[object]|true|none|
-|»» id|body|string|true|Internal ID of the estateAsset|
-|»» type|body|string|true|none|
-|»» attributes|body|object|true|none|
-|»»» assetOwnerships|body|[[AssetOwnership](#schemaassetownership)]|true|none|
+|groupId|path|string|true|Internal ID of the group|
+|data|body|[object]|true|none|
+|» id|body|string|true|Internal ID of the `estateAsset`|
+|» type|body|string|true|Resource type - `estateAsset`|
+|» attributes|body|object|true|none|
+|»» assetOwnerships|body|[[AssetOwnership](#schemaassetownership)]|true|none|
+|»»» type|body|string|true|Resource type - `assetOwnership`|
+|»»» attributes|body|object|true|none|
+|»»»» ownerId|body|string|true|Internal ID of the owner. If blank, will expect `companyId`.|
+|»»»» companyId|body|string|false|Internal ID of the company that owns the asset. Ignored if `ownerId` is provided.|
+|»»»» ownerCategory|body|string|false|Owner category. A physical person ('person'), the community ('community') or a moral person ('company')|
+|»»»» communityOwner|body|string|false|Only in case of 'community `ownerCategory`'. Whether the asset is under both names or the main data subject or it's partner/spouse",|
+|»»»» ownershipType|body|string|false|Type of the ownership. Full property ('fp'), bare ownership ('np') or usufruct ('us')|
+|»»»» percentage|body|number|true|Percentage ownership. Decimals must be separated by a dot. Eg. 25.5|
+|»»»» otherOwnerId|body|string|false|Internal ID of the owner holding the other side of the dismembered ownership, if applicable. Ignored if `ownershipType` is 'fp'.|
+|»»»» otherCompanyId|body|string|false|Internal ID of the company holding the other side of the dismembered ownership, if applicable. Ignored if `ownershipType` is 'fp' and/or if `otherOwnerId` is provided.|
+|»»»» usufructStartDate|body|string|false|YYYY-MM-DD. Start date of the usufruct. Only when a company owns the usufruct. Will default to current date|
+|»»»» usufructPcValue|body|number|false|Initial percentage of the full property value. Only when a company owns the usufruct.|
+|»»»» usufructYearsDuration|body|integer|false|Number of years the usufruct was initially granted to the company. Only when a company owns the usufruct.|
 
 #### Enumerated Values
 
 |Parameter|Value|
 |---|---|
-|»» type|estateAsset|
+|» type|estateAsset|
+|»»» type|assetOwnership|
+|»»»» ownerCategory|person|
+|»»»» ownerCategory|community|
+|»»»» ownerCategory|company|
+|»»»» communityOwner|both_names|
+|»»»» communityOwner|owner_name|
+|»»»» communityOwner|partner_name|
+|»»»» ownershipType|fp|
+|»»»» ownershipType|np|
+|»»»» ownershipType|us|
 
 > Example responses
 
 > 201 Response
 
-<h3 id="resets-one-or-more-asset-ownerships-responses">Responses</h3>
+<h3 id="resetassetownerships-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Asset Ownerships reset|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="resets-one-or-more-asset-ownerships-responseschema">Response Schema</h3>
+<h3 id="resetassetownerships-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[object]|true|none|none|
-|»» id|string|true|none|Internal ID of the estateAsset|
-|»» type|string|true|none|none|
+|»» id|string|true|none|Internal ID of the `estateAsset`.|
+|»» type|string|true|none|Resource type - `estateAsset`.|
 |»» attributes|object|true|none|none|
-|»»» assetOwnerships|[[AssetOwnership](#schemaassetownership)]|true|none|none|
+|»»» assetOwnerships|[[AssetOwnership](#schemaassetownership)]|true|none|Asset ownership objects for this `estateAsset`|
+|»»»» type|string|true|none|Resource type - `assetOwnership`|
+|»»»» attributes|object|true|none|none|
+|»»»»» ownerId|string|true|none|Internal ID of the owner. If blank, will expect `companyId`.|
+|»»»»» companyId|string|false|none|Internal ID of the company that owns the asset. Ignored if `ownerId` is provided.|
+|»»»»» ownerCategory|string|false|none|Owner category. A physical person ('person'), the community ('community') or a moral person ('company')|
+|»»»»» communityOwner|string|false|none|Only in case of 'community `ownerCategory`'. Whether the asset is under both names or the main data subject or it's partner/spouse",|
+|»»»»» ownershipType|string|false|none|Type of the ownership. Full property ('fp'), bare ownership ('np') or usufruct ('us')|
+|»»»»» percentage|number|true|none|Percentage ownership. Decimals must be separated by a dot. Eg. 25.5|
+|»»»»» otherOwnerId|string|false|none|Internal ID of the owner holding the other side of the dismembered ownership, if applicable. Ignored if `ownershipType` is 'fp'.|
+|»»»»» otherCompanyId|string|false|none|Internal ID of the company holding the other side of the dismembered ownership, if applicable. Ignored if `ownershipType` is 'fp' and/or if `otherOwnerId` is provided.|
+|»»»»» usufructStartDate|string|false|none|YYYY-MM-DD. Start date of the usufruct. Only when a company owns the usufruct. Will default to current date|
+|»»»»» usufructPcValue|number|false|none|Initial percentage of the full property value. Only when a company owns the usufruct.|
+|»»»»» usufructYearsDuration|integer|false|none|Number of years the usufruct was initially granted to the company. Only when a company owns the usufruct.|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|estateAsset|
+|type|assetOwnership|
+|ownerCategory|person|
+|ownerCategory|community|
+|ownerCategory|company|
+|communityOwner|both_names|
+|communityOwner|owner_name|
+|communityOwner|partner_name|
+|ownershipType|fp|
+|ownershipType|np|
+|ownershipType|us|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1287,7 +1528,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-company-group-access">Company Group Access</h1>
 
-## Creates one or more Company Group Access
+## addCompanyGroupAccesses
 
 <a id="opIdaddCompanyGroupAccesses"></a>
 
@@ -1295,19 +1536,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules \
+curl -X PATCH https://subdomain.api.paxfamilia.com/v1/groups/confidentiality-rules \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-PATCH https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -1322,7 +1555,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules',
+result = RestClient.patch 'https://subdomain.api.paxfamilia.com/v1/groups/confidentiality-rules',
   params: {
   }, headers: headers
 
@@ -1359,7 +1592,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/confidentiality-rules',
 {
   method: 'PATCH',
   body: inputBody,
@@ -1392,7 +1625,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules", data)
+    req, err := http.NewRequest("PATCH", "https://subdomain.api.paxfamilia.com/v1/groups/confidentiality-rules", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1403,7 +1636,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/confidentiality-rules");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/confidentiality-rules");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -1420,6 +1653,8 @@ System.out.println(response.toString());
 ```
 
 `PATCH /groups/confidentiality-rules`
+
+*Creates one or more Company Group Access*
 
 > Body parameter
 
@@ -1445,12 +1680,23 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-company-group-access-parameters">Parameters</h3>
+<h3 id="addcompanygroupaccesses-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» data|body|[[CompanyGroupAccess](#schemacompanygroupaccess)]|true|none|
+|data|body|[[CompanyGroupAccess](#schemacompanygroupaccess)]|true|none|
+|» id|body|string|true|Internal ID of group|
+|» type|body|string|true|Resource type - `group`|
+|» attributes|body|object|true|none|
+|»» id|body|string|true|Internal ID of group|
+|»» companyAdvisorId|body|string|true|Internal ID of company advisor for this group. Must be an existing `companyMembership`.|
+|»» authorizedCompanyUserIds|body|[string]|true|Internal IDs of other company employees allowed access to the group. Must be existing `companyMemberships`.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|group|
 
 > Example responses
 
@@ -1478,23 +1724,35 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-company-group-access-responses">Responses</h3>
+<h3 id="addcompanygroupaccesses-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Company Group Accesses updated|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-company-group-access-responseschema">Response Schema</h3>
+<h3 id="addcompanygroupaccesses-responseschema">Response Schema</h3>
 
 Status Code **202**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[CompanyGroupAccess](#schemacompanygroupaccess)]|true|none|none|
+|»» id|string|true|none|Internal ID of group|
+|»» type|string|true|none|Resource type - `group`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal ID of group|
+|»»» companyAdvisorId|string|true|none|Internal ID of company advisor for this group. Must be an existing `companyMembership`.|
+|»»» authorizedCompanyUserIds|[string]|true|none|Internal IDs of other company employees allowed access to the group. Must be existing `companyMemberships`.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|group|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1503,7 +1761,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-company-memberships">Company Memberships</h1>
 
-## Creates one or more company memberships
+## addCompanyMemberships
 
 <a id="opIdaddCompanyMemberships"></a>
 
@@ -1511,19 +1769,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/company-memberships \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/company-memberships \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/company-memberships HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -1538,7 +1788,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/company-memberships',
   params: {
   }, headers: headers
 
@@ -1578,7 +1828,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/company-memberships',
+fetch('https://subdomain.api.paxfamilia.com/v1/company-memberships',
 {
   method: 'POST',
   body: inputBody,
@@ -1611,7 +1861,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/company-memberships", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/company-memberships", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1622,7 +1872,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/company-memberships");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/company-memberships");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1639,6 +1889,8 @@ System.out.println(response.toString());
 ```
 
 `POST /company-memberships`
+
+*Creates one or more company memberships*
 
 > Body parameter
 
@@ -1667,12 +1919,37 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-company-memberships-parameters">Parameters</h3>
+<h3 id="addcompanymemberships-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» data|body|[[CompanyMembership](#schemacompanymembership)]|true|none|
+|data|body|[[CompanyMembership](#schemacompanymembership)]|true|none|
+|» id|body|string|true|Internal employee id. Must be unique.|
+|» type|body|string|true|Resource type - `companyMembership`|
+|» attributes|body|object|true|none|
+|»» id|body|string|true|Internal employee id. Must be unique. Will be generated randomly if not provided|
+|»» companyUnitId|body|string|false|Id of the unit, center or department the employee belongs to.|
+|»» lastName|body|string|true|Last name of the employee|
+|»» firstName|body|string|true|First name of the employee|
+|»» gender|body|string|true|Gender of the employee|
+|»» email|body|string|true|Email of the employee. used as username for login. needs to be unique.|
+|»» mobilePhone|body|string|true|Mobile phone number of the employee. required for 2fa. uses the [phony library](https://github.com/floere/phony) to validate plausibility of number. Country extension defaults to *+32* unless provided|
+|»» countryCode|body|string|false|Country (residence) of the employee. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»» locale|body|string|true|Language used for the PaxFamilia application|
+|»» memberRight|body|string|true|Right of the employee. `read_and_write` means the employee can create new clients, `read` only means the employee can't create clients but can access clients he has been given access to.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|companyMembership|
+|»» gender|M|
+|»» gender|F|
+|»» locale|fr|
+|»» locale|nl|
+|»» locale|en|
+|»» memberRight|read_and_write|
+|»» memberRight|read|
 
 > Example responses
 
@@ -1703,30 +1980,56 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-company-memberships-responses">Responses</h3>
+<h3 id="addcompanymemberships-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Company memberships created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-company-memberships-responseschema">Response Schema</h3>
+<h3 id="addcompanymemberships-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[CompanyMembership](#schemacompanymembership)]|true|none|none|
+|»» id|string|true|none|Internal employee id. Must be unique.|
+|»» type|string|true|none|Resource type - `companyMembership`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal employee id. Must be unique. Will be generated randomly if not provided|
+|»»» companyUnitId|string|false|none|Id of the unit, center or department the employee belongs to.|
+|»»» lastName|string|true|none|Last name of the employee|
+|»»» firstName|string|true|none|First name of the employee|
+|»»» gender|string|true|none|Gender of the employee|
+|»»» email|string|true|none|Email of the employee. used as username for login. needs to be unique.|
+|»»» mobilePhone|string|true|none|Mobile phone number of the employee. required for 2fa. uses the [phony library](https://github.com/floere/phony) to validate plausibility of number. Country extension defaults to *+32* unless provided|
+|»»» countryCode|string|false|none|Country (residence) of the employee. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» locale|string|true|none|Language used for the PaxFamilia application|
+|»»» memberRight|string|true|none|Right of the employee. `read_and_write` means the employee can create new clients, `read` only means the employee can't create clients but can access clients he has been given access to.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|companyMembership|
+|gender|M|
+|gender|F|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|memberRight|read_and_write|
+|memberRight|read|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Retrieves the list of company memberships
+## getCompanyMemberships
 
 <a id="opIdgetCompanyMemberships"></a>
 
@@ -1734,17 +2037,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/company-memberships \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/company-memberships \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/company-memberships HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -1758,7 +2054,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/company-memberships',
   params: {
   }, headers: headers
 
@@ -1776,7 +2072,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/company-memberships',
+fetch('https://subdomain.api.paxfamilia.com/v1/company-memberships',
 {
   method: 'GET',
 
@@ -1808,7 +2104,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/company-memberships", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/company-memberships", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1819,7 +2115,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/company-memberships");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/company-memberships");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1837,11 +2133,13 @@ System.out.println(response.toString());
 
 `GET /company-memberships`
 
-<h3 id="retrieves-the-list-of-company-memberships-parameters">Parameters</h3>
+*Retrieves the list of company memberships*
+
+<h3 id="getcompanymemberships-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|paginationQuery|query|string|false|page object query with number and size in the format page%5Bnumber%5D=1&page%5Bsize%5D=50 which would be page[number]=1&page[size]=50 before encoding the square brackets|
+|paginationQuery|query|string|false|Page object query with number and size in the format `page%5Bnumber%5D=1&page%5Bsize%5D=50` which would be `page[number]=1&page[size]=50` before encoding the square brackets.|
 
 > Example responses
 
@@ -1870,11 +2168,11 @@ System.out.println(response.toString());
     }
   ],
   "links": {
-    "self": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
-    "first": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
-    "prev": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
-    "next": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
-    "last": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
+    "self": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
+    "first": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
+    "prev": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
+    "next": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
+    "last": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
   },
   "meta": {
     "totalPages": 5
@@ -1882,27 +2180,61 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="retrieves-the-list-of-company-memberships-responses">Responses</h3>
+<h3 id="getcompanymemberships-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Company memberships found|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
 
-<h3 id="retrieves-the-list-of-company-memberships-responseschema">Response Schema</h3>
+<h3 id="getcompanymemberships-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[CompanyMembership](#schemacompanymembership)]|true|none|none|
+|»» id|string|true|none|Internal employee id. Must be unique.|
+|»» type|string|true|none|Resource type - `companyMembership`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal employee id. Must be unique. Will be generated randomly if not provided|
+|»»» companyUnitId|string|false|none|Id of the unit, center or department the employee belongs to.|
+|»»» lastName|string|true|none|Last name of the employee|
+|»»» firstName|string|true|none|First name of the employee|
+|»»» gender|string|true|none|Gender of the employee|
+|»»» email|string|true|none|Email of the employee. used as username for login. needs to be unique.|
+|»»» mobilePhone|string|true|none|Mobile phone number of the employee. required for 2fa. uses the [phony library](https://github.com/floere/phony) to validate plausibility of number. Country extension defaults to *+32* unless provided|
+|»»» countryCode|string|false|none|Country (residence) of the employee. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» locale|string|true|none|Language used for the PaxFamilia application|
+|»»» memberRight|string|true|none|Right of the employee. `read_and_write` means the employee can create new clients, `read` only means the employee can't create clients but can access clients he has been given access to.|
+|»» links|[PaginationLinks](#schemapaginationlinks)|false|none|none|
+|»»» self|string|true|none|Link to the current page of the collection.|
+|»»» first|string|true|none|Link to the first page of the collection.|
+|»»» prev|string|true|none|Link to the previous page of the collection.|
+|»»» next|string|true|none|Link to the next page of the collection.|
+|»»» last|string|true|none|Link to the last page of the collection.|
+|»» meta|[PaginationMeta](#schemapaginationmeta)|false|none|none|
+|»»» totalPages|number|false|none|Total pages paginated|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|companyMembership|
+|gender|M|
+|gender|F|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|memberRight|read_and_write|
+|memberRight|read|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Updates a company membership
+## findCompanyMembershipById
 
 <a id="opIdfindCompanyMembershipById"></a>
 
@@ -1910,19 +2242,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} \
+curl -X PATCH https://subdomain.api.paxfamilia.com/v1/company-memberships/{id} \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-PATCH https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -1937,7 +2261,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}',
+result = RestClient.patch 'https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}',
   params: {
   }, headers: headers
 
@@ -1975,7 +2299,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}',
+fetch('https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}',
 {
   method: 'PATCH',
   body: inputBody,
@@ -2008,7 +2332,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}", data)
+    req, err := http.NewRequest("PATCH", "https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2019,7 +2343,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -2036,6 +2360,8 @@ System.out.println(response.toString());
 ```
 
 `PATCH /company-memberships/{id}`
+
+*Updates a company membership*
 
 > Body parameter
 
@@ -2062,12 +2388,38 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="updates-a-company-membership-parameters">Parameters</h3>
+<h3 id="findcompanymembershipbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|none|
-|body|body|object|false|none|
+|id|path|string|true|ID of the company membership|
+|data|body|[CompanyMembership](#schemacompanymembership)|true|none|
+|» id|body|string|true|Internal employee id. Must be unique.|
+|» type|body|string|true|Resource type - `companyMembership`|
+|» attributes|body|object|true|none|
+|»» id|body|string|true|Internal employee id. Must be unique. Will be generated randomly if not provided|
+|»» companyUnitId|body|string|false|Id of the unit, center or department the employee belongs to.|
+|»» lastName|body|string|true|Last name of the employee|
+|»» firstName|body|string|true|First name of the employee|
+|»» gender|body|string|true|Gender of the employee|
+|»» email|body|string|true|Email of the employee. used as username for login. needs to be unique.|
+|»» mobilePhone|body|string|true|Mobile phone number of the employee. required for 2fa. uses the [phony library](https://github.com/floere/phony) to validate plausibility of number. Country extension defaults to *+32* unless provided|
+|»» countryCode|body|string|false|Country (residence) of the employee. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»» locale|body|string|true|Language used for the PaxFamilia application|
+|»» memberRight|body|string|true|Right of the employee. `read_and_write` means the employee can create new clients, `read` only means the employee can't create clients but can access clients he has been given access to.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|companyMembership|
+|»» gender|M|
+|»» gender|F|
+|»» locale|fr|
+|»» locale|nl|
+|»» locale|en|
+|»» memberRight|read_and_write|
+|»» memberRight|read|
 
 > Example responses
 
@@ -2096,24 +2448,56 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="updates-a-company-membership-responses">Responses</h3>
+<h3 id="findcompanymembershipbyid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|not valid company membership attributes|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Not valid company membership attributes|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="updates-a-company-membership-responseschema">Response Schema</h3>
+<h3 id="findcompanymembershipbyid-responseschema">Response Schema</h3>
+
+Status Code **202**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[CompanyMembership](#schemacompanymembership)|true|none|none|
+|»» id|string|true|none|Internal employee id. Must be unique.|
+|»» type|string|true|none|Resource type - `companyMembership`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal employee id. Must be unique. Will be generated randomly if not provided|
+|»»» companyUnitId|string|false|none|Id of the unit, center or department the employee belongs to.|
+|»»» lastName|string|true|none|Last name of the employee|
+|»»» firstName|string|true|none|First name of the employee|
+|»»» gender|string|true|none|Gender of the employee|
+|»»» email|string|true|none|Email of the employee. used as username for login. needs to be unique.|
+|»»» mobilePhone|string|true|none|Mobile phone number of the employee. required for 2fa. uses the [phony library](https://github.com/floere/phony) to validate plausibility of number. Country extension defaults to *+32* unless provided|
+|»»» countryCode|string|false|none|Country (residence) of the employee. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» locale|string|true|none|Language used for the PaxFamilia application|
+|»»» memberRight|string|true|none|Right of the employee. `read_and_write` means the employee can create new clients, `read` only means the employee can't create clients but can access clients he has been given access to.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|companyMembership|
+|gender|M|
+|gender|F|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|memberRight|read_and_write|
+|memberRight|read|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Destroys a company membership
+## deleteCompanyMembership
 
 <a id="opIddeleteCompanyMembership"></a>
 
@@ -2121,17 +2505,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X DELETE https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} \
+curl -X DELETE https://subdomain.api.paxfamilia.com/v1/company-memberships/{id} \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-DELETE https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id} HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -2145,7 +2522,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.delete 'https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}',
+result = RestClient.delete 'https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}',
   params: {
   }, headers: headers
 
@@ -2163,7 +2540,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}',
+fetch('https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}',
 {
   method: 'DELETE',
 
@@ -2195,7 +2572,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}", data)
+    req, err := http.NewRequest("DELETE", "https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2206,7 +2583,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/company-memberships/{id}");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/company-memberships/{id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -2224,11 +2601,13 @@ System.out.println(response.toString());
 
 `DELETE /company-memberships/{id}`
 
-<h3 id="destroys-a-company-membership-parameters">Parameters</h3>
+*Destroys a company membership*
+
+<h3 id="deletecompanymembership-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|none|
+|id|path|string|true|ID of the company membership|
 
 > Example responses
 
@@ -2257,16 +2636,48 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="destroys-a-company-membership-responses">Responses</h3>
+<h3 id="deletecompanymembership-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|company membership deleted|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="destroys-a-company-membership-responseschema">Response Schema</h3>
+<h3 id="deletecompanymembership-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[CompanyMembership](#schemacompanymembership)|true|none|none|
+|»» id|string|true|none|Internal employee id. Must be unique.|
+|»» type|string|true|none|Resource type - `companyMembership`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal employee id. Must be unique. Will be generated randomly if not provided|
+|»»» companyUnitId|string|false|none|Id of the unit, center or department the employee belongs to.|
+|»»» lastName|string|true|none|Last name of the employee|
+|»»» firstName|string|true|none|First name of the employee|
+|»»» gender|string|true|none|Gender of the employee|
+|»»» email|string|true|none|Email of the employee. used as username for login. needs to be unique.|
+|»»» mobilePhone|string|true|none|Mobile phone number of the employee. required for 2fa. uses the [phony library](https://github.com/floere/phony) to validate plausibility of number. Country extension defaults to *+32* unless provided|
+|»»» countryCode|string|false|none|Country (residence) of the employee. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» locale|string|true|none|Language used for the PaxFamilia application|
+|»»» memberRight|string|true|none|Right of the employee. `read_and_write` means the employee can create new clients, `read` only means the employee can't create clients but can access clients he has been given access to.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|companyMembership|
+|gender|M|
+|gender|F|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|memberRight|read_and_write|
+|memberRight|read|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2275,7 +2686,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-company-units">Company Units</h1>
 
-## Creates one or more company units
+## addCompanyUnits
 
 <a id="opIdaddCompanyUnits"></a>
 
@@ -2283,19 +2694,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/company-units \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/company-units \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/company-units HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -2310,7 +2713,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/company-units',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/company-units',
   params: {
   }, headers: headers
 
@@ -2345,7 +2748,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/company-units',
+fetch('https://subdomain.api.paxfamilia.com/v1/company-units',
 {
   method: 'POST',
   body: inputBody,
@@ -2378,7 +2781,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/company-units", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/company-units", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2389,7 +2792,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/company-units");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/company-units");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2407,6 +2810,8 @@ System.out.println(response.toString());
 
 `POST /company-units`
 
+*Creates one or more company units*
+
 > Body parameter
 
 ```json
@@ -2429,12 +2834,29 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-company-units-parameters">Parameters</h3>
+<h3 id="addcompanyunits-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» data|body|[[CompanyUnit](#schemacompanyunit)]|true|none|
+|data|body|[[CompanyUnit](#schemacompanyunit)]|true|none|
+|» id|body|string|true|Internal id of the unit, center or department.|
+|» type|body|string|true|Resource type - `companyUnit`|
+|» attributes|body|object|true|none|
+|»» id|body|string|true|Internal id of the unit, center or department. Will be generated randomly if not provided|
+|»» parentUnitId|body|string|false|A unit can be a sub unit of another unit (parentUnit).|
+|»» name|body|string|true|Name the unit, center or department|
+|»» countryCode|body|string|false|Country of the unit. Default to the country of the company it belongs to. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»» address|body|string|false|Address of the unit|
+|»» zipcode|body|string|false|Zipcode of the unit|
+|»» locale|body|string|true|Language of the unit|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|companyUnit|
+|»» locale|fr|
+|»» locale|nl|
 
 > Example responses
 
@@ -2460,30 +2882,48 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-company-units-responses">Responses</h3>
+<h3 id="addcompanyunits-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Company units created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-company-units-responseschema">Response Schema</h3>
+<h3 id="addcompanyunits-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[CompanyUnit](#schemacompanyunit)]|true|none|none|
+|»» id|string|true|none|Internal id of the unit, center or department.|
+|»» type|string|true|none|Resource type - `companyUnit`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal id of the unit, center or department. Will be generated randomly if not provided|
+|»»» parentUnitId|string|false|none|A unit can be a sub unit of another unit (parentUnit).|
+|»»» name|string|true|none|Name the unit, center or department|
+|»»» countryCode|string|false|none|Country of the unit. Default to the country of the company it belongs to. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» address|string|false|none|Address of the unit|
+|»»» zipcode|string|false|none|Zipcode of the unit|
+|»»» locale|string|true|none|Language of the unit|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|companyUnit|
+|locale|fr|
+|locale|nl|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Retrieves the list of company units
+## getCompanyUnits
 
 <a id="opIdgetCompanyUnits"></a>
 
@@ -2491,17 +2931,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/company-units \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/company-units \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/company-units HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -2515,7 +2948,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/company-units',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/company-units',
   params: {
   }, headers: headers
 
@@ -2533,7 +2966,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/company-units',
+fetch('https://subdomain.api.paxfamilia.com/v1/company-units',
 {
   method: 'GET',
 
@@ -2565,7 +2998,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/company-units", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/company-units", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2576,7 +3009,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/company-units");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/company-units");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2594,11 +3027,13 @@ System.out.println(response.toString());
 
 `GET /company-units`
 
-<h3 id="retrieves-the-list-of-company-units-parameters">Parameters</h3>
+*Retrieves the list of company units*
+
+<h3 id="getcompanyunits-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|paginationQuery|query|string|false|page object query with number and size in the format page%5Bnumber%5D=1&page%5Bsize%5D=50 which would be page[number]=1&page[size]=50 before encoding the square brackets|
+|paginationQuery|query|string|false|Page object query with number and size in the format `page%5Bnumber%5D=1&page%5Bsize%5D=50` which would be `page[number]=1&page[size]=50` before encoding the square brackets.|
 
 > Example responses
 
@@ -2622,11 +3057,11 @@ System.out.println(response.toString());
     }
   ],
   "links": {
-    "self": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
-    "first": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
-    "prev": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
-    "next": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
-    "last": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
+    "self": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
+    "first": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
+    "prev": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
+    "next": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
+    "last": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
   },
   "meta": {
     "totalPages": 5
@@ -2634,20 +3069,46 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="retrieves-the-list-of-company-units-responses">Responses</h3>
+<h3 id="getcompanyunits-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Company units found|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
 
-<h3 id="retrieves-the-list-of-company-units-responseschema">Response Schema</h3>
+<h3 id="getcompanyunits-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[CompanyUnit](#schemacompanyunit)]|true|none|none|
+|»» id|string|true|none|Internal id of the unit, center or department.|
+|»» type|string|true|none|Resource type - `companyUnit`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal id of the unit, center or department. Will be generated randomly if not provided|
+|»»» parentUnitId|string|false|none|A unit can be a sub unit of another unit (parentUnit).|
+|»»» name|string|true|none|Name the unit, center or department|
+|»»» countryCode|string|false|none|Country of the unit. Default to the country of the company it belongs to. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» address|string|false|none|Address of the unit|
+|»»» zipcode|string|false|none|Zipcode of the unit|
+|»»» locale|string|true|none|Language of the unit|
+|»» links|[PaginationLinks](#schemapaginationlinks)|false|none|none|
+|»»» self|string|true|none|Link to the current page of the collection.|
+|»»» first|string|true|none|Link to the first page of the collection.|
+|»»» prev|string|true|none|Link to the previous page of the collection.|
+|»»» next|string|true|none|Link to the next page of the collection.|
+|»»» last|string|true|none|Link to the last page of the collection.|
+|»» meta|[PaginationMeta](#schemapaginationmeta)|false|none|none|
+|»»» totalPages|number|false|none|Total pages paginated|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|companyUnit|
+|locale|fr|
+|locale|nl|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2656,7 +3117,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-donations">Donations</h1>
 
-## Creates one or more Donations
+## addDonations
 
 <a id="opIdaddDonations"></a>
 
@@ -2664,19 +3125,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/donations \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -2691,7 +3144,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/donations',
   params: {
   }, headers: headers
 
@@ -2737,7 +3190,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/donations',
 {
   method: 'POST',
   body: inputBody,
@@ -2770,7 +3223,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/donations", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2781,7 +3234,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/donations");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/donations");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2799,6 +3252,8 @@ System.out.println(response.toString());
 
 `POST /groups/{groupId}/donations`
 
+*Creates one or more Donations*
+
 > Body parameter
 
 ```json
@@ -2832,13 +3287,64 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-donations-parameters">Parameters</h3>
+<h3 id="adddonations-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|groupId|path|string|true|none|
-|body|body|object|false|none|
-|» data|body|[[Donation](#schemadonation)]|true|none|
+|groupId|path|string|true|ID of the group|
+|data|body|[[Donation](#schemadonation)]|true|none|
+|» id|body|string|true|Internal id of the donation.|
+|» type|body|string|true|Resource type - `donation`|
+|» attributes|body|object|true|none|
+|»» id|body|string|true|Internal id of the donation. Must be unique. Will be generated randomly if not provided.|
+|»» estateAssetId|body|string|false|Id of the asset it relates to.|
+|»» name|body|string|true|Name or reference for the donation|
+|»» transactionDate|body|string|true|Donation date. YYYY-MM-DD|
+|»» donationType|body|string|true|Type of donation|
+|»» amount|body|number|true|Total intrinsic value of the donation. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
+|»» currentValue|body|string|false|Current value of the donation. Defaults to `amount`|
+|»» donorIds|body|[string]|true|Array of donor ids.|
+|»» doneeIds|body|[string]|true|Array of donee ids.|
+|»» calleeIds|body|[string]|false|Internal IDs of the callee(s). Only in case residuo clause is true.|
+|»» ownershipType|body|string|true|Specify if the donation is not for the full ownership. Full property ('fp'), bare ownership ('np') or bare ownership with reserve of usufruct ('np_reserve_us').|
+|»» inheritanceTreatment|body|string|false|Treatment at succession. `advance`:- advance on inheritance, `no_report`:- par preciput et hors part, `advance_with_no_report`:- advance on inheritance with no report in nature.|
+|»» nonTransferabilityClause|body|string|false|Type of non transferability clause (inalienability) if any|
+|»» nonTransferabilityDuration|body|integer|false|Number of years of inalienability. Required if `nonTransferabilityClause` is forYears|
+|»» noCommunityCondition|body|boolean|false|Clause preventing to bring the given assets to a community|
+|»» returnClause|body|string|false|Clause of conventional return|
+|»» returnClauseOptional|body|boolean|false|Is the return clause optional?|
+|»» annuityClause|body|boolean|false|Is there a charge/rent (Charge de rente)?|
+|»» annuityAmount|body|number|false|Annual annuity amount. Required if `annuityClause` is *true*|
+|»» annuityPc|body|number|false|Annual annuity indexation.|
+|»» description|body|string|false|Description|
+|»» registered|body|boolean|true|Is the donation registered?|
+|»» contractForm|body|string|false|What contractual form did the donation take?|
+|»» notaris|body|string|false|Name of the notaris|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|donation|
+|»» donationType|movable|
+|»» donationType|immovable|
+|»» ownershipType|fp|
+|»» ownershipType|np_reserve_us|
+|»» ownershipType|np|
+|»» inheritanceTreatment|advance|
+|»» inheritanceTreatment|no_report|
+|»» inheritanceTreatment|advance_with_no_report|
+|»» inheritanceTreatment|dunno|
+|»» nonTransferabilityClause|none|
+|»» nonTransferabilityClause|for_years|
+|»» nonTransferabilityClause|till_donor_death|
+|»» returnClause|none|
+|»» returnClause|yes_no_descendance|
+|»» returnClause|yes_with_descendance|
+|»» returnClause|dunno|
+|»» contractForm|notarial_deed|
+|»» contractForm|foreign_notarial_deed|
+|»» contractForm|none|
 
 > Example responses
 
@@ -2875,23 +3381,75 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-donations-responses">Responses</h3>
+<h3 id="adddonations-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Donations created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-donations-responseschema">Response Schema</h3>
+<h3 id="adddonations-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[Donation](#schemadonation)]|true|none|none|
+|»» id|string|true|none|Internal id of the donation.|
+|»» type|string|true|none|Resource type - `donation`|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal id of the donation. Must be unique. Will be generated randomly if not provided.|
+|»»» estateAssetId|string|false|none|Id of the asset it relates to.|
+|»»» name|string|true|none|Name or reference for the donation|
+|»»» transactionDate|string|true|none|Donation date. YYYY-MM-DD|
+|»»» donationType|string|true|none|Type of donation|
+|»»» amount|number|true|none|Total intrinsic value of the donation. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
+|»»» currentValue|string|false|none|Current value of the donation. Defaults to `amount`|
+|»»» donorIds|[string]|true|none|Array of donor ids.|
+|»»» doneeIds|[string]|true|none|Array of donee ids.|
+|»»» calleeIds|[string]|false|none|Internal IDs of the callee(s). Only in case residuo clause is true.|
+|»»» ownershipType|string|true|none|Specify if the donation is not for the full ownership. Full property ('fp'), bare ownership ('np') or bare ownership with reserve of usufruct ('np_reserve_us').|
+|»»» inheritanceTreatment|string|false|none|Treatment at succession. `advance`:- advance on inheritance, `no_report`:- par preciput et hors part, `advance_with_no_report`:- advance on inheritance with no report in nature.|
+|»»» nonTransferabilityClause|string|false|none|Type of non transferability clause (inalienability) if any|
+|»»» nonTransferabilityDuration|integer|false|none|Number of years of inalienability. Required if `nonTransferabilityClause` is forYears|
+|»»» noCommunityCondition|boolean|false|none|Clause preventing to bring the given assets to a community|
+|»»» returnClause|string|false|none|Clause of conventional return|
+|»»» returnClauseOptional|boolean|false|none|Is the return clause optional?|
+|»»» annuityClause|boolean|false|none|Is there a charge/rent (Charge de rente)?|
+|»»» annuityAmount|number|false|none|Annual annuity amount. Required if `annuityClause` is *true*|
+|»»» annuityPc|number|false|none|Annual annuity indexation.|
+|»»» description|string|false|none|Description|
+|»»» registered|boolean|true|none|Is the donation registered?|
+|»»» contractForm|string|false|none|What contractual form did the donation take?|
+|»»» notaris|string|false|none|Name of the notaris|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|donation|
+|donationType|movable|
+|donationType|immovable|
+|ownershipType|fp|
+|ownershipType|np_reserve_us|
+|ownershipType|np|
+|inheritanceTreatment|advance|
+|inheritanceTreatment|no_report|
+|inheritanceTreatment|advance_with_no_report|
+|inheritanceTreatment|dunno|
+|nonTransferabilityClause|none|
+|nonTransferabilityClause|for_years|
+|nonTransferabilityClause|till_donor_death|
+|returnClause|none|
+|returnClause|yes_no_descendance|
+|returnClause|yes_with_descendance|
+|returnClause|dunno|
+|contractForm|notarial_deed|
+|contractForm|foreign_notarial_deed|
+|contractForm|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2900,7 +3458,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-dummy-users">Dummy Users</h1>
 
-## Creates one or more dummy users
+## addDummyUsers
 
 <a id="opIdaddDummyUsers"></a>
 
@@ -2908,19 +3466,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/dummy-users \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/dummy-users \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/dummy-users HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -2935,7 +3485,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/dummy-users',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/dummy-users',
   params: {
   }, headers: headers
 
@@ -2971,7 +3521,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/dummy-users',
+fetch('https://subdomain.api.paxfamilia.com/v1/dummy-users',
 {
   method: 'POST',
   body: inputBody,
@@ -3004,7 +3554,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/dummy-users", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/dummy-users", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3015,7 +3565,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/dummy-users");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/dummy-users");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -3032,6 +3582,8 @@ System.out.println(response.toString());
 ```
 
 `POST /dummy-users`
+
+*Creates one or more dummy users*
 
 > Body parameter
 
@@ -3056,12 +3608,31 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-dummy-users-parameters">Parameters</h3>
+<h3 id="adddummyusers-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» data|body|[[DummyUser](#schemadummyuser)]|true|none|
+|data|body|[[DummyUser](#schemadummyuser)]|true|none|
+|» id|body|string|true|Internal client/person id.|
+|» type|body|string|true|Resource type - `dummyUser`|
+|» attributes|body|[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)|true|none|
+|»» id|body|string|false|Internal client/person id. Will be generated randomly if not provided|
+|»» lastName|body|string|true|Last name of the client.|
+|»» firstName|body|string|true|First name of the client.|
+|»» email|body|string|false|Email of the client. Optional.|
+|»» gender|body|string|true|Gender of the client.|
+|»» birthday|body|string|false|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
+|»» nationality|body|string|true|Country code of nationality. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»» countryCode|body|string|true|Country code of residence. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»» zipcode|body|string|false|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|dummyUser|
+|»» gender|M|
+|»» gender|F|
 
 > Example responses
 
@@ -3088,30 +3659,50 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-dummy-users-responses">Responses</h3>
+<h3 id="adddummyusers-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Dummy users created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-dummy-users-responseschema">Response Schema</h3>
+<h3 id="adddummyusers-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[DummyUser](#schemadummyuser)]|true|none|none|
+|»» id|string|true|none|Internal client/person id.|
+|»» type|string|true|none|Resource type - `dummyUser`|
+|»» attributes|[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)|true|none|none|
+|»»» id|string|false|none|Internal client/person id. Will be generated randomly if not provided|
+|»»» lastName|string|true|none|Last name of the client.|
+|»»» firstName|string|true|none|First name of the client.|
+|»»» email|string|false|none|Email of the client. Optional.|
+|»»» gender|string|true|none|Gender of the client.|
+|»»» birthday|string|false|none|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
+|»»» nationality|string|true|none|Country code of nationality. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» countryCode|string|true|none|Country code of residence. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» zipcode|string|false|none|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|dummyUser|
+|gender|M|
+|gender|F|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Retrieves the list of dummy users
+## getDummyUsers
 
 <a id="opIdgetDummyUsers"></a>
 
@@ -3119,17 +3710,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/dummy-users \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/dummy-users \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/dummy-users HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -3143,7 +3727,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/dummy-users',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/dummy-users',
   params: {
   }, headers: headers
 
@@ -3161,7 +3745,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/dummy-users',
+fetch('https://subdomain.api.paxfamilia.com/v1/dummy-users',
 {
   method: 'GET',
 
@@ -3193,7 +3777,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/dummy-users", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/dummy-users", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3204,7 +3788,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/dummy-users");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/dummy-users");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3222,11 +3806,13 @@ System.out.println(response.toString());
 
 `GET /dummy-users`
 
-<h3 id="retrieves-the-list-of-dummy-users-parameters">Parameters</h3>
+*Retrieves the list of dummy users*
+
+<h3 id="getdummyusers-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|paginationQuery|query|string|false|page object query with number and size in the format page%5Bnumber%5D=1&page%5Bsize%5D=50 which would be page[number]=1&page[size]=50 before encoding the square brackets|
+|paginationQuery|query|string|false|Page object query with number and size in the format `page%5Bnumber%5D=1&page%5Bsize%5D=50` which would be `page[number]=1&page[size]=50` before encoding the square brackets.|
 
 > Example responses
 
@@ -3251,11 +3837,11 @@ System.out.println(response.toString());
     }
   ],
   "links": {
-    "self": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
-    "first": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
-    "prev": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
-    "next": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
-    "last": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
+    "self": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
+    "first": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
+    "prev": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
+    "next": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
+    "last": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
   },
   "meta": {
     "totalPages": 5
@@ -3263,20 +3849,48 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="retrieves-the-list-of-dummy-users-responses">Responses</h3>
+<h3 id="getdummyusers-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Dummy users found|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
 
-<h3 id="retrieves-the-list-of-dummy-users-responseschema">Response Schema</h3>
+<h3 id="getdummyusers-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[DummyUser](#schemadummyuser)]|true|none|none|
+|»» id|string|true|none|Internal client/person id.|
+|»» type|string|true|none|Resource type - `dummyUser`|
+|»» attributes|[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)|true|none|none|
+|»»» id|string|false|none|Internal client/person id. Will be generated randomly if not provided|
+|»»» lastName|string|true|none|Last name of the client.|
+|»»» firstName|string|true|none|First name of the client.|
+|»»» email|string|false|none|Email of the client. Optional.|
+|»»» gender|string|true|none|Gender of the client.|
+|»»» birthday|string|false|none|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
+|»»» nationality|string|true|none|Country code of nationality. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» countryCode|string|true|none|Country code of residence. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» zipcode|string|false|none|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
+|»» links|[PaginationLinks](#schemapaginationlinks)|false|none|none|
+|»»» self|string|true|none|Link to the current page of the collection.|
+|»»» first|string|true|none|Link to the first page of the collection.|
+|»»» prev|string|true|none|Link to the previous page of the collection.|
+|»»» next|string|true|none|Link to the next page of the collection.|
+|»»» last|string|true|none|Link to the last page of the collection.|
+|»» meta|[PaginationMeta](#schemapaginationmeta)|false|none|none|
+|»»» totalPages|number|false|none|Total pages paginated|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|dummyUser|
+|gender|M|
+|gender|F|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3285,7 +3899,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-estate-assets">Estate Assets</h1>
 
-## Creates one or more Estate Assets
+## addEstateAssets
 
 <a id="opIdaddEstateAssets"></a>
 
@@ -3293,19 +3907,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-assets \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -3320,7 +3926,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-assets',
   params: {
   }, headers: headers
 
@@ -3333,11 +3939,23 @@ const fetch = require('node-fetch');
 const inputBody = '{
   "data": [
     {
-      "id": "12345h",
+      "id": "string",
       "type": "estateAsset",
       "attributes": {
-        "id": "123dfer",
-        "currentValue": 2344
+        "id": "345abcd",
+        "apiOnly": true,
+        "name": "Home expense account",
+        "countryCode": "BE",
+        "zipcode": "1050",
+        "currentValue": 3234,
+        "currency": "EUR",
+        "defaultOwnershipType": "owner",
+        "bankName": "ING Belgium",
+        "accountType": "current_account",
+        "iban": "0022333344445555",
+        "swiftCode": "GBABDD88",
+        "rateOfReturn": 2,
+        "category": "account"
       }
     }
   ]
@@ -3350,7 +3968,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-assets',
 {
   method: 'POST',
   body: inputBody,
@@ -3383,7 +4001,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-assets", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3394,7 +4012,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-assets");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-assets");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -3412,30 +4030,86 @@ System.out.println(response.toString());
 
 `POST /groups/{groupId}/estate-assets`
 
+*Creates one or more Estate Assets*
+
+'Endpoint to mass upload `EstateAssets`. These have five diferent categories: company, real estate, other asset, investment and account. Each is described in further detail in the Schemas section of this document, they are named respectively `EstateAssetCompany`, `EstateAssetRealEstate`, `EstateAssetOtherAsset`, `EstateAssetInvestment` and `EstateAssetAccount`. Each share `EstateAssetBaseAttributes` and then include specific extra properties of their own. Below the examples are demonstrated using the *account* category. Be aware that the endpoint accepts **any number** of the five categories non-exclusively, which means you can send more then one category at a time.'
+
 > Body parameter
 
 ```json
 {
   "data": [
     {
-      "id": "12345h",
+      "id": "string",
       "type": "estateAsset",
       "attributes": {
-        "id": "123dfer",
-        "currentValue": 2344
+        "id": "345abcd",
+        "apiOnly": true,
+        "name": "Home expense account",
+        "countryCode": "BE",
+        "zipcode": "1050",
+        "currentValue": 3234,
+        "currency": "EUR",
+        "defaultOwnershipType": "owner",
+        "bankName": "ING Belgium",
+        "accountType": "current_account",
+        "iban": "0022333344445555",
+        "swiftCode": "GBABDD88",
+        "rateOfReturn": 2,
+        "category": "account"
       }
     }
   ]
 }
 ```
 
-<h3 id="creates-one-or-more-estate-assets-parameters">Parameters</h3>
+<h3 id="addestateassets-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|groupId|path|string|true|none|
-|body|body|object|false|none|
-|» data|body|[allOf]|true|none|
+|groupId|path|string|true|ID of the group|
+|data|body|[object]|true|none|
+|» id|body|string|false|ID of the estate asset|
+|» type|body|string|false|Resource type - `estateAsset`|
+|» attributes|body|any|false|none|
+|»» *anonymous*|body|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|
+|»»» id|body|string|false|Internal reference to asset, must be unique in the group scope. Will be generated randomly if not provided|
+|»»» apiOnly|body|boolean|false|Can only be edited through the api endpoint|
+|»»» name|body|string|false|Custom name of the asset. If left empty will be constructed from the address|
+|»»» countryCode|body|string|false|Country where the asset is located. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» zipcode|body|string|false|Zipcode where the asset is located. Required for real estate in Belgium to calculate property tax from cadastral income|
+|»»» currentValue|body|number|true|Current value of the asset|
+|»»» currency|body|string|false|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»»» situationDate|body|string|false|Date at which the amounts where calculated. Must be in the past. Defaults to the creation date. *YYYY-MM-DD*.|
+|»»» defaultOwnershipType|body|string|false|Ownership of the asset. Owner refers to the 'main client', partner refers to the main client spouse or partner|
+|»»» community|body|boolean|false|Is the asset owned by the community? If not specified, defaults according to the matrimonial regime|
+|»» *anonymous*|body|object|false|none|
+|»»» accountType|body|string|true|Type of account|
+|»»» bankName|body|string|true|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
+|»»» iban|body|string|false|Account IBAN number.|
+|»»» rateOfReturn|body|number|false|Expected annual value increase of the company.|
+|»»» swiftCode|body|string|false|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated|
+|»»» category|body|string|true|none|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|estateAsset|
+|»»» defaultOwnershipType|owner|
+|»»» defaultOwnershipType|partner|
+|»»» defaultOwnershipType|common|
+|»»» defaultOwnershipType|owner_np_children|
+|»»» defaultOwnershipType|partner_np_children|
+|»»» defaultOwnershipType|common_np_children|
+|»»» defaultOwnershipType|owner_us_parent|
+|»»» defaultOwnershipType|partner_us_parent|
+|»»» defaultOwnershipType|other|
+|»»» accountType|current_account|
+|»»» accountType|saving_account|
+|»»» accountType|term_account|
+|»»» accountType|other_type|
+|»»» category|account|
 
 > Example responses
 
@@ -3445,44 +4119,97 @@ System.out.println(response.toString());
 {
   "data": [
     {
-      "id": "12345h",
+      "id": "string",
       "type": "estateAsset",
       "attributes": {
-        "id": "123dfer",
-        "currentValue": 2344
+        "id": "345abcd",
+        "apiOnly": true,
+        "name": "Home expense account",
+        "countryCode": "BE",
+        "zipcode": "1050",
+        "currentValue": 3234,
+        "currency": "EUR",
+        "defaultOwnershipType": "owner",
+        "bankName": "ING Belgium",
+        "accountType": "current_account",
+        "iban": "0022333344445555",
+        "swiftCode": "GBABDD88",
+        "rateOfReturn": 2,
+        "category": "account"
       }
     }
   ]
 }
 ```
 
-<h3 id="creates-one-or-more-estate-assets-responses">Responses</h3>
+<h3 id="addestateassets-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Estate Assets created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-estate-assets-responseschema">Response Schema</h3>
+<h3 id="addestateassets-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» data|[allOf]|true|none|none|
+|» data|[object]|true|none|none|
+|»» id|string|false|none|ID of the estate asset|
+|»» type|string|false|none|Resource type - `estateAsset`|
+|»» attributes|any|false|none|none|
 
-*allOf - discriminator: type*
+*allOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|»»» *anonymous*|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|none|
+|»»»» id|string|false|none|Internal reference to asset, must be unique in the group scope. Will be generated randomly if not provided|
+|»»»» apiOnly|boolean|false|none|Can only be edited through the api endpoint|
+|»»»» name|string|false|none|Custom name of the asset. If left empty will be constructed from the address|
+|»»»» countryCode|string|false|none|Country where the asset is located. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»» zipcode|string|false|none|Zipcode where the asset is located. Required for real estate in Belgium to calculate property tax from cadastral income|
+|»»»» currentValue|number|true|none|Current value of the asset|
+|»»»» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»»»» situationDate|string|false|none|Date at which the amounts where calculated. Must be in the past. Defaults to the creation date. *YYYY-MM-DD*.|
+|»»»» defaultOwnershipType|string|false|none|Ownership of the asset. Owner refers to the 'main client', partner refers to the main client spouse or partner|
+|»»»» community|boolean|false|none|Is the asset owned by the community? If not specified, defaults according to the matrimonial regime|
 
 *and*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|»»» *anonymous*|object|false|none|none|
+|»»»» accountType|string|true|none|Type of account|
+|»»»» bankName|string|true|none|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
+|»»»» iban|string|false|none|Account IBAN number.|
+|»»»» rateOfReturn|number|false|none|Expected annual value increase of the company.|
+|»»»» swiftCode|string|false|none|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated|
+|»»»» category|string|true|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|estateAsset|
+|defaultOwnershipType|owner|
+|defaultOwnershipType|partner|
+|defaultOwnershipType|common|
+|defaultOwnershipType|owner_np_children|
+|defaultOwnershipType|partner_np_children|
+|defaultOwnershipType|common_np_children|
+|defaultOwnershipType|owner_us_parent|
+|defaultOwnershipType|partner_us_parent|
+|defaultOwnershipType|other|
+|accountType|current_account|
+|accountType|saving_account|
+|accountType|term_account|
+|accountType|other_type|
+|category|account|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3491,7 +4218,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-estate-liabilities">Estate Liabilities</h1>
 
-## Creates one or more Estate Liabilities
+## addEstateLiabilities
 
 <a id="opIdaddEstateLiabilities"></a>
 
@@ -3499,19 +4226,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-liabilities \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -3526,7 +4245,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-liabilities',
   params: {
   }, headers: headers
 
@@ -3539,11 +4258,42 @@ const fetch = require('node-fetch');
 const inputBody = '{
   "data": [
     {
-      "id": "12345h",
-      "type": "estateAsset",
+      "id": "abcd1234",
+      "type": "estateLiability",
       "attributes": {
-        "id": "123dfer",
-        "rate": 2
+        "id": "abcd1234",
+        "name": "Birthday gift to my son's 30th",
+        "countryCode": "BE",
+        "currency": "EUR",
+        "contractDate": "1970-02-20",
+        "initialAmount": 5001,
+        "bankName": "Grifindor Vault",
+        "apiOnly": false,
+        "liabilityType": "bank_loan",
+        "repaymentType": "constant_periodicity",
+        "periodicity": "monthly",
+        "periodsDuration": 1,
+        "rate": 0,
+        "sameOwnershipAsAsset": true,
+        "borrowers": [
+          "0",
+          "12345mn",
+          "0"
+        ],
+        "lenders": [
+          "12345mnoo0"
+        ],
+        "linkedToAsset": false,
+        "rateType": "fixed",
+        "balanceInsurance": false,
+        "balanceInsurancePc": 0,
+        "swiftCode": "GEBABEBB00",
+        "guarantee": true,
+        "guaranteeType": "other_guarantee",
+        "guaranteeAmount": 73810,
+        "guarantorInternalId": "estate_asset_id_653",
+        "prepaid": false,
+        "prepaymentDate": "1987-08-16T00:00:00.000Z"
       }
     }
   ]
@@ -3556,7 +4306,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-liabilities',
 {
   method: 'POST',
   body: inputBody,
@@ -3589,7 +4339,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-liabilities", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3600,7 +4350,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/estate-liabilities");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/estate-liabilities");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -3618,30 +4368,120 @@ System.out.println(response.toString());
 
 `POST /groups/{groupId}/estate-liabilities`
 
+*Creates one or more Estate Liabilities*
+
 > Body parameter
 
 ```json
 {
   "data": [
     {
-      "id": "12345h",
-      "type": "estateAsset",
+      "id": "abcd1234",
+      "type": "estateLiability",
       "attributes": {
-        "id": "123dfer",
-        "rate": 2
+        "id": "abcd1234",
+        "name": "Birthday gift to my son's 30th",
+        "countryCode": "BE",
+        "currency": "EUR",
+        "contractDate": "1970-02-20",
+        "initialAmount": 5001,
+        "bankName": "Grifindor Vault",
+        "apiOnly": false,
+        "liabilityType": "bank_loan",
+        "repaymentType": "constant_periodicity",
+        "periodicity": "monthly",
+        "periodsDuration": 1,
+        "rate": 0,
+        "sameOwnershipAsAsset": true,
+        "borrowers": [
+          "0",
+          "12345mn",
+          "0"
+        ],
+        "lenders": [
+          "12345mnoo0"
+        ],
+        "linkedToAsset": false,
+        "rateType": "fixed",
+        "balanceInsurance": false,
+        "balanceInsurancePc": 0,
+        "swiftCode": "GEBABEBB00",
+        "guarantee": true,
+        "guaranteeType": "other_guarantee",
+        "guaranteeAmount": 73810,
+        "guarantorInternalId": "estate_asset_id_653",
+        "prepaid": false,
+        "prepaymentDate": "1987-08-16T00:00:00.000Z"
       }
     }
   ]
 }
 ```
 
-<h3 id="creates-one-or-more-estate-liabilities-parameters">Parameters</h3>
+<h3 id="addestateliabilities-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|groupId|path|string|true|none|
-|body|body|object|false|none|
-|» data|body|[allOf]|true|none|
+|groupId|path|string|true|ID of the group|
+|data|body|[[EstateLiability](#schemaestateliability)]|true|none|
+|» id|body|string|true|Internal reference to the liability, must be unique in the group scope.|
+|» type|body|string|true|Resource type - `estateLiability`|
+|» attributes|body|object|true|none|
+|»» id|body|string|false|Internal reference to the liability, must be unique in the group scope. Will be generated randomly if not provided|
+|»» apiOnly|body|boolean|false|Can only be edited through the api endpoint|
+|»» name|body|string|true|Custom name of the liability. Can also be a reference.|
+|»» liabilityType|body|string|true|Type of account|
+|»» linkedToAsset|body|boolean|false|Has the liability been used to finance an asset that has already been created within PaxFamilia?|
+|»» estateAssetId|body|string|false|Internal reference to asset. Will be ignored if `linkedToAsset` is false. Required if `linkedToAsset` is *true*.|
+|»» swiftCode|body|string|false|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|»» bankName|body|string|true|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|»» countryCode|body|string|false|Country of the applicable law. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»» initialAmount|body|number|true|Initial loan amount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
+|»» contractDate|body|string|true|Contract signature date. Must be in the past. *YYYY-MM-DD*|
+|»» currency|body|string|false|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»» repaymentType|body|string|true|Type of account|
+|»» periodicity|body|string|true|Periodicity of the principal and/or interest payment|
+|»» periodsDuration|body|integer|true|Number of repayment periods. Ignored if `repaymentType` has no end date (*no_end_pay_interest* or *no_end_capitalized_interest*)|
+|»» rate|body|number|true|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
+|»» rateType|body|string|false|Fixed or variable interest rate|
+|»» sameOwnershipAsAsset|body|boolean|false|Is the liability held by the same owners of the linked asset and in the same proportions? Ignored if `linkedToAsset` is set to *false*.|
+|»» borrowers|body|[string]|false|"Ignored if `sameOwnershipAsAsset` is *true*, otherwise at least one required. Will assume each borrower holds an equivalent share of the loan. Other borrowers, i.e. that do not exist in the PaxFamilia group scope, can be referenced with and ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four borrowers (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan."|
+|»» lenders|body|[string]|false|Ignored if `liabilityType` is *bank_loan*. Will assume each lender holds an equivalent share of the loan. Other lenders, i.e. that do not exist in the PaxFamilia group scope, can be referenced with an ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four lenders (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan.|
+|»» balanceInsurance|body|boolean|false|Is the liability covered by a balance insurance (ASRD)?|
+|»» balanceInsurancePc|body|number|false|Percentage of the loan covered by a balance insurance. Ignored if `balanceInsurance` is *false*|
+|»» guarantee|body|boolean|false|Is the liability secured by a guarantee?|
+|»» guaranteeType|body|string|false|Type of guarantee. Ignored unless `guarantee` is *true*.|
+|»» guaranteeAmount|body|number|false|Amount of the guarantee. Will default to the `initialAmount`. Ignored unless `guarantee` is *true*.|
+|»» guarantorInternalId|body|string|false|ID of the asset or person guaranteeing the liability. Will default to the `estateAssetId` if present. Ignored unless `guarantee` is *true*. ID needs to exists within PaxFamilia|
+|»» prepaid|body|boolean|false|Has the loan been prepaid? (or is it expected to be prepaid at some future date?)|
+|»» prepaymentDate|body|string|false|Prepayment date. Defaults to current date if prepaid is set to true, otherwise ignored. *YYYY-MM-DD*|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|estateLiability|
+|»» liabilityType|bank_loan|
+|»» liabilityType|private_loan|
+|»» liabilityType|loan_account|
+|»» liabilityType|other_type|
+|»» repaymentType|constant_periodicity|
+|»» repaymentType|constant_principal|
+|»» repaymentType|bullet|
+|»» repaymentType|no_end_pay_interest|
+|»» repaymentType|no_end_capitalized_interest|
+|»» repaymentType|bullet_capitalized_interest|
+|»» periodicity|monthly|
+|»» periodicity|quarterly|
+|»» periodicity|semi_annual|
+|»» periodicity|annual|
+|»» rateType|fixed|
+|»» rateType|variable|
+|»» guaranteeType|mortgage,|
+|»» guaranteeType|mortgage_mandate,|
+|»» guaranteeType|personal_guarantee,|
+|»» guaranteeType|pledge,|
+|»» guaranteeType|other_guarantee|
 
 > Example responses
 
@@ -3658,7 +4498,7 @@ System.out.println(response.toString());
         "name": "Birthday gift to my son's 30th",
         "countryCode": "BE",
         "currency": "EUR",
-        "initialDate": "1970-02-20",
+        "contractDate": "1970-02-20",
         "initialAmount": 5001,
         "bankName": "Grifindor Vault",
         "apiOnly": false,
@@ -3701,23 +4541,82 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-estate-liabilities-responses">Responses</h3>
+<h3 id="addestateliabilities-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Estate Liabilities created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-estate-liabilities-responseschema">Response Schema</h3>
+<h3 id="addestateliabilities-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[EstateLiabilityWithGuarantees](#schemaestateliabilitywithguarantees)]|true|none|none|
+|»» id|string|true|none|Internal reference to the liability, must be unique in the group scope.|
+|»» type|string|true|none|Resource type - `estateLiability`|
+|»» attributes|[EstateLiabilityWithGuarantees/properties/attributes](#schemaestateliabilitywithguarantees/properties/attributes)|true|none|none|
+|»»» id|string|false|none|Internal reference to the liability, must be unique in the group scope. Will be generated randomly if not provided|
+|»»» apiOnly|boolean|false|none|Can only be edited through the api endpoint|
+|»»» name|string|true|none|Custom name of the liability. Can also be a reference.|
+|»»» liabilityType|string|true|none|Type of account|
+|»»» linkedToAsset|boolean|false|none|Has the liability been used to finance an asset that has already been created within PaxFamilia?|
+|»»» estateAssetId|string|false|none|Internal reference to asset. Will be ignored if `linkedToAsset` is false. Required if `linkedToAsset` is *true*.|
+|»»» swiftCode|string|false|none|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|»»» bankName|string|true|none|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|»»» countryCode|string|false|none|Country of the applicable law. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» initialAmount|number|true|none|Initial loan amount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
+|»»» contractDate|string|true|none|Contract signature date. *YYYY-MM-DD*|
+|»»» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»»» repaymentType|string|true|none|Type of account|
+|»»» periodicity|string|true|none|Periodicity of the principal and/or interest payment|
+|»»» periodsDuration|integer|true|none|Number of repayment periods. Ignored if `repaymentType` has no end date (*no_end_pay_interest* or *no_end_capitalized_interest*)|
+|»»» rate|number|true|none|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
+|»»» rateType|string|false|none|Fixed or variable interest rate|
+|»»» sameOwnershipAsAsset|boolean|false|none|Is the liability held by the same owners of the linked asset and in the same proportions? Ignored if `linkedToAsset` is set to *false*.|
+|»»» borrowers|[string]|false|none|"Ignored if `sameOwnershipAsAsset` is *true*, otherwise at least one required. Will assume each borrower holds an equivalent share of the loan. Other borrowers, i.e. that do not exist in the PaxFamilia group scope, can be referenced with and ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four borrowers (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan."|
+|»»» lenders|[string]|false|none|Ignored if `liabilityType` is *bank_loan*. Will assume each lender holds an equivalent share of the loan. Other lenders, i.e. that do not exist in the PaxFamilia group scope, can be referenced with an ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four lenders (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan.|
+|»»» balanceInsurance|boolean|false|none|Is the liability covered by a balance insurance (ASRD)?|
+|»»» balanceInsurancePc|number|false|none|Percentage of the loan covered by a balance insurance. Ignored if `balanceInsurance` is *false*|
+|»»» guarantees|[object]|false|none|none|
+|»»»» amount|number|true|none|Amount of the guarantee. Will default to the `initialAmount`. Ignored unless `guarantee` is *true*.|
+|»»»» guaranteeType|string|true|none|Type of guarantee. Ignored unless `guarantee` is *true*.|
+|»»»» guarantorableId|string|true|none|ID of the asset or person guaranteeing the liability. Will default to the `estateAssetId` if present. Ignored unless `guarantee` is *true*. ID need to exists within PaxFamilia.|
+|»»»» guarantorableType|string|true|none|Resource type of the guarantee, can be `GroupMembership` or `EstateAsset`.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|estateLiability|
+|liabilityType|bank_loan|
+|liabilityType|private_loan|
+|liabilityType|loan_account|
+|liabilityType|other_type|
+|repaymentType|constant_periodicity|
+|repaymentType|constant_principal|
+|repaymentType|bullet|
+|repaymentType|no_end_pay_interest|
+|repaymentType|no_end_capitalized_interest|
+|repaymentType|bullet_capitalized_interest|
+|periodicity|monthly|
+|periodicity|quarterly|
+|periodicity|semi_annual|
+|periodicity|annual|
+|rateType|fixed|
+|rateType|variable|
+|guaranteeType|mortgage|
+|guaranteeType|mortgage_mandate|
+|guaranteeType|personal_guarantee|
+|guaranteeType|pledge|
+|guaranteeType|other_guarantee|
+|guarantorableType|EstateAsset|
+|guarantorableType|GroupMembership|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3726,7 +4625,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-group-memberships">Group Memberships</h1>
 
-## Creates one or more Group Memberships
+## addGroupMemberships
 
 <a id="opIdaddGroupMemberships"></a>
 
@@ -3734,19 +4633,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/group-memberships \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -3761,7 +4652,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/group-memberships',
   params: {
   }, headers: headers
 
@@ -3777,6 +4668,7 @@ const inputBody = '{
       "id": "Yu1234ac",
       "type": "groupMembership",
       "attributes": {
+        "dummyUserId": "Yu1234ac",
         "sex": "F",
         "status": "approved",
         "memberRight": "no_right",
@@ -3786,8 +4678,7 @@ const inputBody = '{
         "extendedMinority": true,
         "provisionalAdministration": true,
         "judicialProtection": false,
-        "extrajudicialProtection": false,
-        "dummyUserId": "Yu1234ac"
+        "extrajudicialProtection": false
       }
     }
   ]
@@ -3800,7 +4691,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/group-memberships',
 {
   method: 'POST',
   body: inputBody,
@@ -3833,7 +4724,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/group-memberships", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3844,7 +4735,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/group-memberships");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/group-memberships");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -3862,6 +4753,8 @@ System.out.println(response.toString());
 
 `POST /groups/{groupId}/group-memberships`
 
+*Creates one or more Group Memberships*
+
 > Body parameter
 
 ```json
@@ -3871,6 +4764,7 @@ System.out.println(response.toString());
       "id": "Yu1234ac",
       "type": "groupMembership",
       "attributes": {
+        "dummyUserId": "Yu1234ac",
         "sex": "F",
         "status": "approved",
         "memberRight": "no_right",
@@ -3880,21 +4774,53 @@ System.out.println(response.toString());
         "extendedMinority": true,
         "provisionalAdministration": true,
         "judicialProtection": false,
-        "extrajudicialProtection": false,
-        "dummyUserId": "Yu1234ac"
+        "extrajudicialProtection": false
       }
     }
   ]
 }
 ```
 
-<h3 id="creates-one-or-more-group-memberships-parameters">Parameters</h3>
+<h3 id="addgroupmemberships-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|groupId|path|string|true|none|
-|body|body|object|false|none|
-|» data|body|[[GroupMembership](#schemagroupmembership)]|true|none|
+|groupId|path|string|true|ID of the group|
+|data|body|[[GroupMembership](#schemagroupmembership)]|true|none|
+|» id|body|string|true|Same as `dummyUserId` below|
+|» type|body|string|true|Resource type - `groupMembership`|
+|» attributes|body|[GroupMembership/properties/attributes](#schemagroupmembership/properties/attributes)|true|none|
+|»» dummyUserId|body|string|true|Id of an existing dummy user.|
+|»» coHolder|body|boolean|false|Is the person a main data subject of the group|
+|»» dead|body|boolean|false|Is the person deceased?|
+|»» fatherId|body|string|false|Internal reference to the father, must be an ID of an existing dummy user.|
+|»» motherId|body|string|false|Internal reference to the mother, must be an ID of an existing dummy user.|
+|»» currentSpouseId|body|string|false|Internal reference to the partner, must be an ID of an existing dummy user.|
+|»» spouseType|body|string|false|Type of partner relationship if current spouse exist.|
+|»» regimeType|body|string|false|Type of matrimonial regime if `spouseType` is spouse|
+|»» adoption|body|string|false|Type of adoption if any|
+|»» extendedMinority|body|boolean|false|Does the group membership have an extended minority?|
+|»» provisionalAdministration|body|boolean|false|Does the group membership have a provisional administration?|
+|»» judicialProtection|body|boolean|false|Does the group membership have a judicial protection?|
+|»» extrajudicialProtection|body|boolean|false|Does the group membership have an extrajudicial protection?|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|groupMembership|
+|»» spouseType|spouse|
+|»» spouseType|legal_cohabitant|
+|»» spouseType|simple_cohabitant|
+|»» regimeType|legal_regime|
+|»» regimeType|separate_ownership|
+|»» regimeType|acquests_participation|
+|»» regimeType|separate_ownership_with_community_addition|
+|»» regimeType|conventional_community|
+|»» regimeType|full_community|
+|»» adoption|none|
+|»» adoption|simple|
+|»» adoption|full|
 
 > Example responses
 
@@ -3907,6 +4833,7 @@ System.out.println(response.toString());
       "id": "Yu1234ac",
       "type": "groupMembership",
       "attributes": {
+        "dummyUserId": "Yu1234ac",
         "sex": "F",
         "status": "approved",
         "memberRight": "no_right",
@@ -3916,31 +4843,64 @@ System.out.println(response.toString());
         "extendedMinority": true,
         "provisionalAdministration": true,
         "judicialProtection": false,
-        "extrajudicialProtection": false,
-        "dummyUserId": "Yu1234ac"
+        "extrajudicialProtection": false
       }
     }
   ]
 }
 ```
 
-<h3 id="creates-one-or-more-group-memberships-responses">Responses</h3>
+<h3 id="addgroupmemberships-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Group Memberships created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-group-memberships-responseschema">Response Schema</h3>
+<h3 id="addgroupmemberships-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[GroupMembership](#schemagroupmembership)]|true|none|none|
+|»» id|string|true|none|Same as `dummyUserId` below|
+|»» type|string|true|none|Resource type - `groupMembership`|
+|»» attributes|[GroupMembership/properties/attributes](#schemagroupmembership/properties/attributes)|true|none|none|
+|»»» dummyUserId|string|true|none|Id of an existing dummy user.|
+|»»» coHolder|boolean|false|none|Is the person a main data subject of the group|
+|»»» dead|boolean|false|none|Is the person deceased?|
+|»»» fatherId|string|false|none|Internal reference to the father, must be an ID of an existing dummy user.|
+|»»» motherId|string|false|none|Internal reference to the mother, must be an ID of an existing dummy user.|
+|»»» currentSpouseId|string|false|none|Internal reference to the partner, must be an ID of an existing dummy user.|
+|»»» spouseType|string|false|none|Type of partner relationship if current spouse exist.|
+|»»» regimeType|string|false|none|Type of matrimonial regime if `spouseType` is spouse|
+|»»» adoption|string|false|none|Type of adoption if any|
+|»»» extendedMinority|boolean|false|none|Does the group membership have an extended minority?|
+|»»» provisionalAdministration|boolean|false|none|Does the group membership have a provisional administration?|
+|»»» judicialProtection|boolean|false|none|Does the group membership have a judicial protection?|
+|»»» extrajudicialProtection|boolean|false|none|Does the group membership have an extrajudicial protection?|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|groupMembership|
+|spouseType|spouse|
+|spouseType|legal_cohabitant|
+|spouseType|simple_cohabitant|
+|regimeType|legal_regime|
+|regimeType|separate_ownership|
+|regimeType|acquests_participation|
+|regimeType|separate_ownership_with_community_addition|
+|regimeType|conventional_community|
+|regimeType|full_community|
+|adoption|none|
+|adoption|simple|
+|adoption|full|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3949,7 +4909,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-groups">Groups</h1>
 
-## Creates one or more Groups
+## addGroups
 
 <a id="opIdaddGroups"></a>
 
@@ -3957,19 +4917,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -3984,7 +4936,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups',
   params: {
   }, headers: headers
 
@@ -4000,8 +4952,9 @@ const inputBody = '{
       "id": "acbdj6472",
       "type": "group",
       "attributes": {
-        "internalName": "Lucas Niets",
         "id": "acbdj6472",
+        "internalName": "Lucas Niets",
+        "state": "active",
         "clientId": "a675742",
         "companyAdvisorId": "987gfr"
       }
@@ -4016,7 +4969,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups',
 {
   method: 'POST',
   body: inputBody,
@@ -4049,7 +5002,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -4060,7 +5013,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4078,6 +5031,8 @@ System.out.println(response.toString());
 
 `POST /groups`
 
+*Creates one or more Groups*
+
 > Body parameter
 
 ```json
@@ -4087,8 +5042,9 @@ System.out.println(response.toString());
       "id": "acbdj6472",
       "type": "group",
       "attributes": {
-        "internalName": "Lucas Niets",
         "id": "acbdj6472",
+        "internalName": "Lucas Niets",
+        "state": "active",
         "clientId": "a675742",
         "companyAdvisorId": "987gfr"
       }
@@ -4097,12 +5053,33 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-groups-parameters">Parameters</h3>
+<h3 id="addgroups-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» data|body|[[Group](#schemagroup)]|true|none|
+|data|body|[[Group](#schemagroup)]|true|none|
+|» id|body|string|true|Internal group ID.|
+|» type|body|string|true|Resource type - `group`|
+|» attributes|body|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|
+|»» id|body|string|true|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»» internalName|body|string|false|Internal client name, won't be visible to client|
+|»» companyAdvisorId|body|string|true|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»» clientId|body|string|true|ID of the 'main' client. Must be an existing dummy user.|
+|»» locale|body|string|false|Default language for the group. Defaults to the locale of the company advisor.|
+|»» state|body|string|false|State of the group|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|group|
+|»» locale|fr|
+|»» locale|nl|
+|»» locale|en|
+|»» state|draft|
+|»» state|active|
+|»» state|suspended|
+|»» state|marked_for_deletion|
 
 > Example responses
 
@@ -4115,8 +5092,9 @@ System.out.println(response.toString());
       "id": "acbdj6472",
       "type": "group",
       "attributes": {
-        "internalName": "Lucas Niets",
         "id": "acbdj6472",
+        "internalName": "Lucas Niets",
+        "state": "active",
         "clientId": "a675742",
         "companyAdvisorId": "987gfr"
       }
@@ -4125,30 +5103,52 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-groups-responses">Responses</h3>
+<h3 id="addgroups-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Groups created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-groups-responseschema">Response Schema</h3>
+<h3 id="addgroups-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[Group](#schemagroup)]|true|none|none|
+|»» id|string|true|none|Internal group ID.|
+|»» type|string|true|none|Resource type - `group`|
+|»» attributes|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|none|
+|»»» id|string|true|none|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»»» internalName|string|false|none|Internal client name, won't be visible to client|
+|»»» companyAdvisorId|string|true|none|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»»» clientId|string|true|none|ID of the 'main' client. Must be an existing dummy user.|
+|»»» locale|string|false|none|Default language for the group. Defaults to the locale of the company advisor.|
+|»»» state|string|false|none|State of the group|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|group|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|state|draft|
+|state|active|
+|state|suspended|
+|state|marked_for_deletion|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Retrieves the list of Groups
+## getGroups
 
 <a id="opIdgetGroups"></a>
 
@@ -4156,17 +5156,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/groups \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/groups \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/groups HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -4180,7 +5173,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/groups',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/groups',
   params: {
   }, headers: headers
 
@@ -4198,7 +5191,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups',
 {
   method: 'GET',
 
@@ -4230,7 +5223,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/groups", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/groups", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -4241,7 +5234,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4259,11 +5252,13 @@ System.out.println(response.toString());
 
 `GET /groups`
 
-<h3 id="retrieves-the-list-of-groups-parameters">Parameters</h3>
+*Retrieves the list of Groups*
+
+<h3 id="getgroups-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|paginationQuery|query|string|false|page object query with number and size in the format page%5Bnumber%5D=1&page%5Bsize%5D=50 which would be page[number]=1&page[size]=50 before encoding the square brackets|
+|paginationQuery|query|string|false|Page object query with number and size in the format `page%5Bnumber%5D=1&page%5Bsize%5D=50` which would be `page[number]=1&page[size]=50` before encoding the square brackets.|
 
 > Example responses
 
@@ -4276,19 +5271,20 @@ System.out.println(response.toString());
       "id": "acbdj6472",
       "type": "group",
       "attributes": {
-        "internalName": "Lucas Niets",
         "id": "acbdj6472",
+        "internalName": "Lucas Niets",
+        "state": "active",
         "clientId": "a675742",
         "companyAdvisorId": "987gfr"
       }
     }
   ],
   "links": {
-    "self": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
-    "first": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
-    "prev": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
-    "next": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
-    "last": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
+    "self": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
+    "first": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
+    "prev": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
+    "next": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
+    "last": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
   },
   "meta": {
     "totalPages": 5
@@ -4296,173 +5292,57 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="retrieves-the-list-of-groups-responses">Responses</h3>
+<h3 id="getgroups-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Groups found|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
 
-<h3 id="retrieves-the-list-of-groups-responseschema">Response Schema</h3>
+<h3 id="getgroups-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[Group](#schemagroup)]|true|none|none|
+|»» id|string|true|none|Internal group ID.|
+|»» type|string|true|none|Resource type - `group`|
+|»» attributes|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|none|
+|»»» id|string|true|none|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|»»» internalName|string|false|none|Internal client name, won't be visible to client|
+|»»» companyAdvisorId|string|true|none|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|»»» clientId|string|true|none|ID of the 'main' client. Must be an existing dummy user.|
+|»»» locale|string|false|none|Default language for the group. Defaults to the locale of the company advisor.|
+|»»» state|string|false|none|State of the group|
+|»» links|[PaginationLinks](#schemapaginationlinks)|false|none|none|
+|»»» self|string|true|none|Link to the current page of the collection.|
+|»»» first|string|true|none|Link to the first page of the collection.|
+|»»» prev|string|true|none|Link to the previous page of the collection.|
+|»»» next|string|true|none|Link to the next page of the collection.|
+|»»» last|string|true|none|Link to the last page of the collection.|
+|»» meta|[PaginationMeta](#schemapaginationmeta)|false|none|none|
+|»»» totalPages|number|false|none|Total pages paginated|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|group|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|state|draft|
+|state|active|
+|state|suspended|
+|state|marked_for_deletion|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Deletes the Group ::WARNING:: will be deleted in favour of lifecycle/mark_for_deletion
-
-<a id="opIddeleteGroup"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://[your-subdomain].paxfamilia.com/api/v1/groups/{id} \
-  -H 'Accept: application/vnd.api+json' \
-  -H 'X-Api-Key: 4P1k3y87sGd' \
-  -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-DELETE https://[your-subdomain].paxfamilia.com/api/v1/groups/{id} HTTP/1.1
-
-Accept: application/vnd.api+json
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/vnd.api+json',
-  'X-Api-Key' => '4P1k3y87sGd',
-  'Authorization' => '4P1k3y87sGd'
-}
-
-result = RestClient.delete 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/vnd.api+json',
-  'X-Api-Key':'4P1k3y87sGd',
-  'Authorization':'4P1k3y87sGd'
-
-};
-
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/vnd.api+json"},
-        "X-Api-Key": []string{"4P1k3y87sGd"},
-        "Authorization": []string{"4P1k3y87sGd"},
-
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-`DELETE /groups/{id}`
-
-<h3 id="deletes-the-group-::warning::-will-be-deleted-in-favour-of-lifecycle/mark_for_deletion-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|id|path|string|true|Group ID of the group to be deleted|
-|days|query|number|false|deactivate the group and set the days until the group should be deleted|
-
-> Example responses
-
-> 401 Response
-
-```json
-{
-  "errors": [
-    {
-      "status": "unauthorized",
-      "detail": "Invalid credentials"
-    }
-  ]
-}
-```
-
-<h3 id="deletes-the-group-::warning::-will-be-deleted-in-favour-of-lifecycle/mark_for_deletion-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Group deleted|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-ApiKey & JsonWebToken
-</aside>
-
-## Get the Estate of one Group
+## getGroupEstate
 
 <a id="opIdgetGroupEstate"></a>
 
@@ -4470,17 +5350,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/groups/{id}/estate \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -4494,7 +5367,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/groups/{id}/estate',
   params: {
   }, headers: headers
 
@@ -4512,7 +5385,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{id}/estate',
 {
   method: 'GET',
 
@@ -4544,7 +5417,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/groups/{id}/estate", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -4555,7 +5428,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/estate");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{id}/estate");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4573,13 +5446,15 @@ System.out.println(response.toString());
 
 `GET /groups/{id}/estate`
 
-Retrieve the lists of Estate Assets, Estate Liabilities and Insurances of a Group
+*Get the Estate of one Group*
 
-<h3 id="get-the-estate-of-one-group-parameters">Parameters</h3>
+Retrieve the lists of 'Estate Assets', 'Estate Liabilities' and 'Insurances' of a 'Group'
+
+<h3 id="getgroupestate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Group ID of the group|
+|id|path|string|true|ID of the group|
 
 > Example responses
 
@@ -4594,14 +5469,22 @@ Retrieve the lists of Estate Assets, Estate Liabilities and Insurances of a Grou
       "estateAssets": [
         {
           "id": "345abcd",
-          "category": "account",
           "apiOnly": true,
           "name": "Home expense account",
           "countryCode": "BE",
           "zipcode": "1050",
           "currentValue": 3234,
           "currency": "EUR",
-          "defaultOwnershipType": "owner"
+          "defaultOwnershipType": "owner",
+          "address": "St. Pierre de Levanaco",
+          "realEstateType": "offices",
+          "autoPropertyTax": false,
+          "annualRent": 10,
+          "cadastralIncome": 130,
+          "propertyTax": 10,
+          "otherCharges": 120,
+          "workValue": 1230,
+          "category": "real_estate"
         }
       ],
       "estateLiabilities": [
@@ -4616,7 +5499,7 @@ Retrieve the lists of Estate Assets, Estate Liabilities and Insurances of a Grou
           "bankName": "string",
           "countryCode": "BE",
           "initialAmount": 0,
-          "initialDate": "string",
+          "contractDate": "string",
           "currency": "EUR",
           "repaymentType": "constant_periodicity",
           "periodicity": "monthly",
@@ -4705,38 +5588,246 @@ Retrieve the lists of Estate Assets, Estate Liabilities and Insurances of a Grou
 }
 ```
 
-<h3 id="get-the-estate-of-one-group-responses">Responses</h3>
+<h3 id="getgroupestate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Group found|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="get-the-estate-of-one-group-responseschema">Response Schema</h3>
+<h3 id="getgroupestate-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|object|true|none|none|
-|»» id|string|false|none|none|
-|»» type|string|false|none|none|
+|»» id|string|false|none|ID of the group|
+|»» type|string|false|none|Resource type - `group`|
 |»» attributes|object|false|none|none|
-|»»» estateAssets|[[EstateAssetAttributes](#schemaestateassetattributes)]|false|none|none|
+|»»» estateAssets|[allOf]|false|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»» *anonymous*|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|none|
+|»»»»» id|string|false|none|Internal reference to asset, must be unique in the group scope. Will be generated randomly if not provided|
+|»»»»» apiOnly|boolean|false|none|Can only be edited through the api endpoint|
+|»»»»» name|string|false|none|Custom name of the asset. If left empty will be constructed from the address|
+|»»»»» countryCode|string|false|none|Country where the asset is located. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»»» zipcode|string|false|none|Zipcode where the asset is located. Required for real estate in Belgium to calculate property tax from cadastral income|
+|»»»»» currentValue|number|true|none|Current value of the asset|
+|»»»»» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»»»»» situationDate|string|false|none|Date at which the amounts where calculated. Must be in the past. Defaults to the creation date. *YYYY-MM-DD*.|
+|»»»»» defaultOwnershipType|string|false|none|Ownership of the asset. Owner refers to the 'main client', partner refers to the main client spouse or partner|
+|»»»»» community|boolean|false|none|Is the asset owned by the community? If not specified, defaults according to the matrimonial regime|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»» *anonymous*|object|false|none|none|
+|»»»»» address|string|false|none|Address where the asset is located|
+|»»»»» realEstateType|string|true|none|Type of real estate asset|
+|»»»»» privateUse|boolean|false|none|Is this property for private use or investment?|
+|»»»»» annualRent|number|false|none|Total annual rent|
+|»»»»» cadastralIncome|number|false|none|Unindexed cadastral income. For assets located in Belgium only.|
+|»»»»» autoPropertyTax|boolean|false|none|Should the property tax be calculated from the cadastral income? For assets located in Belgium only.|
+|»»»»» propertyTax|number|false|none|Annual property tax|
+|»»»»» otherCharges|number|false|none|Other annual charges|
+|»»»»» acquisitionValue|number|false|none|Initial acquisition value (incl. tax and fees)|
+|»»»»» acquisitionYear|string|false|none|'YYYY' - Acquisition year of the asset.|
+|»»»»» workValue|number|false|none|Total amount of investment made since the acquisition|
+|»»»»» rateOfReturn|number|false|none|Expected annual value increase of the company.|
+|»»»»» category|string|true|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»» estateLiabilities|[[EstateLiabilityWithGuarantees/properties/attributes](#schemaestateliabilitywithguarantees/properties/attributes)]|false|none|none|
+|»»»»» id|string|false|none|Internal reference to the liability, must be unique in the group scope. Will be generated randomly if not provided|
+|»»»»» apiOnly|boolean|false|none|Can only be edited through the api endpoint|
+|»»»»» name|string|true|none|Custom name of the liability. Can also be a reference.|
+|»»»»» liabilityType|string|true|none|Type of account|
+|»»»»» linkedToAsset|boolean|false|none|Has the liability been used to finance an asset that has already been created within PaxFamilia?|
+|»»»»» estateAssetId|string|false|none|Internal reference to asset. Will be ignored if `linkedToAsset` is false. Required if `linkedToAsset` is *true*.|
+|»»»»» swiftCode|string|false|none|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|»»»»» bankName|string|true|none|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|»»»»» countryCode|string|false|none|Country of the applicable law. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»»» initialAmount|number|true|none|Initial loan amount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
+|»»»»» contractDate|string|true|none|Contract signature date. *YYYY-MM-DD*|
+|»»»»» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»»»»» repaymentType|string|true|none|Type of account|
+|»»»»» periodicity|string|true|none|Periodicity of the principal and/or interest payment|
+|»»»»» periodsDuration|integer|true|none|Number of repayment periods. Ignored if `repaymentType` has no end date (*no_end_pay_interest* or *no_end_capitalized_interest*)|
+|»»»»» rate|number|true|none|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
+|»»»»» rateType|string|false|none|Fixed or variable interest rate|
+|»»»»» sameOwnershipAsAsset|boolean|false|none|Is the liability held by the same owners of the linked asset and in the same proportions? Ignored if `linkedToAsset` is set to *false*.|
+|»»»»» borrowers|[string]|false|none|"Ignored if `sameOwnershipAsAsset` is *true*, otherwise at least one required. Will assume each borrower holds an equivalent share of the loan. Other borrowers, i.e. that do not exist in the PaxFamilia group scope, can be referenced with and ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four borrowers (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan."|
+|»»»»» lenders|[string]|false|none|Ignored if `liabilityType` is *bank_loan*. Will assume each lender holds an equivalent share of the loan. Other lenders, i.e. that do not exist in the PaxFamilia group scope, can be referenced with an ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four lenders (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan.|
+|»»»»» balanceInsurance|boolean|false|none|Is the liability covered by a balance insurance (ASRD)?|
+|»»»»» balanceInsurancePc|number|false|none|Percentage of the loan covered by a balance insurance. Ignored if `balanceInsurance` is *false*|
+|»»»»» guarantees|[object]|false|none|none|
+|»»»»»» amount|number|true|none|Amount of the guarantee. Will default to the `initialAmount`. Ignored unless `guarantee` is *true*.|
+|»»»»»» guaranteeType|string|true|none|Type of guarantee. Ignored unless `guarantee` is *true*.|
+|»»»»»» guarantorableId|string|true|none|ID of the asset or person guaranteeing the liability. Will default to the `estateAssetId` if present. Ignored unless `guarantee` is *true*. ID need to exists within PaxFamilia.|
+|»»»»»» guarantorableType|string|true|none|Resource type of the guarantee, can be `GroupMembership` or `EstateAsset`.|
+|»»»»» insurances|[[Insurance/properties/attributes](#schemainsurance/properties/attributes)]|false|none|none|
+|»»»»»» id|string|false|none|Internal ID of the insurance, must be unique in the group scope. Will be generated randomly if not provided.|
+|»»»»»» apiOnly|boolean|false|none|Can only be edited through the API endpoint.|
+|»»»»»» name|string|false|none|Custom name of the policy/insurance. If left empty will be constructed from the reference.|
+|»»»»»» reference|string|true|none|Reference of the policy.|
+|»»»»»» insuranceType|string|true|none|Type of insurance contract.|
+|»»»»»» startDate|string|true|none|Start date of the contract. *YYYY-MM-DD*.|
+|»»»»»» noTerm|boolean|false|none|Is the contract without term?|
+|»»»»»» endDate|string|true|none|End date of the contract. Required if `noTerm` is **false**. Ignored if `noTerm` is **true**. *YYYY-MM-DD*.|
+|»»»»»» fixedTerm|boolean|false|none|Is it a fixed term contract? Ignored if `noTerm` is *true*.|
+|»»»»»» situationDate|string|false|none|Date at which the amounts where calculated. Defaults to the begining of the current year. *YYYY-MM-DD*.|
+|»»»»»» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»»»»»» onlyDeathCover|boolean|false|none|Does the contract only include death insurance, ie. no capital is paid in case of life at term.|
+|»»»»»» acquiredReserve|number|true|none|Acquired reserve / current contract value. Ignored if `onlyDeathCover` is *true*. Decimals must be separated by a dot. Eg. 200000.55|
+|»»»»»» deathPayout|string|false|none|Payout in case of death. Degressive is assumed linear over the contract duration, **fixed_amount** if `onlyDeathCover`, **reserve** otherwise.|
+|»»»»»» deathValue|number|false|none|Death cover amount. Only if `deathPayout` is *'fixed_amount'* or *'degressive'*.|
+|»»»»»» acquiredLifeValue|number|false|none|Acquired value in case of life at term (assuming no additional premiums are paid). Ignored if `onlyDeathCover` is *true*. Defaults to same as `acquiredReserve`.|
+|»»»»»» reduced|boolean|false|none|Answer *'true'* if the contract was reduced or the premium was unique.|
+|»»»»»» premiumsPaid|number|false|none|Premiums paid up to the situation date (net of taxes, fees...).|
+|»»»»»» premiumPeriodicity|string|false|none|Periodicity of the premiums. Ignored if reduced is *'true'*|
+|»»»»»» premiumEndDate|string|false|none|Date until premiums are to be paid. Ignored if reduced is *'true'*. Default contract end_date if any *YYYY-MM-DD*.|
+|»»»»»» premium|number|false|none|Periodic premium expected to be paid. Ignored if reduced is *'true'*.|
+|»»»»»» lifeValue|number|false|none|Expected capital in case of life at term (including additional premiums). Ignored if `onlyDeathCover` is *'true'*. Default to `acquiredLifeValue` if reduced.|
+|»»»»»» enumPolicyholder|string|true|none|Is the policyholder a company or a physical person (other).|
+|»»»»»» employerId|string|false|none|Id of the company (group asset) in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|»»»»»» employerName|string|false|none|Name of the employer in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|»»»»»» policyholderIds|[string]|false|none|Ignored if `enumPolicyholder` is *'company'*. Will assume each borrower holds an equivalent share of the policy.|
+|»»»»»» enumInsuredParty|string|false|none|Is the insured the *'policyholders'* or other designated person(s)?|
+|»»»»»» insuredPartyIds|[string]|false|none|Ignored if `enumInsuredParty` is *'policyholders'*.|
+|»»»»»» beneficiaryIsCompany|boolean|false|none|In case a company is the policyholder, is the company the beneficiary of the contract? Ignored unless `enumPolicyholder` is *'company'*.|
+|»»»»»» enumLifeBeneficiary|string|false|none|Who is(are) the life beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|»»»»»» lifeBeneficiaryIds|[string]|false|none|Ignored if `enumLifeBeneficiary` is not *'other'*.|
+|»»»»»» enumDeathBeneficiary|string|false|none|Who is(are) the death beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|»»»»»» deathBeneficiaryIds|[string]|false|none|Ignored if `enumDeathBeneficiary` is not *'other'*.|
+|»»»»»» insuranceCompanyName|string|true|none|The name of the insurance company. Use existing company ID in PaxFamilia to ensure consistency?.|
+|»»»»»» ecbCode|string|false|none|ECB code of the insurance company. If not provided, insurance company will be created from the `insuranceCompanyName` but accounts won't therefore be linked to proper insurance info and reconciliation and aggregation will therefore be more complicated.|
+|»»»»»» countryCode|string|false|none|Country of the policy. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»»»» category|string|false|none|Category/type of insurance.|
+|»»»»»» managerName|string|false|none|Name of the asset manager.|
+|»»»»»» swiftCode|string|false|none|Swift code of the depository bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated.|
+|»»»»»» bankName|string|false|none|The name of the depository bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
+|»»»»»» listedRealEstateUnderlyingShare|number|false|none|Underlying portfolio asset composition - listed real estate share|
+|»»»»»» equityUnderlyingShare|number|false|none|Underlying portfolio asset composition - participations in listed companies share|
+|»»»»»» privateEquityUnderlyingShare|number|false|none|Underlying portfolio asset composition - participations in non listed companies share|
+|»»»»»» bondsUnderlyingShare|number|false|none|Underlying portfolio asset composition - investment in bonds share|
+|»»»»»» cashUnderlyingShare|number|false|none|Underlying portfolio asset composition - cash / liquidity share|
+|»»»»»» otherUnderlyingShare|number|false|none|Underlying portfolio asset composition - other / alternative share|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|group|
+|defaultOwnershipType|owner|
+|defaultOwnershipType|partner|
+|defaultOwnershipType|common|
+|defaultOwnershipType|owner_np_children|
+|defaultOwnershipType|partner_np_children|
+|defaultOwnershipType|common_np_children|
+|defaultOwnershipType|owner_us_parent|
+|defaultOwnershipType|partner_us_parent|
+|defaultOwnershipType|other|
+|realEstateType|residence|
+|realEstateType|residential|
+|realEstateType|investment|
+|realEstateType|offices|
+|realEstateType|commercial|
+|realEstateType|building_land|
+|realEstateType|forest_land|
+|realEstateType|other_land|
+|realEstateType|agri_land|
+|realEstateType|parking|
+|realEstateType|other_property_type|
+|category|real_estate|
+|liabilityType|bank_loan|
+|liabilityType|private_loan|
+|liabilityType|loan_account|
+|liabilityType|other_type|
+|repaymentType|constant_periodicity|
+|repaymentType|constant_principal|
+|repaymentType|bullet|
+|repaymentType|no_end_pay_interest|
+|repaymentType|no_end_capitalized_interest|
+|repaymentType|bullet_capitalized_interest|
+|periodicity|monthly|
+|periodicity|quarterly|
+|periodicity|semi_annual|
+|periodicity|annual|
+|rateType|fixed|
+|rateType|variable|
+|guaranteeType|mortgage|
+|guaranteeType|mortgage_mandate|
+|guaranteeType|personal_guarantee|
+|guaranteeType|pledge|
+|guaranteeType|other_guarantee|
+|guarantorableType|EstateAsset|
+|guarantorableType|GroupMembership|
+|insuranceType|EP|
+|insuranceType|PLCI|
+|insuranceType|AG|
+|insuranceType|EIP|
+|insuranceType|ELT|
+|insuranceType|branch21|
+|insuranceType|branch23|
+|insuranceType|branch44|
+|insuranceType|branch26|
+|insuranceType|euro_fund|
+|insuranceType|unit_linked|
+|insuranceType|multi_vehicle|
+|insuranceType|capitalization|
+|insuranceType|other_insurance|
+|deathPayout|premium|
+|deathPayout|reserve|
+|deathPayout|fixed_amount|
+|deathPayout|degressive|
+|deathPayout|none|
+|premiumPeriodicity|monthly|
+|premiumPeriodicity|quarterly|
+|premiumPeriodicity|semi_annual|
+|premiumPeriodicity|annual|
+|enumPolicyholder|company|
+|enumPolicyholder|other|
+|enumInsuredParty|policyholders|
+|enumInsuredParty|other|
+|enumLifeBeneficiary|policyholders|
+|enumLifeBeneficiary|insured_parties|
+|enumLifeBeneficiary|partner|
+|enumLifeBeneficiary|children|
+|enumLifeBeneficiary|parents|
+|enumLifeBeneficiary|siblings|
+|enumLifeBeneficiary|grand_children:|
+|enumLifeBeneficiary|nephews|
+|enumLifeBeneficiary|other|
+|enumDeathBeneficiary|succession|
+|enumDeathBeneficiary|legal_heirs|
+|enumDeathBeneficiary|partner|
+|enumDeathBeneficiary|children|
+|enumDeathBeneficiary|parents|
+|enumDeathBeneficiary|siblings|
+|enumDeathBeneficiary|grand_children|
+|enumDeathBeneficiary|nephews|
+|enumDeathBeneficiary|foundation|
+|enumDeathBeneficiary|bank|
+|enumDeathBeneficiary|other|
+|category|protection|
+|category|investment|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Get the Family of one Group
+## getGroupFamily
 
 <a id="opIdgetGroupFamily"></a>
 
@@ -4744,17 +5835,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/groups/{id}/family \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -4768,7 +5852,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/groups/{id}/family',
   params: {
   }, headers: headers
 
@@ -4786,7 +5870,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{id}/family',
 {
   method: 'GET',
 
@@ -4818,7 +5902,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/groups/{id}/family", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -4829,7 +5913,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{id}/Family");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{id}/family");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4845,15 +5929,17 @@ System.out.println(response.toString());
 
 ```
 
-`GET /groups/{id}/Family`
+`GET /groups/{id}/family`
+
+*Get the Family of one Group*
 
 Retrieve the family GroupMemberships and respective DummyUsers of a Group
 
-<h3 id="get-the-family-of-one-group-parameters">Parameters</h3>
+<h3 id="getgroupfamily-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Group ID of the group|
+|id|path|string|true|ID of the group|
 
 > Example responses
 
@@ -4887,21 +5973,47 @@ Retrieve the family GroupMemberships and respective DummyUsers of a Group
 }
 ```
 
-<h3 id="get-the-family-of-one-group-responses">Responses</h3>
+<h3 id="getgroupfamily-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Group found|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="get-the-family-of-one-group-responseschema">Response Schema</h3>
+<h3 id="getgroupfamily-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» data|[[GroupMembershipWithDummyUser](#schemagroupmembershipwithdummyuser)]|true|none|none|
+|»» id|string|true|none|`dummyUserId` of the family member|
+|»» type|string|true|none|Resource type - `groupMembership`|
+|»» attributes|object|true|none|none|
+|»»» coHolder|boolean|false|none|Is the person a main data subject of the group.|
+|»»» dead|boolean|false|none|Is the person deceased?|
+|»»» fatherId|string|false|none|Internal reference to the father, must be an ID of an existing dummy user.|
+|»»» motherId|string|false|none|Internal reference to the mother, must be an ID of an existing dummy user.|
+|»»» currentSpouseId|string|false|none|Internal reference to the partner, must be an ID of an existing dummy user.|
+|»»» dummyUser|[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)|false|none|none|
+|»»»» id|string|false|none|Internal client/person id. Will be generated randomly if not provided|
+|»»»» lastName|string|true|none|Last name of the client.|
+|»»»» firstName|string|true|none|First name of the client.|
+|»»»» email|string|false|none|Email of the client. Optional.|
+|»»»» gender|string|true|none|Gender of the client.|
+|»»»» birthday|string|false|none|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
+|»»»» nationality|string|true|none|Country code of nationality. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»» countryCode|string|true|none|Country code of residence. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»»» zipcode|string|false|none|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|groupMembership|
+|gender|M|
+|gender|F|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4910,7 +6022,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-insurances">Insurances</h1>
 
-## Creates one or more Insurances
+## addInsurances
 
 <a id="opIdaddInsurances"></a>
 
@@ -4918,19 +6030,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/insurances \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -4945,7 +6049,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/insurances',
   params: {
   }, headers: headers
 
@@ -5025,7 +6129,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances',
+fetch('https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/insurances',
 {
   method: 'POST',
   body: inputBody,
@@ -5058,7 +6162,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/insurances", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -5069,7 +6173,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/groups/{groupId}/insurances");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/groups/{groupId}/insurances");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -5086,6 +6190,8 @@ System.out.println(response.toString());
 ```
 
 `POST /groups/{groupId}/insurances`
+
+*Creates one or more Insurances*
 
 > Body parameter
 
@@ -5154,13 +6260,116 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-insurances-parameters">Parameters</h3>
+<h3 id="addinsurances-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|groupId|path|string|true|none|
-|body|body|object|false|none|
-|» data|body|[[InsuranceObject](#schemainsuranceobject)]|true|none|
+|groupId|path|string|true|ID of the group|
+|data|body|[[Insurance](#schemainsurance)]|true|none|
+|» id|body|string|true|Internal ID of the insurance.|
+|» type|body|string|true|Resource type - `insurance`|
+|» attributes|body|[Insurance/properties/attributes](#schemainsurance/properties/attributes)|true|none|
+|»» id|body|string|false|Internal ID of the insurance, must be unique in the group scope. Will be generated randomly if not provided.|
+|»» apiOnly|body|boolean|false|Can only be edited through the API endpoint.|
+|»» name|body|string|false|Custom name of the policy/insurance. If left empty will be constructed from the reference.|
+|»» reference|body|string|true|Reference of the policy.|
+|»» insuranceType|body|string|true|Type of insurance contract.|
+|»» startDate|body|string|true|Start date of the contract. *YYYY-MM-DD*.|
+|»» noTerm|body|boolean|false|Is the contract without term?|
+|»» endDate|body|string|true|End date of the contract. Required if `noTerm` is **false**. Ignored if `noTerm` is **true**. *YYYY-MM-DD*.|
+|»» fixedTerm|body|boolean|false|Is it a fixed term contract? Ignored if `noTerm` is *true*.|
+|»» situationDate|body|string|false|Date at which the amounts where calculated. Defaults to the begining of the current year. *YYYY-MM-DD*.|
+|»» currency|body|string|false|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»» onlyDeathCover|body|boolean|false|Does the contract only include death insurance, ie. no capital is paid in case of life at term.|
+|»» acquiredReserve|body|number|true|Acquired reserve / current contract value. Ignored if `onlyDeathCover` is *true*. Decimals must be separated by a dot. Eg. 200000.55|
+|»» deathPayout|body|string|false|Payout in case of death. Degressive is assumed linear over the contract duration, **fixed_amount** if `onlyDeathCover`, **reserve** otherwise.|
+|»» deathValue|body|number|false|Death cover amount. Only if `deathPayout` is *'fixed_amount'* or *'degressive'*.|
+|»» acquiredLifeValue|body|number|false|Acquired value in case of life at term (assuming no additional premiums are paid). Ignored if `onlyDeathCover` is *true*. Defaults to same as `acquiredReserve`.|
+|»» reduced|body|boolean|false|Answer *'true'* if the contract was reduced or the premium was unique.|
+|»» premiumsPaid|body|number|false|Premiums paid up to the situation date (net of taxes, fees...).|
+|»» premiumPeriodicity|body|string|false|Periodicity of the premiums. Ignored if reduced is *'true'*|
+|»» premiumEndDate|body|string|false|Date until premiums are to be paid. Ignored if reduced is *'true'*. Default contract end_date if any *YYYY-MM-DD*.|
+|»» premium|body|number|false|Periodic premium expected to be paid. Ignored if reduced is *'true'*.|
+|»» lifeValue|body|number|false|Expected capital in case of life at term (including additional premiums). Ignored if `onlyDeathCover` is *'true'*. Default to `acquiredLifeValue` if reduced.|
+|»» enumPolicyholder|body|string|true|Is the policyholder a company or a physical person (other).|
+|»» employerId|body|string|false|Id of the company (group asset) in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|»» employerName|body|string|false|Name of the employer in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|»» policyholderIds|body|[string]|false|Ignored if `enumPolicyholder` is *'company'*. Will assume each borrower holds an equivalent share of the policy.|
+|»» enumInsuredParty|body|string|false|Is the insured the *'policyholders'* or other designated person(s)?|
+|»» insuredPartyIds|body|[string]|false|Ignored if `enumInsuredParty` is *'policyholders'*.|
+|»» beneficiaryIsCompany|body|boolean|false|In case a company is the policyholder, is the company the beneficiary of the contract? Ignored unless `enumPolicyholder` is *'company'*.|
+|»» enumLifeBeneficiary|body|string|false|Who is(are) the life beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|»» lifeBeneficiaryIds|body|[string]|false|Ignored if `enumLifeBeneficiary` is not *'other'*.|
+|»» enumDeathBeneficiary|body|string|false|Who is(are) the death beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|»» deathBeneficiaryIds|body|[string]|false|Ignored if `enumDeathBeneficiary` is not *'other'*.|
+|»» insuranceCompanyName|body|string|true|The name of the insurance company. Use existing company ID in PaxFamilia to ensure consistency?.|
+|»» ecbCode|body|string|false|ECB code of the insurance company. If not provided, insurance company will be created from the `insuranceCompanyName` but accounts won't therefore be linked to proper insurance info and reconciliation and aggregation will therefore be more complicated.|
+|»» countryCode|body|string|false|Country of the policy. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»» category|body|string|false|Category/type of insurance.|
+|»» managerName|body|string|false|Name of the asset manager.|
+|»» swiftCode|body|string|false|Swift code of the depository bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated.|
+|»» bankName|body|string|false|The name of the depository bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
+|»» listedRealEstateUnderlyingShare|body|number|false|Underlying portfolio asset composition - listed real estate share|
+|»» equityUnderlyingShare|body|number|false|Underlying portfolio asset composition - participations in listed companies share|
+|»» privateEquityUnderlyingShare|body|number|false|Underlying portfolio asset composition - participations in non listed companies share|
+|»» bondsUnderlyingShare|body|number|false|Underlying portfolio asset composition - investment in bonds share|
+|»» cashUnderlyingShare|body|number|false|Underlying portfolio asset composition - cash / liquidity share|
+|»» otherUnderlyingShare|body|number|false|Underlying portfolio asset composition - other / alternative share|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|insurance|
+|»» insuranceType|EP|
+|»» insuranceType|PLCI|
+|»» insuranceType|AG|
+|»» insuranceType|EIP|
+|»» insuranceType|ELT|
+|»» insuranceType|branch21|
+|»» insuranceType|branch23|
+|»» insuranceType|branch44|
+|»» insuranceType|branch26|
+|»» insuranceType|euro_fund|
+|»» insuranceType|unit_linked|
+|»» insuranceType|multi_vehicle|
+|»» insuranceType|capitalization|
+|»» insuranceType|other_insurance|
+|»» deathPayout|premium|
+|»» deathPayout|reserve|
+|»» deathPayout|fixed_amount|
+|»» deathPayout|degressive|
+|»» deathPayout|none|
+|»» premiumPeriodicity|monthly|
+|»» premiumPeriodicity|quarterly|
+|»» premiumPeriodicity|semi_annual|
+|»» premiumPeriodicity|annual|
+|»» enumPolicyholder|company|
+|»» enumPolicyholder|other|
+|»» enumInsuredParty|policyholders|
+|»» enumInsuredParty|other|
+|»» enumLifeBeneficiary|policyholders|
+|»» enumLifeBeneficiary|insured_parties|
+|»» enumLifeBeneficiary|partner|
+|»» enumLifeBeneficiary|children|
+|»» enumLifeBeneficiary|parents|
+|»» enumLifeBeneficiary|siblings|
+|»» enumLifeBeneficiary|grand_children:|
+|»» enumLifeBeneficiary|nephews|
+|»» enumLifeBeneficiary|other|
+|»» enumDeathBeneficiary|succession|
+|»» enumDeathBeneficiary|legal_heirs|
+|»» enumDeathBeneficiary|partner|
+|»» enumDeathBeneficiary|children|
+|»» enumDeathBeneficiary|parents|
+|»» enumDeathBeneficiary|siblings|
+|»» enumDeathBeneficiary|grand_children|
+|»» enumDeathBeneficiary|nephews|
+|»» enumDeathBeneficiary|foundation|
+|»» enumDeathBeneficiary|bank|
+|»» enumDeathBeneficiary|other|
+|»» category|protection|
+|»» category|investment|
 
 > Example responses
 
@@ -5231,23 +6440,127 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="creates-one-or-more-insurances-responses">Responses</h3>
+<h3 id="addinsurances-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Insurances created|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-insurances-responseschema">Response Schema</h3>
+<h3 id="addinsurances-responseschema">Response Schema</h3>
 
 Status Code **201**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» data|[[InsuranceObject](#schemainsuranceobject)]|true|none|none|
+|» data|[[Insurance](#schemainsurance)]|true|none|none|
+|»» id|string|true|none|Internal ID of the insurance.|
+|»» type|string|true|none|Resource type - `insurance`|
+|»» attributes|[Insurance/properties/attributes](#schemainsurance/properties/attributes)|true|none|none|
+|»»» id|string|false|none|Internal ID of the insurance, must be unique in the group scope. Will be generated randomly if not provided.|
+|»»» apiOnly|boolean|false|none|Can only be edited through the API endpoint.|
+|»»» name|string|false|none|Custom name of the policy/insurance. If left empty will be constructed from the reference.|
+|»»» reference|string|true|none|Reference of the policy.|
+|»»» insuranceType|string|true|none|Type of insurance contract.|
+|»»» startDate|string|true|none|Start date of the contract. *YYYY-MM-DD*.|
+|»»» noTerm|boolean|false|none|Is the contract without term?|
+|»»» endDate|string|true|none|End date of the contract. Required if `noTerm` is **false**. Ignored if `noTerm` is **true**. *YYYY-MM-DD*.|
+|»»» fixedTerm|boolean|false|none|Is it a fixed term contract? Ignored if `noTerm` is *true*.|
+|»»» situationDate|string|false|none|Date at which the amounts where calculated. Defaults to the begining of the current year. *YYYY-MM-DD*.|
+|»»» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|»»» onlyDeathCover|boolean|false|none|Does the contract only include death insurance, ie. no capital is paid in case of life at term.|
+|»»» acquiredReserve|number|true|none|Acquired reserve / current contract value. Ignored if `onlyDeathCover` is *true*. Decimals must be separated by a dot. Eg. 200000.55|
+|»»» deathPayout|string|false|none|Payout in case of death. Degressive is assumed linear over the contract duration, **fixed_amount** if `onlyDeathCover`, **reserve** otherwise.|
+|»»» deathValue|number|false|none|Death cover amount. Only if `deathPayout` is *'fixed_amount'* or *'degressive'*.|
+|»»» acquiredLifeValue|number|false|none|Acquired value in case of life at term (assuming no additional premiums are paid). Ignored if `onlyDeathCover` is *true*. Defaults to same as `acquiredReserve`.|
+|»»» reduced|boolean|false|none|Answer *'true'* if the contract was reduced or the premium was unique.|
+|»»» premiumsPaid|number|false|none|Premiums paid up to the situation date (net of taxes, fees...).|
+|»»» premiumPeriodicity|string|false|none|Periodicity of the premiums. Ignored if reduced is *'true'*|
+|»»» premiumEndDate|string|false|none|Date until premiums are to be paid. Ignored if reduced is *'true'*. Default contract end_date if any *YYYY-MM-DD*.|
+|»»» premium|number|false|none|Periodic premium expected to be paid. Ignored if reduced is *'true'*.|
+|»»» lifeValue|number|false|none|Expected capital in case of life at term (including additional premiums). Ignored if `onlyDeathCover` is *'true'*. Default to `acquiredLifeValue` if reduced.|
+|»»» enumPolicyholder|string|true|none|Is the policyholder a company or a physical person (other).|
+|»»» employerId|string|false|none|Id of the company (group asset) in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|»»» employerName|string|false|none|Name of the employer in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|»»» policyholderIds|[string]|false|none|Ignored if `enumPolicyholder` is *'company'*. Will assume each borrower holds an equivalent share of the policy.|
+|»»» enumInsuredParty|string|false|none|Is the insured the *'policyholders'* or other designated person(s)?|
+|»»» insuredPartyIds|[string]|false|none|Ignored if `enumInsuredParty` is *'policyholders'*.|
+|»»» beneficiaryIsCompany|boolean|false|none|In case a company is the policyholder, is the company the beneficiary of the contract? Ignored unless `enumPolicyholder` is *'company'*.|
+|»»» enumLifeBeneficiary|string|false|none|Who is(are) the life beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|»»» lifeBeneficiaryIds|[string]|false|none|Ignored if `enumLifeBeneficiary` is not *'other'*.|
+|»»» enumDeathBeneficiary|string|false|none|Who is(are) the death beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|»»» deathBeneficiaryIds|[string]|false|none|Ignored if `enumDeathBeneficiary` is not *'other'*.|
+|»»» insuranceCompanyName|string|true|none|The name of the insurance company. Use existing company ID in PaxFamilia to ensure consistency?.|
+|»»» ecbCode|string|false|none|ECB code of the insurance company. If not provided, insurance company will be created from the `insuranceCompanyName` but accounts won't therefore be linked to proper insurance info and reconciliation and aggregation will therefore be more complicated.|
+|»»» countryCode|string|false|none|Country of the policy. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|»»» category|string|false|none|Category/type of insurance.|
+|»»» managerName|string|false|none|Name of the asset manager.|
+|»»» swiftCode|string|false|none|Swift code of the depository bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated.|
+|»»» bankName|string|false|none|The name of the depository bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
+|»»» listedRealEstateUnderlyingShare|number|false|none|Underlying portfolio asset composition - listed real estate share|
+|»»» equityUnderlyingShare|number|false|none|Underlying portfolio asset composition - participations in listed companies share|
+|»»» privateEquityUnderlyingShare|number|false|none|Underlying portfolio asset composition - participations in non listed companies share|
+|»»» bondsUnderlyingShare|number|false|none|Underlying portfolio asset composition - investment in bonds share|
+|»»» cashUnderlyingShare|number|false|none|Underlying portfolio asset composition - cash / liquidity share|
+|»»» otherUnderlyingShare|number|false|none|Underlying portfolio asset composition - other / alternative share|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|insurance|
+|insuranceType|EP|
+|insuranceType|PLCI|
+|insuranceType|AG|
+|insuranceType|EIP|
+|insuranceType|ELT|
+|insuranceType|branch21|
+|insuranceType|branch23|
+|insuranceType|branch44|
+|insuranceType|branch26|
+|insuranceType|euro_fund|
+|insuranceType|unit_linked|
+|insuranceType|multi_vehicle|
+|insuranceType|capitalization|
+|insuranceType|other_insurance|
+|deathPayout|premium|
+|deathPayout|reserve|
+|deathPayout|fixed_amount|
+|deathPayout|degressive|
+|deathPayout|none|
+|premiumPeriodicity|monthly|
+|premiumPeriodicity|quarterly|
+|premiumPeriodicity|semi_annual|
+|premiumPeriodicity|annual|
+|enumPolicyholder|company|
+|enumPolicyholder|other|
+|enumInsuredParty|policyholders|
+|enumInsuredParty|other|
+|enumLifeBeneficiary|policyholders|
+|enumLifeBeneficiary|insured_parties|
+|enumLifeBeneficiary|partner|
+|enumLifeBeneficiary|children|
+|enumLifeBeneficiary|parents|
+|enumLifeBeneficiary|siblings|
+|enumLifeBeneficiary|grand_children:|
+|enumLifeBeneficiary|nephews|
+|enumLifeBeneficiary|other|
+|enumDeathBeneficiary|succession|
+|enumDeathBeneficiary|legal_heirs|
+|enumDeathBeneficiary|partner|
+|enumDeathBeneficiary|children|
+|enumDeathBeneficiary|parents|
+|enumDeathBeneficiary|siblings|
+|enumDeathBeneficiary|grand_children|
+|enumDeathBeneficiary|nephews|
+|enumDeathBeneficiary|foundation|
+|enumDeathBeneficiary|bank|
+|enumDeathBeneficiary|other|
+|category|protection|
+|category|investment|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5256,7 +6569,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-estates">Estates</h1>
 
-## Creates one or more Refresh Values
+## refreshEstateValues
 
 <a id="opIdrefreshEstateValues"></a>
 
@@ -5264,19 +6577,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values \
+curl -X PATCH https://subdomain.api.paxfamilia.com/v1/estates/refresh-values \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-PATCH https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -5291,7 +6596,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values',
+result = RestClient.patch 'https://subdomain.api.paxfamilia.com/v1/estates/refresh-values',
   params: {
   }, headers: headers
 
@@ -5304,8 +6609,20 @@ const fetch = require('node-fetch');
 const inputBody = '{
   "data": [
     {
-      "id": "12345h",
-      "type": "estateAsset"
+      "id": "123dfer",
+      "type": "estateLiability",
+      "attributes": {
+        "id": "123dfer",
+        "rate": 2,
+        "rateType": "fixed",
+        "repaymentStart": "custom_date",
+        "customRepaymentStartDate": "1987-08-16",
+        "amountAtRepaymentStart": 38626,
+        "periodicity": "monthly",
+        "periodsDuration": 28,
+        "prepaid": false,
+        "prepaymentDate": "2007-08-16"
+      }
     }
   ]
 }';
@@ -5317,7 +6634,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values',
+fetch('https://subdomain.api.paxfamilia.com/v1/estates/refresh-values',
 {
   method: 'PATCH',
   body: inputBody,
@@ -5350,7 +6667,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values", data)
+    req, err := http.NewRequest("PATCH", "https://subdomain.api.paxfamilia.com/v1/estates/refresh-values", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -5361,7 +6678,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/estates/refresh-values");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/estates/refresh-values");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -5379,25 +6696,69 @@ System.out.println(response.toString());
 
 `PATCH /estates/refresh-values`
 
+*Creates one or more Refresh Values*
+
+Endpoint to mass update certain values on the main estate resources - EstateLiability, Insurance, EstateAsset (company, other asset, real estate, account and investment), only one is referenced as an example response. Below are the remaining expected for EstateAsset and Insurance, a more detailed definition can be found in the Schemas section of this documentation under `RefreshValuesEstateAsset` and `RefreshValuesInsurance` respectively.
+
 > Body parameter
 
 ```json
 {
   "data": [
     {
-      "id": "12345h",
-      "type": "estateAsset"
+      "id": "123dfer",
+      "type": "estateLiability",
+      "attributes": {
+        "id": "123dfer",
+        "rate": 2,
+        "rateType": "fixed",
+        "repaymentStart": "custom_date",
+        "customRepaymentStartDate": "1987-08-16",
+        "amountAtRepaymentStart": 38626,
+        "periodicity": "monthly",
+        "periodsDuration": 28,
+        "prepaid": false,
+        "prepaymentDate": "2007-08-16"
+      }
     }
   ]
 }
 ```
 
-<h3 id="creates-one-or-more-refresh-values-parameters">Parameters</h3>
+<h3 id="refreshestatevalues-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» data|body|[[RefreshValues](#schemarefreshvalues)]|true|none|
+|data|body|[[RefreshValuesEstateLiability](#schemarefreshvaluesestateliability)]|true|none|
+|» id|body|string|true|Internal reference to the liability|
+|» type|body|string|true|Resource type|
+|» attributes|body|object|true|none|
+|»» id|body|string|true|Internal reference to the liability|
+|»» rate|body|number|true|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
+|»» rateType|body|string|false|Fixed or variable interest rate|
+|»» repaymentStart|body|string|false|Repayment start|
+|»» customRepaymentStartDate|body|string|false|First repayment date. YYYY-MM-DD. Ignored unless `repaymentStart` is *custom_date*.|
+|»» amountAtRepaymentStart|body|number|false|Loan balance on the repayment start date. Defaults to initialAmount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55,|
+|»» periodicity|body|string|false|Periodicity of the principal and/or interest payment.|
+|»» periodsDuration|body|integer|false|Number of repayment periods. Ignored if `repaymentType` has no end date (no_end_pay_interest or no_end_capitalized_interest)|
+|»» prepaid|body|boolean|false|Has the loan been prepaid? (or is it expected to be prepaid at some future date?)|
+|»» prepaymentDate|body|string|false|Prepayment date. Defaults to current date if prepaid is set to true, otherwise ignored. *'YYYY-MM-DD'*|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|estateLiability|
+|»» rateType|fixed|
+|»» rateType|variable|
+|»» repaymentStart|one_period_after_contract_date|
+|»» repaymentStart|first_day_of_next_period|
+|»» repaymentStart|last_day_of_current_period|
+|»» repaymentStart|custom_date|
+|»» periodicity|monthly|
+|»» periodicity|quarterly|
+|»» periodicity|semi_annual|
+|»» periodicity|annual|
 
 > Example responses
 
@@ -5407,37 +6768,78 @@ System.out.println(response.toString());
 {
   "data": [
     {
-      "id": "12345h",
-      "type": "estateAsset"
+      "id": "123dfer",
+      "type": "estateLiability",
+      "attributes": {
+        "id": "123dfer",
+        "rate": 2,
+        "rateType": "fixed",
+        "repaymentStart": "custom_date",
+        "customRepaymentStartDate": "1987-08-16",
+        "amountAtRepaymentStart": 38626,
+        "periodicity": "monthly",
+        "periodsDuration": 28,
+        "prepaid": false,
+        "prepaymentDate": "2007-08-16"
+      }
     }
   ]
 }
 ```
 
-<h3 id="creates-one-or-more-refresh-values-responses">Responses</h3>
+<h3 id="refreshestatevalues-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Refresh Values updated|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
-<h3 id="creates-one-or-more-refresh-values-responseschema">Response Schema</h3>
+<h3 id="refreshestatevalues-responseschema">Response Schema</h3>
 
 Status Code **202**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» data|[[RefreshValues](#schemarefreshvalues)]|true|none|none|
+|» data|[[RefreshValuesEstateLiability](#schemarefreshvaluesestateliability)]|true|none|none|
+|»» id|string|true|none|Internal reference to the liability|
+|»» type|string|true|none|Resource type|
+|»» attributes|object|true|none|none|
+|»»» id|string|true|none|Internal reference to the liability|
+|»»» rate|number|true|none|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
+|»»» rateType|string|false|none|Fixed or variable interest rate|
+|»»» repaymentStart|string|false|none|Repayment start|
+|»»» customRepaymentStartDate|string|false|none|First repayment date. YYYY-MM-DD. Ignored unless `repaymentStart` is *custom_date*.|
+|»»» amountAtRepaymentStart|number|false|none|Loan balance on the repayment start date. Defaults to initialAmount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55,|
+|»»» periodicity|string|false|none|Periodicity of the principal and/or interest payment.|
+|»»» periodsDuration|integer|false|none|Number of repayment periods. Ignored if `repaymentType` has no end date (no_end_pay_interest or no_end_capitalized_interest)|
+|»»» prepaid|boolean|false|none|Has the loan been prepaid? (or is it expected to be prepaid at some future date?)|
+|»»» prepaymentDate|string|false|none|Prepayment date. Defaults to current date if prepaid is set to true, otherwise ignored. *'YYYY-MM-DD'*|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|estateLiability|
+|rateType|fixed|
+|rateType|variable|
+|repaymentStart|one_period_after_contract_date|
+|repaymentStart|first_day_of_next_period|
+|repaymentStart|last_day_of_current_period|
+|repaymentStart|custom_date|
+|periodicity|monthly|
+|periodicity|quarterly|
+|periodicity|semi_annual|
+|periodicity|annual|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Return Estate object IDs per group
+## getEstateObjectIdsByGroup
 
 <a id="opIdgetEstateObjectIdsByGroup"></a>
 
@@ -5445,19 +6847,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/estates/object-ids \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -5472,7 +6866,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/estates/object-ids',
   params: {
   }, headers: headers
 
@@ -5500,7 +6894,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids',
+fetch('https://subdomain.api.paxfamilia.com/v1/estates/object-ids',
 {
   method: 'POST',
   body: inputBody,
@@ -5533,7 +6927,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/estates/object-ids", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -5544,7 +6938,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/estates/object-ids");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/estates/object-ids");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -5562,7 +6956,9 @@ System.out.println(response.toString());
 
 `POST /estates/object-ids`
 
-POST used instead of GET due to size of groupIds array and array encoding
+*Return Estate object IDs per group*
+
+POST used instead of GET due to size of `groupIds` array and array encoding
 
 > Body parameter
 
@@ -5579,11 +6975,22 @@ POST used instead of GET due to size of groupIds array and array encoding
 }
 ```
 
-<h3 id="return-estate-object-ids-per-group-parameters">Parameters</h3>
+<h3 id="getestateobjectidsbygroup-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[EstateObjectIdsFilter](#schemaestateobjectidsfilter)|false|none|
+|apiOnly|body|boolean|false|Filter for *'api_only'* *true* or not.|
+|type|body|string|true|Filter for estate object type to search for.|
+|groupIds|body|[string]|false|Group IDs to filter for.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|type|estateAsset|
+|type|estateLiability|
+|type|insurance|
 
 > Example responses
 
@@ -5614,22 +7021,22 @@ POST used instead of GET due to size of groupIds array and array encoding
 }
 ```
 
-<h3 id="return-estate-object-ids-per-group-responses">Responses</h3>
+<h3 id="getestateobjectidsbygroup-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Estate Object Ids per Group fetched|[EstateObjectIdsByGroup](#schemaestateobjectidsbygroup)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 ApiKey & JsonWebToken
 </aside>
 
-## Deletes Estate objects by ID per group
+## deleteEstateObjectsByGroup
 
 <a id="opIddeleteEstateObjectsByGroup"></a>
 
@@ -5637,19 +7044,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/estates/delete-ids \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -5664,7 +7063,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/estates/delete-ids',
   params: {
   }, headers: headers
 
@@ -5696,7 +7095,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids',
+fetch('https://subdomain.api.paxfamilia.com/v1/estates/delete-ids',
 {
   method: 'POST',
   body: inputBody,
@@ -5729,7 +7128,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/estates/delete-ids", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -5740,7 +7139,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/estates/delete-ids");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/estates/delete-ids");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -5757,6 +7156,8 @@ System.out.println(response.toString());
 ```
 
 `POST /estates/delete-ids`
+
+*Deletes Estate objects by ID per group*
 
 > Body parameter
 
@@ -5777,12 +7178,22 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="deletes-estate-objects-by-id-per-group-parameters">Parameters</h3>
+<h3 id="deleteestateobjectsbygroup-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» data|body|[[EstateDeleteIds](#schemaestatedeleteids)]|true|none|
+|data|body|[[EstateDeleteIds](#schemaestatedeleteids)]|true|none|
+|» groupId|body|string|true|Internal ID of a group|
+|» type|body|string|true|Type of estate objects to be deleted|
+|» ids|body|[string]|true|Estate objects ids to be deleted|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|estateAsset|
+|» type|estateLiability|
+|» type|insurance|
 
 > Example responses
 
@@ -5799,15 +7210,15 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="deletes-estate-objects-by-id-per-group-responses">Responses</h3>
+<h3 id="deleteestateobjectsbygroup-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Estate Objects successfully deleted|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5816,7 +7227,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-alive">Alive</h1>
 
-## Check if the API connection is alive
+## checkIfAlive
 
 <a id="opIdcheckIfAlive"></a>
 
@@ -5824,17 +7235,10 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X GET https://[your-subdomain].paxfamilia.com/api/v1/is-alive \
+curl -X GET https://subdomain.api.paxfamilia.com/v1/is-alive \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-GET https://[your-subdomain].paxfamilia.com/api/v1/is-alive HTTP/1.1
-
-Accept: application/vnd.api+json
 
 ```
 
@@ -5848,7 +7252,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.get 'https://[your-subdomain].paxfamilia.com/api/v1/is-alive',
+result = RestClient.get 'https://subdomain.api.paxfamilia.com/v1/is-alive',
   params: {
   }, headers: headers
 
@@ -5866,7 +7270,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/is-alive',
+fetch('https://subdomain.api.paxfamilia.com/v1/is-alive',
 {
   method: 'GET',
 
@@ -5898,7 +7302,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://[your-subdomain].paxfamilia.com/api/v1/is-alive", data)
+    req, err := http.NewRequest("GET", "https://subdomain.api.paxfamilia.com/v1/is-alive", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -5909,7 +7313,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/is-alive");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/is-alive");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5927,6 +7331,8 @@ System.out.println(response.toString());
 
 `GET /is-alive`
 
+*Check if the API connection is alive*
+
 > Example responses
 
 > 401 Response
@@ -5942,12 +7348,12 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="check-if-the-api-connection-is-alive-responses">Responses</h3>
+<h3 id="checkifalive-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|API is alive|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5956,7 +7362,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-general-purpose">General Purpose</h1>
 
-## Change the internal ID of a saved resource
+## updateId
 
 <a id="opIdupdateId"></a>
 
@@ -5964,19 +7370,11 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X PATCH https://[your-subdomain].paxfamilia.com/api/v1/update-id \
+curl -X PATCH https://subdomain.api.paxfamilia.com/v1/update-id \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H 'X-Api-Key: 4P1k3y87sGd' \
   -H 'Authorization: 4P1k3y87sGd'
-
-```
-
-```http
-PATCH https://[your-subdomain].paxfamilia.com/api/v1/update-id HTTP/1.1
-
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
 
 ```
 
@@ -5991,7 +7389,7 @@ headers = {
   'Authorization' => '4P1k3y87sGd'
 }
 
-result = RestClient.patch 'https://[your-subdomain].paxfamilia.com/api/v1/update-id',
+result = RestClient.patch 'https://subdomain.api.paxfamilia.com/v1/update-id',
   params: {
   }, headers: headers
 
@@ -6016,7 +7414,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/update-id',
+fetch('https://subdomain.api.paxfamilia.com/v1/update-id',
 {
   method: 'PATCH',
   body: inputBody,
@@ -6049,7 +7447,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "https://[your-subdomain].paxfamilia.com/api/v1/update-id", data)
+    req, err := http.NewRequest("PATCH", "https://subdomain.api.paxfamilia.com/v1/update-id", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -6060,7 +7458,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/update-id");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/update-id");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -6078,6 +7476,8 @@ System.out.println(response.toString());
 
 `PATCH /update-id`
 
+*Change the internal ID of a saved resource*
+
 > Body parameter
 
 ```json
@@ -6090,11 +7490,28 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="change-the-internal-id-of-a-saved-resource-parameters">Parameters</h3>
+<h3 id="updateid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[NewId](#schemanewid)|false|none|
+|data|body|object|true|none|
+|» id|body|string|true|Internal ID of the resource to be updated.|
+|» type|body|string|true|Type of the resource to be updated|
+|» newId|body|string|true|New ID of the resource to be updated to|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|companyUnit|
+|» type|companyMembership|
+|» type|dummyUser|
+|» type|group|
+|» type|estateAsset|
+|» type|estateLiability|
+|» type|insurance|
+|» type|donation|
 
 > Example responses
 
@@ -6110,15 +7527,15 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="change-the-internal-id-of-a-saved-resource-responses">Responses</h3>
+<h3 id="updateid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Id successfully updated|[NewId](#schemanewid)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[BadRequestError](#schemabadrequesterror)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[UnauthorizedError](#schemaunauthorizederror)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[NotFoundError](#schemanotfounderror)|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[UnprocessableEntityError](#schemaunprocessableentityerror)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Doesn't match schema|[ErrorBadRequest](#schemaerrorbadrequest)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|[ErrorUnauthorized](#schemaerrorunauthorized)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[ErrorNotFound](#schemaerrornotfound)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable Entity|[ErrorUnprocessableEntity](#schemaerrorunprocessableentity)|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6127,7 +7544,7 @@ ApiKey & JsonWebToken
 
 <h1 id="falcon-alpha-phoenix-user-session">User Session</h1>
 
-## Generate JSON Web Token with valid user credentials + Api-Key
+## createAuthToken
 
 <a id="opIdcreateAuthToken"></a>
 
@@ -6135,17 +7552,9 @@ ApiKey & JsonWebToken
 
 ```shell
 # You can also use wget
-curl -X POST https://[your-subdomain].paxfamilia.com/api/v1/users/login \
+curl -X POST https://subdomain.api.paxfamilia.com/v1/users/login \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
-
-```
-
-```http
-POST https://[your-subdomain].paxfamilia.com/api/v1/users/login HTTP/1.1
-
-Content-Type: application/json
-Accept: application/json
 
 ```
 
@@ -6158,7 +7567,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://[your-subdomain].paxfamilia.com/api/v1/users/login',
+result = RestClient.post 'https://subdomain.api.paxfamilia.com/v1/users/login',
   params: {
   }, headers: headers
 
@@ -6183,7 +7592,7 @@ const headers = {
 
 };
 
-fetch('https://[your-subdomain].paxfamilia.com/api/v1/users/login',
+fetch('https://subdomain.api.paxfamilia.com/v1/users/login',
 {
   method: 'POST',
   body: inputBody,
@@ -6214,7 +7623,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "https://[your-subdomain].paxfamilia.com/api/v1/users/login", data)
+    req, err := http.NewRequest("POST", "https://subdomain.api.paxfamilia.com/v1/users/login", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -6225,7 +7634,7 @@ func main() {
 ```
 
 ```java
-URL obj = new URL("https://[your-subdomain].paxfamilia.com/api/v1/users/login");
+URL obj = new URL("https://subdomain.api.paxfamilia.com/v1/users/login");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -6243,6 +7652,8 @@ System.out.println(response.toString());
 
 `POST /users/login`
 
+*Generate JSON Web Token with valid user credentials + Api-Key*
+
 > Body parameter
 
 ```json
@@ -6257,16 +7668,15 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="generate-json-web-token-with-valid-user-credentials-+-api-key-parameters">Parameters</h3>
+<h3 id="createauthtoken-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|false|none|
-|» user|body|object|true|none|
-|»» email|body|string|true|none|
-|»» password|body|string|true|none|
-|» company|body|object|true|none|
-|»» apiKey|body|string|true|none|
+|user|body|object|true|User credentials|
+|» email|body|string|true|Valid user email|
+|» password|body|string|true|Valid user password|
+|company|body|object|true|Company credentials|
+|» apiKey|body|string|true|Valid company apiKey|
 
 > Example responses
 
@@ -6279,20 +7689,20 @@ System.out.println(response.toString());
 }
 ```
 
-<h3 id="generate-json-web-token-with-valid-user-credentials-+-api-key-responses">Responses</h3>
+<h3 id="createauthtoken-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Login Successful|Inline|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Invalid credentials|Inline|
 
-<h3 id="generate-json-web-token-with-valid-user-credentials-+-api-key-responseschema">Response Schema</h3>
+<h3 id="createauthtoken-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» accessToken|string|false|none|none|
+|» accessToken|string|false|none|Json Web Token to use for authentication|
 |» message|string|false|none|none|
 
 #### Enumerated Values
@@ -6314,9 +7724,9 @@ This operation does not require authentication
 
 # Schemas
 
-<h2 id="tocSbadrequesterror">BadRequestError</h2>
+<h2 id="tocSerrorbadrequest">ErrorBadRequest</h2>
 
-<a id="schemabadrequesterror"></a>
+<a id="schemaerrorbadrequest"></a>
 
 ```json
 {
@@ -6334,9 +7744,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|errors|[object]|true|none|none|
-|» status|string|true|none|none|
-|» detail|string|true|none|none|
+|errors|[object]|true|none|Errors array|
+|» status|string|true|none|HTTP error name *400 Bad Request*|
+|» detail|string|true|none|Error message|
 
 #### Enumerated Values
 
@@ -6344,9 +7754,9 @@ This operation does not require authentication
 |---|---|
 |status|bad_request|
 
-<h2 id="tocSunauthorizederror">UnauthorizedError</h2>
+<h2 id="tocSerrorunauthorized">ErrorUnauthorized</h2>
 
-<a id="schemaunauthorizederror"></a>
+<a id="schemaerrorunauthorized"></a>
 
 ```json
 {
@@ -6364,9 +7774,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|errors|[object]|true|none|none|
-|» status|string|true|none|none|
-|» detail|string|true|none|none|
+|errors|[object]|true|none|Errors array|
+|» status|string|true|none|HTTP error name *401 Unauthorized*|
+|» detail|string|true|none|Error message|
 
 #### Enumerated Values
 
@@ -6374,9 +7784,9 @@ This operation does not require authentication
 |---|---|
 |status|unauthorized|
 
-<h2 id="tocSunprocessableentityerror">UnprocessableEntityError</h2>
+<h2 id="tocSerrorunprocessableentity">ErrorUnprocessableEntity</h2>
 
-<a id="schemaunprocessableentityerror"></a>
+<a id="schemaerrorunprocessableentity"></a>
 
 ```json
 {
@@ -6394,9 +7804,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|errors|[object]|true|none|none|
-|» status|string|true|none|none|
-|» detail|string|true|none|none|
+|errors|[object]|true|none|Errors array|
+|» status|string|true|none|HTTP error name *422 Unprocessable Entity*|
+|» detail|string|true|none|Error message|
 
 #### Enumerated Values
 
@@ -6404,9 +7814,9 @@ This operation does not require authentication
 |---|---|
 |status|unprocessable_entity|
 
-<h2 id="tocSnotfounderror">NotFoundError</h2>
+<h2 id="tocSerrornotfound">ErrorNotFound</h2>
 
-<a id="schemanotfounderror"></a>
+<a id="schemaerrornotfound"></a>
 
 ```json
 {
@@ -6424,9 +7834,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|errors|[object]|true|none|none|
-|» status|string|true|none|none|
-|» detail|string|true|none|none|
+|errors|[object]|true|none|Errors array|
+|» status|string|true|none|HTTP error name *404 Not Found*|
+|» detail|string|true|none|Error message|
 
 #### Enumerated Values
 
@@ -6462,29 +7872,33 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Api log ID|
+|type|string|true|none|Resource type - `apiLog`|
 |attributes|object|true|none|none|
-|» id|string|false|none|api log id|
-|» companyMembershipId|string|false|none|employee public id if their is en employee associated to this log|
-|» success|boolean|true|none|request success or failure,|
-|» status|string|false|none|request status http code in word|
-|» description|string|false|none|any valid description needed, for success ususally amount saved, for failure usually error text|
-|» groupPublicId|string|false|none|group public id associated to the log when group scoped resource|
-|» resourceId|string|false|none|public id of the resource in question when in the case of a specific resource error|
-|» controller|string|false|none|resource controller log originated from|
-|» action|string|false|none|resource action log originated from|
-|» requestMethod|string|false|none|http request method (post, patch, delete, get)|
+|» id|string|false|none|Api log ID|
+|» companyMembershipId|string|false|none|Employee public id if their is an employee associated to this log|
+|» success|boolean|true|none|Request success or failure|
+|» status|string|false|none|Request status HTTP code in word form|
+|» description|string|false|none|Any valid description needed, for **success** usually amount saved, for **failure** usually error message|
+|» groupPublicId|string|false|none|Group public id associated to the log when it is a group scoped resource, such as: `estateAsset`, `estateLiability`|
+|» resourceId|string|false|none|Public id of the resource in question when in the case of a specific resource error|
+|» controller|string|false|none|Resource controller from which the log originated|
+|» action|string|false|none|Resource action from which the log originated|
+|» requestMethod|string|false|none|HTTP request method|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|apiLog|
+|requestMethod|POST|
+|requestMethod|PATCH|
+|requestMethod|DELETE|
+|requestMethod|GET|
 
-<h2 id="tocScommonpercentattributes">CommonPercentAttributes</h2>
+<h2 id="tocSestateassetpercentattributes">EstateAssetPercentAttributes</h2>
 
-<a id="schemacommonpercentattributes"></a>
+<a id="schemaestateassetpercentattributes"></a>
 
 ```json
 {
@@ -6509,36 +7923,13 @@ This operation does not require authentication
 |cashShare|number|false|none|Cash percent-share of the asset, shares must add up to 100|
 |otherShare|number|false|none|Other percent-share of the asset, shares must add up to 100|
 
-<h2 id="tocSestateasset">EstateAsset</h2>
+<h2 id="tocSestateassetbaseattributes">EstateAssetBaseAttributes</h2>
 
-<a id="schemaestateasset"></a>
-
-```json
-{
-  "id": "12345h",
-  "type": "estateAsset",
-  "attributes": {
-    "id": "123dfer",
-    "currentValue": 2344
-  }
-}
-
-```
-
-### Properties
-
-*allOf - discriminator: RefreshValues.type*
-
-*and*
-
-<h2 id="tocSestateassetattributes">EstateAssetAttributes</h2>
-
-<a id="schemaestateassetattributes"></a>
+<a id="schemaestateassetbaseattributes"></a>
 
 ```json
 {
   "id": "345abcd",
-  "category": "account",
   "apiOnly": true,
   "name": "Home expense account",
   "countryCode": "BE",
@@ -6554,14 +7945,14 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|false|none|internal reference to asset, must be unique in the group scope. Will be generated randomly if not provided|
-|category|string|true|none|none|
-|apiOnly|boolean|false|none|can only be edited through the api endpoint|
+|id|string|false|none|Internal reference to asset, must be unique in the group scope. Will be generated randomly if not provided|
+|apiOnly|boolean|false|none|Can only be edited through the api endpoint|
 |name|string|false|none|Custom name of the asset. If left empty will be constructed from the address|
-|countryCode|string|false|none|Country where the asset is located|
+|countryCode|string|false|none|Country where the asset is located. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
 |zipcode|string|false|none|Zipcode where the asset is located. Required for real estate in Belgium to calculate property tax from cadastral income|
 |currentValue|number|true|none|Current value of the asset|
-|currency|string|false|none|Currency of the value(s)|
+|currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|situationDate|string|false|none|Date at which the amounts where calculated. Must be in the past. Defaults to the creation date. *YYYY-MM-DD*.|
 |defaultOwnershipType|string|false|none|Ownership of the asset. Owner refers to the 'main client', partner refers to the main client spouse or partner|
 |community|boolean|false|none|Is the asset owned by the community? If not specified, defaults according to the matrimonial regime|
 
@@ -6569,446 +7960,6 @@ This operation does not require authentication
 
 |Property|Value|
 |---|---|
-|category|account|
-|category|company|
-|category|investment|
-|category|other_asset|
-|category|real_estate|
-|countryCode|TJ|
-|countryCode|JM|
-|countryCode|HT|
-|countryCode|ST|
-|countryCode|MS|
-|countryCode|AE|
-|countryCode|PK|
-|countryCode|NL|
-|countryCode|LU|
-|countryCode|BZ|
-|countryCode|IR|
-|countryCode|BO|
-|countryCode|UY|
-|countryCode|GH|
-|countryCode|SA|
-|countryCode|CI|
-|countryCode|MF|
-|countryCode|TF|
-|countryCode|AI|
-|countryCode|QA|
-|countryCode|SX|
-|countryCode|LY|
-|countryCode|BV|
-|countryCode|PG|
-|countryCode|KG|
-|countryCode|GQ|
-|countryCode|EH|
-|countryCode|NU|
-|countryCode|PR|
-|countryCode|GD|
-|countryCode|KR|
-|countryCode|HM|
-|countryCode|SM|
-|countryCode|SL|
-|countryCode|CD|
-|countryCode|MK|
-|countryCode|TR|
-|countryCode|DZ|
-|countryCode|GE|
-|countryCode|PS|
-|countryCode|BB|
-|countryCode|UA|
-|countryCode|GP|
-|countryCode|PF|
-|countryCode|NA|
-|countryCode|BW|
-|countryCode|SY|
-|countryCode|TG|
-|countryCode|DO|
-|countryCode|AQ|
-|countryCode|CH|
-|countryCode|MG|
-|countryCode|FO|
-|countryCode|VG|
-|countryCode|GI|
-|countryCode|BN|
-|countryCode|LA|
-|countryCode|IS|
-|countryCode|EE|
-|countryCode|UM|
-|countryCode|LT|
-|countryCode|RS|
-|countryCode|MR|
-|countryCode|AD|
-|countryCode|HU|
-|countryCode|TK|
-|countryCode|MY|
-|countryCode|AO|
-|countryCode|CV|
-|countryCode|NF|
-|countryCode|PA|
-|countryCode|GW|
-|countryCode|BE|
-|countryCode|PT|
-|countryCode|GB|
-|countryCode|IM|
-|countryCode|US|
-|countryCode|YE|
-|countryCode|HK|
-|countryCode|AZ|
-|countryCode|CC|
-|countryCode|ML|
-|countryCode|SK|
-|countryCode|VU|
-|countryCode|TL|
-|countryCode|HR|
-|countryCode|SR|
-|countryCode|MU|
-|countryCode|CZ|
-|countryCode|PM|
-|countryCode|LS|
-|countryCode|WS|
-|countryCode|KM|
-|countryCode|IT|
-|countryCode|BI|
-|countryCode|WF|
-|countryCode|GN|
-|countryCode|SG|
-|countryCode|CO|
-|countryCode|CN|
-|countryCode|AW|
-|countryCode|MA|
-|countryCode|FI|
-|countryCode|VA|
-|countryCode|ZW|
-|countryCode|KY|
-|countryCode|BH|
-|countryCode|PY|
-|countryCode|EC|
-|countryCode|LR|
-|countryCode|RU|
-|countryCode|PL|
-|countryCode|OM|
-|countryCode|MT|
-|countryCode|SS|
-|countryCode|DE|
-|countryCode|TM|
-|countryCode|SJ|
-|countryCode|MM|
-|countryCode|TT|
-|countryCode|IL|
-|countryCode|BD|
-|countryCode|NR|
-|countryCode|LK|
-|countryCode|UG|
-|countryCode|NG|
-|countryCode|BQ|
-|countryCode|MX|
-|countryCode|CW|
-|countryCode|SI|
-|countryCode|MN|
-|countryCode|CA|
-|countryCode|AX|
-|countryCode|VN|
-|countryCode|TW|
-|countryCode|JP|
-|countryCode|IO|
-|countryCode|RO|
-|countryCode|BG|
-|countryCode|GU|
-|countryCode|BR|
-|countryCode|AM|
-|countryCode|ZM|
-|countryCode|DJ|
-|countryCode|JE|
-|countryCode|AT|
-|countryCode|CM|
-|countryCode|SE|
-|countryCode|FJ|
-|countryCode|KZ|
-|countryCode|GL|
-|countryCode|GY|
-|countryCode|CX|
-|countryCode|MW|
-|countryCode|TN|
-|countryCode|ZA|
-|countryCode|TO|
-|countryCode|CY|
-|countryCode|MV|
-|countryCode|PN|
-|countryCode|RW|
-|countryCode|NI|
-|countryCode|KN|
-|countryCode|BJ|
-|countryCode|ET|
-|countryCode|GM|
-|countryCode|TZ|
-|countryCode|VC|
-|countryCode|FK|
-|countryCode|SD|
-|countryCode|MC|
-|countryCode|AU|
-|countryCode|CL|
-|countryCode|DK|
-|countryCode|FR|
-|countryCode|TC|
-|countryCode|CU|
-|countryCode|AL|
-|countryCode|MZ|
-|countryCode|BS|
-|countryCode|NE|
-|countryCode|GT|
-|countryCode|LI|
-|countryCode|NP|
-|countryCode|BF|
-|countryCode|PW|
-|countryCode|KW|
-|countryCode|IN|
-|countryCode|GA|
-|countryCode|TV|
-|countryCode|MO|
-|countryCode|SH|
-|countryCode|MD|
-|countryCode|CK|
-|countryCode|AR|
-|countryCode|SC|
-|countryCode|IE|
-|countryCode|ES|
-|countryCode|LB|
-|countryCode|BM|
-|countryCode|RE|
-|countryCode|KI|
-|countryCode|AG|
-|countryCode|MQ|
-|countryCode|SV|
-|countryCode|JO|
-|countryCode|TH|
-|countryCode|SO|
-|countryCode|MH|
-|countryCode|CG|
-|countryCode|KP|
-|countryCode|GF|
-|countryCode|BA|
-|countryCode|YT|
-|countryCode|GS|
-|countryCode|KE|
-|countryCode|PE|
-|countryCode|BT|
-|countryCode|SZ|
-|countryCode|CR|
-|countryCode|TD|
-|countryCode|DM|
-|countryCode|NC|
-|countryCode|GR|
-|countryCode|GG|
-|countryCode|HN|
-|countryCode|VI|
-|countryCode|CF|
-|countryCode|SN|
-|countryCode|AF|
-|countryCode|MP|
-|countryCode|PH|
-|countryCode|BY|
-|countryCode|LV|
-|countryCode|NO|
-|countryCode|EG|
-|countryCode|KH|
-|countryCode|IQ|
-|countryCode|LC|
-|countryCode|NZ|
-|countryCode|BL|
-|countryCode|UZ|
-|countryCode|ID|
-|countryCode|ER|
-|countryCode|VE|
-|countryCode|FM|
-|countryCode|SB|
-|countryCode|ME|
-|countryCode|AS|
-|currency|AED|
-|currency|AFN|
-|currency|ALL|
-|currency|AMD|
-|currency|ANG|
-|currency|AOA|
-|currency|ARS|
-|currency|AUD|
-|currency|AWG|
-|currency|AZN|
-|currency|BAM|
-|currency|BBD|
-|currency|BDT|
-|currency|BGN|
-|currency|BHD|
-|currency|BIF|
-|currency|BMD|
-|currency|BND|
-|currency|BOB|
-|currency|BRL|
-|currency|BSD|
-|currency|BTN|
-|currency|BWP|
-|currency|BYN|
-|currency|BYR|
-|currency|BZD|
-|currency|CAD|
-|currency|CDF|
-|currency|CHF|
-|currency|CLF|
-|currency|CLP|
-|currency|CNY|
-|currency|COP|
-|currency|CRC|
-|currency|CUC|
-|currency|CUP|
-|currency|CVE|
-|currency|CZK|
-|currency|DJF|
-|currency|DKK|
-|currency|DOP|
-|currency|DZD|
-|currency|EGP|
-|currency|ERN|
-|currency|ETB|
-|currency|EUR|
-|currency|FJD|
-|currency|FKP|
-|currency|GBP|
-|currency|GEL|
-|currency|GHS|
-|currency|GIP|
-|currency|GMD|
-|currency|GNF|
-|currency|GTQ|
-|currency|GYD|
-|currency|HKD|
-|currency|HNL|
-|currency|HRK|
-|currency|HTG|
-|currency|HUF|
-|currency|IDR|
-|currency|ILS|
-|currency|INR|
-|currency|IQD|
-|currency|IRR|
-|currency|ISK|
-|currency|JMD|
-|currency|JOD|
-|currency|JPY|
-|currency|KES|
-|currency|KGS|
-|currency|KHR|
-|currency|KMF|
-|currency|KPW|
-|currency|KRW|
-|currency|KWD|
-|currency|KYD|
-|currency|KZT|
-|currency|LAK|
-|currency|LBP|
-|currency|LKR|
-|currency|LRD|
-|currency|LSL|
-|currency|LTL|
-|currency|LVL|
-|currency|LYD|
-|currency|MAD|
-|currency|MDL|
-|currency|MGA|
-|currency|MKD|
-|currency|MMK|
-|currency|MNT|
-|currency|MOP|
-|currency|MRO|
-|currency|MUR|
-|currency|MVR|
-|currency|MWK|
-|currency|MXN|
-|currency|MYR|
-|currency|MZN|
-|currency|NAD|
-|currency|NGN|
-|currency|NIO|
-|currency|NOK|
-|currency|NPR|
-|currency|NZD|
-|currency|OMR|
-|currency|PAB|
-|currency|PEN|
-|currency|PGK|
-|currency|PHP|
-|currency|PKR|
-|currency|PLN|
-|currency|PYG|
-|currency|QAR|
-|currency|RON|
-|currency|RSD|
-|currency|RUB|
-|currency|RWF|
-|currency|SAR|
-|currency|SBD|
-|currency|SCR|
-|currency|SDG|
-|currency|SEK|
-|currency|SGD|
-|currency|SHP|
-|currency|SKK|
-|currency|SLL|
-|currency|SOS|
-|currency|SRD|
-|currency|SSP|
-|currency|STD|
-|currency|SVC|
-|currency|SYP|
-|currency|SZL|
-|currency|THB|
-|currency|TJS|
-|currency|TMT|
-|currency|TND|
-|currency|TOP|
-|currency|TRY|
-|currency|TTD|
-|currency|TWD|
-|currency|TZS|
-|currency|UAH|
-|currency|UGX|
-|currency|USD|
-|currency|UYU|
-|currency|UZS|
-|currency|VEF|
-|currency|VND|
-|currency|VUV|
-|currency|WST|
-|currency|XAF|
-|currency|XAG|
-|currency|XAU|
-|currency|XBA|
-|currency|XBB|
-|currency|XBC|
-|currency|XBD|
-|currency|XCD|
-|currency|XDR|
-|currency|XOF|
-|currency|XPD|
-|currency|XPF|
-|currency|XPT|
-|currency|XTS|
-|currency|YER|
-|currency|ZAR|
-|currency|ZMK|
-|currency|ZMW|
-|currency|BTC|
-|currency|JEP|
-|currency|GGP|
-|currency|IMP|
-|currency|XFU|
-|currency|GBX|
-|currency|CNH|
-|currency|EEK|
-|currency|MTL|
-|currency|TMM|
-|currency|ZWD|
-|currency|ZWL|
-|currency|ZWN|
-|currency|ZWR|
 |defaultOwnershipType|owner|
 |defaultOwnershipType|partner|
 |defaultOwnershipType|common|
@@ -7019,14 +7970,13 @@ This operation does not require authentication
 |defaultOwnershipType|partner_us_parent|
 |defaultOwnershipType|other|
 
-<h2 id="tocSrealestate">realEstate</h2>
+<h2 id="tocSestateassetrealestate">EstateAssetRealEstate</h2>
 
-<a id="schemarealestate"></a>
+<a id="schemaestateassetrealestate"></a>
 
 ```json
 {
   "id": "345abcd",
-  "category": "account",
   "apiOnly": true,
   "name": "Home expense account",
   "countryCode": "BE",
@@ -7034,32 +7984,70 @@ This operation does not require authentication
   "currentValue": 3234,
   "currency": "EUR",
   "defaultOwnershipType": "owner",
-  "address": "St. St. Pierre de Levanaco",
+  "address": "St. Pierre de Levanaco",
   "realEstateType": "offices",
   "autoPropertyTax": false,
   "annualRent": 10,
   "cadastralIncome": 130,
   "propertyTax": 10,
   "otherCharges": 120,
-  "workValue": 1230
+  "workValue": 1230,
+  "category": "real_estate"
 }
 
 ```
 
 ### Properties
 
-*allOf - discriminator: EstateAssetAttributes.category*
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|none|
 
 *and*
 
-<h2 id="tocSinvestment">investment</h2>
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|none|
+|» address|string|false|none|Address where the asset is located|
+|» realEstateType|string|true|none|Type of real estate asset|
+|» privateUse|boolean|false|none|Is this property for private use or investment?|
+|» annualRent|number|false|none|Total annual rent|
+|» cadastralIncome|number|false|none|Unindexed cadastral income. For assets located in Belgium only.|
+|» autoPropertyTax|boolean|false|none|Should the property tax be calculated from the cadastral income? For assets located in Belgium only.|
+|» propertyTax|number|false|none|Annual property tax|
+|» otherCharges|number|false|none|Other annual charges|
+|» acquisitionValue|number|false|none|Initial acquisition value (incl. tax and fees)|
+|» acquisitionYear|string|false|none|'YYYY' - Acquisition year of the asset.|
+|» workValue|number|false|none|Total amount of investment made since the acquisition|
+|» rateOfReturn|number|false|none|Expected annual value increase of the company.|
+|» category|string|true|none|none|
 
-<a id="schemainvestment"></a>
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|realEstateType|residence|
+|realEstateType|residential|
+|realEstateType|investment|
+|realEstateType|offices|
+|realEstateType|commercial|
+|realEstateType|building_land|
+|realEstateType|forest_land|
+|realEstateType|other_land|
+|realEstateType|agri_land|
+|realEstateType|parking|
+|realEstateType|other_property_type|
+|category|real_estate|
+
+<h2 id="tocSestateassetinvestment">EstateAssetInvestment</h2>
+
+<a id="schemaestateassetinvestment"></a>
 
 ```json
 {
   "id": "345abcd",
-  "category": "account",
   "apiOnly": true,
   "name": "Home expense account",
   "countryCode": "BE",
@@ -7078,27 +8066,52 @@ This operation does not require authentication
   "reference": "126732",
   "swiftCode": "GBABDD88",
   "rateOfReturn": 2,
-  "capitalisationPc": 3
+  "capitalisationPc": 3,
+  "category": "investment"
 }
 
 ```
 
 ### Properties
 
-*allOf - discriminator: EstateAssetAttributes.category*
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|none|
 
 *and*
 
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[EstateAssetPercentAttributes](#schemaestateassetpercentattributes)|false|none|none|
+
 *and*
 
-<h2 id="tocSaccount">account</h2>
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|none|
+|» reference|string|true|none|Reference of the portfolio|
+|» swiftCode|string|false|none|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated|
+|» bankName|string|true|none|The name of the (depositary) bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
+|» capitalisationPc|number|false|none|Percentage of return that is expected to be capitalized. Used for CF projections|
+|» rateOfReturn|number|false|none|Expected annual value increase of the company.|
+|» manager|string|false|none|Name of the asset manager|
+|» category|string|true|none|none|
 
-<a id="schemaaccount"></a>
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|category|investment|
+
+<h2 id="tocSestateassetaccount">EstateAssetAccount</h2>
+
+<a id="schemaestateassetaccount"></a>
 
 ```json
 {
   "id": "345abcd",
-  "category": "account",
   "apiOnly": true,
   "name": "Home expense account",
   "countryCode": "BE",
@@ -7110,25 +8123,49 @@ This operation does not require authentication
   "accountType": "current_account",
   "iban": "0022333344445555",
   "swiftCode": "GBABDD88",
-  "rateOfReturn": 2
+  "rateOfReturn": 2,
+  "category": "account"
 }
 
 ```
 
 ### Properties
 
-*allOf - discriminator: EstateAssetAttributes.category*
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|none|
 
 *and*
 
-<h2 id="tocScompany">company</h2>
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|none|
+|» accountType|string|true|none|Type of account|
+|» bankName|string|true|none|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
+|» iban|string|false|none|Account IBAN number.|
+|» rateOfReturn|number|false|none|Expected annual value increase of the company.|
+|» swiftCode|string|false|none|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated|
+|» category|string|true|none|none|
 
-<a id="schemacompany"></a>
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|accountType|current_account|
+|accountType|saving_account|
+|accountType|term_account|
+|accountType|other_type|
+|category|account|
+
+<h2 id="tocSestateassetcompany">EstateAssetCompany</h2>
+
+<a id="schemaestateassetcompany"></a>
 
 ```json
 {
   "id": "345abcd",
-  "category": "account",
   "apiOnly": true,
   "name": "Home expense account",
   "countryCode": "BE",
@@ -7152,27 +8189,67 @@ This operation does not require authentication
   "companyObject": "patrimonial",
   "companyType": "SPRL",
   "receivablesShare": 0,
-  "agriSpecificShare": 0
+  "agriSpecificShare": 0,
+  "category": "company"
 }
 
 ```
 
 ### Properties
 
-*allOf - discriminator: EstateAssetAttributes.category*
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|none|
 
 *and*
 
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[EstateAssetPercentAttributes](#schemaestateassetpercentattributes)|false|none|none|
+
 *and*
 
-<h2 id="tocSotherasset">otherAsset</h2>
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|none|
+|» companyType|string|false|none|Type of company / legal form|
+|» companyObject|string|true|none|Type of company object|
+|» companyNumber|string|false|none|Company registration number. Numbers only.|
+|» vatNumber|string|false|none|Company VAT number. Will be derived from `companyNumber` where possible, eg. Belgian companies|
+|» officialName|string|true|none|Official/legal name of the company. If `companyNumber` and `countryCode` are valid, will be obtained from [Open Corporate](opencorporates.com)|
+|» legalPersonality|boolean|false|none|Does the company have a legal personality? Eg. indivisions, 'société civile/de droit commun' don't have legal personality|
+|» address|string|false|none|Address of the company. If `companyNumber` and `countryCode` are valid, will be obtained from [Open Corporate](opencorporates.com)|
+|» linkUnderlyingValue|boolean|false|none|Company value can be determined based on the value of the underlying company assets and liabilities added in the system or from a value you determine yourself.|
+|» hasDividend|boolean|false|none|Is the company paying a dividend?|
+|» annualDividend|number|false|none|Estimated annual dividend. Ignore if `hasDividend` is *false*.|
+|» dividendIndexation|boolean|false|none|Should the dividend be indexed with the company value?|
+|» linkUnderlyingComposition|boolean|false|none|Company asset composition can be determined based on the underlying company assets and liabilities added in the system or from a composition you specifity. If set to *true*, provided asset composition will be ignored.|
+|» rateOfReturn|number|false|none|Expected annual value increase of the company.|
+|» realEstateShare|number|false|none|Underlying company asset composition - real estate share|
+|» receivablesShare|number|false|none|Underlying company asset composition - receivables / private loans|
+|» category|string|true|none|none|
 
-<a id="schemaotherasset"></a>
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|companyObject|operational|
+|companyObject|management|
+|companyObject|holding|
+|companyObject|patrimonial|
+|companyObject|agriculture|
+|companyObject|other_object|
+|category|company|
+
+<h2 id="tocSestateassetotherasset">EstateAssetOtherAsset</h2>
+
+<a id="schemaestateassetotherasset"></a>
 
 ```json
 {
   "id": "345abcd",
-  "category": "account",
   "apiOnly": true,
   "name": "Home expense account",
   "countryCode": "BE",
@@ -7181,16 +8258,43 @@ This operation does not require authentication
   "currency": "EUR",
   "defaultOwnershipType": "owner",
   "otherAssetType": "precious_metal",
-  "privateUse": false
+  "privateUse": false,
+  "category": "other_asset"
 }
 
 ```
 
 ### Properties
 
-*allOf - discriminator: EstateAssetAttributes.category*
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[EstateAssetBaseAttributes](#schemaestateassetbaseattributes)|false|none|none|
 
 *and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|none|
+|» otherAssetType|string|true|none|Type of other asset|
+|» privateUse|boolean|false|none|Is this asset for private use or investment?|
+|» category|string|true|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|otherAssetType|jewelry|
+|otherAssetType|art|
+|otherAssetType|car|
+|otherAssetType|wine|
+|otherAssetType|books|
+|otherAssetType|precious_metal|
+|otherAssetType|furniture|
+|otherAssetType|immaterial_asset|
+|otherAssetType|other_type|
+|category|other_asset|
 
 <h2 id="tocSassetownership">AssetOwnership</h2>
 
@@ -7212,16 +8316,16 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|true|none|none|
+|type|string|true|none|Resource type - `assetOwnership`|
 |attributes|object|true|none|none|
-|» ownerId|string|true|none|Internal ID of the owner. If blank, will expect companyId.|
-|» companyId|string|false|none|Internal ID of the company that owns the asset. Ignored if ownerId is provided.|
+|» ownerId|string|true|none|Internal ID of the owner. If blank, will expect `companyId`.|
+|» companyId|string|false|none|Internal ID of the company that owns the asset. Ignored if `ownerId` is provided.|
 |» ownerCategory|string|false|none|Owner category. A physical person ('person'), the community ('community') or a moral person ('company')|
-|» communityOwner|string|false|none|Only in case of 'community ownerCategory'. Whether the asset is under both names or the main data subject or it's partner/spouse",|
+|» communityOwner|string|false|none|Only in case of 'community `ownerCategory`'. Whether the asset is under both names or the main data subject or it's partner/spouse",|
 |» ownershipType|string|false|none|Type of the ownership. Full property ('fp'), bare ownership ('np') or usufruct ('us')|
 |» percentage|number|true|none|Percentage ownership. Decimals must be separated by a dot. Eg. 25.5|
-|» otherOwnerId|string|false|none|Internal ID of the owner holding the other side of the dismembered ownership, if applicable. Ignored if ownershipType is 'fp'.|
-|» otherCompanyId|string|false|none|Internal ID of the company holding the other side of the dismembered ownership, if applicable. Ignored if ownershipType is 'fp' and/or if otherOwnerId is provided.|
+|» otherOwnerId|string|false|none|Internal ID of the owner holding the other side of the dismembered ownership, if applicable. Ignored if `ownershipType` is 'fp'.|
+|» otherCompanyId|string|false|none|Internal ID of the company holding the other side of the dismembered ownership, if applicable. Ignored if `ownershipType` is 'fp' and/or if `otherOwnerId` is provided.|
 |» usufructStartDate|string|false|none|YYYY-MM-DD. Start date of the usufruct. Only when a company owns the usufruct. Will default to current date|
 |» usufructPcValue|number|false|none|Initial percentage of the full property value. Only when a company owns the usufruct.|
 |» usufructYearsDuration|integer|false|none|Number of years the usufruct was initially granted to the company. Only when a company owns the usufruct.|
@@ -7271,19 +8375,19 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal employee id. Must be unique.|
+|type|string|true|none|Resource type - `companyMembership`|
 |attributes|object|true|none|none|
 |» id|string|true|none|Internal employee id. Must be unique. Will be generated randomly if not provided|
 |» companyUnitId|string|false|none|Id of the unit, center or department the employee belongs to.|
-|» lastName|string|true|none|none|
-|» firstName|string|true|none|none|
-|» gender|string|true|none|none|
+|» lastName|string|true|none|Last name of the employee|
+|» firstName|string|true|none|First name of the employee|
+|» gender|string|true|none|Gender of the employee|
 |» email|string|true|none|Email of the employee. used as username for login. needs to be unique.|
-|» mobilePhone|string|true|none|Mobile phone number of the employee. required for 2fa. uses the phony library https://github.com/floere/phony to validate plausibility of number. Country extension defaults to +32 unless provided|
-|» countryCode|string|false|none|Country (residence) of the employee|
-|» locale|string|true|none|none|
-|» memberRight|string|true|none|right of the employee. read and write means can create new clients, read only means the employee can't create clients but can access clients he has been given access to|
+|» mobilePhone|string|true|none|Mobile phone number of the employee. required for 2fa. uses the [phony library](https://github.com/floere/phony) to validate plausibility of number. Country extension defaults to *+32* unless provided|
+|» countryCode|string|false|none|Country (residence) of the employee. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|» locale|string|true|none|Language used for the PaxFamilia application|
+|» memberRight|string|true|none|Right of the employee. `read_and_write` means the employee can create new clients, `read` only means the employee can't create clients but can access clients he has been given access to.|
 
 #### Enumerated Values
 
@@ -7292,257 +8396,9 @@ This operation does not require authentication
 |type|companyMembership|
 |gender|M|
 |gender|F|
-|countryCode|TJ|
-|countryCode|JM|
-|countryCode|HT|
-|countryCode|ST|
-|countryCode|MS|
-|countryCode|AE|
-|countryCode|PK|
-|countryCode|NL|
-|countryCode|LU|
-|countryCode|BZ|
-|countryCode|IR|
-|countryCode|BO|
-|countryCode|UY|
-|countryCode|GH|
-|countryCode|SA|
-|countryCode|CI|
-|countryCode|MF|
-|countryCode|TF|
-|countryCode|AI|
-|countryCode|QA|
-|countryCode|SX|
-|countryCode|LY|
-|countryCode|BV|
-|countryCode|PG|
-|countryCode|KG|
-|countryCode|GQ|
-|countryCode|EH|
-|countryCode|NU|
-|countryCode|PR|
-|countryCode|GD|
-|countryCode|KR|
-|countryCode|HM|
-|countryCode|SM|
-|countryCode|SL|
-|countryCode|CD|
-|countryCode|MK|
-|countryCode|TR|
-|countryCode|DZ|
-|countryCode|GE|
-|countryCode|PS|
-|countryCode|BB|
-|countryCode|UA|
-|countryCode|GP|
-|countryCode|PF|
-|countryCode|NA|
-|countryCode|BW|
-|countryCode|SY|
-|countryCode|TG|
-|countryCode|DO|
-|countryCode|AQ|
-|countryCode|CH|
-|countryCode|MG|
-|countryCode|FO|
-|countryCode|VG|
-|countryCode|GI|
-|countryCode|BN|
-|countryCode|LA|
-|countryCode|IS|
-|countryCode|EE|
-|countryCode|UM|
-|countryCode|LT|
-|countryCode|RS|
-|countryCode|MR|
-|countryCode|AD|
-|countryCode|HU|
-|countryCode|TK|
-|countryCode|MY|
-|countryCode|AO|
-|countryCode|CV|
-|countryCode|NF|
-|countryCode|PA|
-|countryCode|GW|
-|countryCode|BE|
-|countryCode|PT|
-|countryCode|GB|
-|countryCode|IM|
-|countryCode|US|
-|countryCode|YE|
-|countryCode|HK|
-|countryCode|AZ|
-|countryCode|CC|
-|countryCode|ML|
-|countryCode|SK|
-|countryCode|VU|
-|countryCode|TL|
-|countryCode|HR|
-|countryCode|SR|
-|countryCode|MU|
-|countryCode|CZ|
-|countryCode|PM|
-|countryCode|LS|
-|countryCode|WS|
-|countryCode|KM|
-|countryCode|IT|
-|countryCode|BI|
-|countryCode|WF|
-|countryCode|GN|
-|countryCode|SG|
-|countryCode|CO|
-|countryCode|CN|
-|countryCode|AW|
-|countryCode|MA|
-|countryCode|FI|
-|countryCode|VA|
-|countryCode|ZW|
-|countryCode|KY|
-|countryCode|BH|
-|countryCode|PY|
-|countryCode|EC|
-|countryCode|LR|
-|countryCode|RU|
-|countryCode|PL|
-|countryCode|OM|
-|countryCode|MT|
-|countryCode|SS|
-|countryCode|DE|
-|countryCode|TM|
-|countryCode|SJ|
-|countryCode|MM|
-|countryCode|TT|
-|countryCode|IL|
-|countryCode|BD|
-|countryCode|NR|
-|countryCode|LK|
-|countryCode|UG|
-|countryCode|NG|
-|countryCode|BQ|
-|countryCode|MX|
-|countryCode|CW|
-|countryCode|SI|
-|countryCode|MN|
-|countryCode|CA|
-|countryCode|AX|
-|countryCode|VN|
-|countryCode|TW|
-|countryCode|JP|
-|countryCode|IO|
-|countryCode|RO|
-|countryCode|BG|
-|countryCode|GU|
-|countryCode|BR|
-|countryCode|AM|
-|countryCode|ZM|
-|countryCode|DJ|
-|countryCode|JE|
-|countryCode|AT|
-|countryCode|CM|
-|countryCode|SE|
-|countryCode|FJ|
-|countryCode|KZ|
-|countryCode|GL|
-|countryCode|GY|
-|countryCode|CX|
-|countryCode|MW|
-|countryCode|TN|
-|countryCode|ZA|
-|countryCode|TO|
-|countryCode|CY|
-|countryCode|MV|
-|countryCode|PN|
-|countryCode|RW|
-|countryCode|NI|
-|countryCode|KN|
-|countryCode|BJ|
-|countryCode|ET|
-|countryCode|GM|
-|countryCode|TZ|
-|countryCode|VC|
-|countryCode|FK|
-|countryCode|SD|
-|countryCode|MC|
-|countryCode|AU|
-|countryCode|CL|
-|countryCode|DK|
-|countryCode|FR|
-|countryCode|TC|
-|countryCode|CU|
-|countryCode|AL|
-|countryCode|MZ|
-|countryCode|BS|
-|countryCode|NE|
-|countryCode|GT|
-|countryCode|LI|
-|countryCode|NP|
-|countryCode|BF|
-|countryCode|PW|
-|countryCode|KW|
-|countryCode|IN|
-|countryCode|GA|
-|countryCode|TV|
-|countryCode|MO|
-|countryCode|SH|
-|countryCode|MD|
-|countryCode|CK|
-|countryCode|AR|
-|countryCode|SC|
-|countryCode|IE|
-|countryCode|ES|
-|countryCode|LB|
-|countryCode|BM|
-|countryCode|RE|
-|countryCode|KI|
-|countryCode|AG|
-|countryCode|MQ|
-|countryCode|SV|
-|countryCode|JO|
-|countryCode|TH|
-|countryCode|SO|
-|countryCode|MH|
-|countryCode|CG|
-|countryCode|KP|
-|countryCode|GF|
-|countryCode|BA|
-|countryCode|YT|
-|countryCode|GS|
-|countryCode|KE|
-|countryCode|PE|
-|countryCode|BT|
-|countryCode|SZ|
-|countryCode|CR|
-|countryCode|TD|
-|countryCode|DM|
-|countryCode|NC|
-|countryCode|GR|
-|countryCode|GG|
-|countryCode|HN|
-|countryCode|VI|
-|countryCode|CF|
-|countryCode|SN|
-|countryCode|AF|
-|countryCode|MP|
-|countryCode|PH|
-|countryCode|BY|
-|countryCode|LV|
-|countryCode|NO|
-|countryCode|EG|
-|countryCode|KH|
-|countryCode|IQ|
-|countryCode|LC|
-|countryCode|NZ|
-|countryCode|BL|
-|countryCode|UZ|
-|countryCode|ID|
-|countryCode|ER|
-|countryCode|VE|
-|countryCode|FM|
-|countryCode|SB|
-|countryCode|ME|
-|countryCode|AS|
 |locale|fr|
 |locale|nl|
+|locale|en|
 |memberRight|read_and_write|
 |memberRight|read|
 
@@ -7571,271 +8427,22 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal id of the unit, center or department.|
+|type|string|true|none|Resource type - `companyUnit`|
 |attributes|object|true|none|none|
 |» id|string|true|none|Internal id of the unit, center or department. Will be generated randomly if not provided|
 |» parentUnitId|string|false|none|A unit can be a sub unit of another unit (parentUnit).|
 |» name|string|true|none|Name the unit, center or department|
-|» countryCode|string|false|none|Country of the unit. Default to the country of the company it belongs to.|
+|» countryCode|string|false|none|Country of the unit. Default to the country of the company it belongs to. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
 |» address|string|false|none|Address of the unit|
 |» zipcode|string|false|none|Zipcode of the unit|
-|» locale|string|true|none|none|
+|» locale|string|true|none|Language of the unit|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|companyUnit|
-|countryCode|TJ|
-|countryCode|JM|
-|countryCode|HT|
-|countryCode|ST|
-|countryCode|MS|
-|countryCode|AE|
-|countryCode|PK|
-|countryCode|NL|
-|countryCode|LU|
-|countryCode|BZ|
-|countryCode|IR|
-|countryCode|BO|
-|countryCode|UY|
-|countryCode|GH|
-|countryCode|SA|
-|countryCode|CI|
-|countryCode|MF|
-|countryCode|TF|
-|countryCode|AI|
-|countryCode|QA|
-|countryCode|SX|
-|countryCode|LY|
-|countryCode|BV|
-|countryCode|PG|
-|countryCode|KG|
-|countryCode|GQ|
-|countryCode|EH|
-|countryCode|NU|
-|countryCode|PR|
-|countryCode|GD|
-|countryCode|KR|
-|countryCode|HM|
-|countryCode|SM|
-|countryCode|SL|
-|countryCode|CD|
-|countryCode|MK|
-|countryCode|TR|
-|countryCode|DZ|
-|countryCode|GE|
-|countryCode|PS|
-|countryCode|BB|
-|countryCode|UA|
-|countryCode|GP|
-|countryCode|PF|
-|countryCode|NA|
-|countryCode|BW|
-|countryCode|SY|
-|countryCode|TG|
-|countryCode|DO|
-|countryCode|AQ|
-|countryCode|CH|
-|countryCode|MG|
-|countryCode|FO|
-|countryCode|VG|
-|countryCode|GI|
-|countryCode|BN|
-|countryCode|LA|
-|countryCode|IS|
-|countryCode|EE|
-|countryCode|UM|
-|countryCode|LT|
-|countryCode|RS|
-|countryCode|MR|
-|countryCode|AD|
-|countryCode|HU|
-|countryCode|TK|
-|countryCode|MY|
-|countryCode|AO|
-|countryCode|CV|
-|countryCode|NF|
-|countryCode|PA|
-|countryCode|GW|
-|countryCode|BE|
-|countryCode|PT|
-|countryCode|GB|
-|countryCode|IM|
-|countryCode|US|
-|countryCode|YE|
-|countryCode|HK|
-|countryCode|AZ|
-|countryCode|CC|
-|countryCode|ML|
-|countryCode|SK|
-|countryCode|VU|
-|countryCode|TL|
-|countryCode|HR|
-|countryCode|SR|
-|countryCode|MU|
-|countryCode|CZ|
-|countryCode|PM|
-|countryCode|LS|
-|countryCode|WS|
-|countryCode|KM|
-|countryCode|IT|
-|countryCode|BI|
-|countryCode|WF|
-|countryCode|GN|
-|countryCode|SG|
-|countryCode|CO|
-|countryCode|CN|
-|countryCode|AW|
-|countryCode|MA|
-|countryCode|FI|
-|countryCode|VA|
-|countryCode|ZW|
-|countryCode|KY|
-|countryCode|BH|
-|countryCode|PY|
-|countryCode|EC|
-|countryCode|LR|
-|countryCode|RU|
-|countryCode|PL|
-|countryCode|OM|
-|countryCode|MT|
-|countryCode|SS|
-|countryCode|DE|
-|countryCode|TM|
-|countryCode|SJ|
-|countryCode|MM|
-|countryCode|TT|
-|countryCode|IL|
-|countryCode|BD|
-|countryCode|NR|
-|countryCode|LK|
-|countryCode|UG|
-|countryCode|NG|
-|countryCode|BQ|
-|countryCode|MX|
-|countryCode|CW|
-|countryCode|SI|
-|countryCode|MN|
-|countryCode|CA|
-|countryCode|AX|
-|countryCode|VN|
-|countryCode|TW|
-|countryCode|JP|
-|countryCode|IO|
-|countryCode|RO|
-|countryCode|BG|
-|countryCode|GU|
-|countryCode|BR|
-|countryCode|AM|
-|countryCode|ZM|
-|countryCode|DJ|
-|countryCode|JE|
-|countryCode|AT|
-|countryCode|CM|
-|countryCode|SE|
-|countryCode|FJ|
-|countryCode|KZ|
-|countryCode|GL|
-|countryCode|GY|
-|countryCode|CX|
-|countryCode|MW|
-|countryCode|TN|
-|countryCode|ZA|
-|countryCode|TO|
-|countryCode|CY|
-|countryCode|MV|
-|countryCode|PN|
-|countryCode|RW|
-|countryCode|NI|
-|countryCode|KN|
-|countryCode|BJ|
-|countryCode|ET|
-|countryCode|GM|
-|countryCode|TZ|
-|countryCode|VC|
-|countryCode|FK|
-|countryCode|SD|
-|countryCode|MC|
-|countryCode|AU|
-|countryCode|CL|
-|countryCode|DK|
-|countryCode|FR|
-|countryCode|TC|
-|countryCode|CU|
-|countryCode|AL|
-|countryCode|MZ|
-|countryCode|BS|
-|countryCode|NE|
-|countryCode|GT|
-|countryCode|LI|
-|countryCode|NP|
-|countryCode|BF|
-|countryCode|PW|
-|countryCode|KW|
-|countryCode|IN|
-|countryCode|GA|
-|countryCode|TV|
-|countryCode|MO|
-|countryCode|SH|
-|countryCode|MD|
-|countryCode|CK|
-|countryCode|AR|
-|countryCode|SC|
-|countryCode|IE|
-|countryCode|ES|
-|countryCode|LB|
-|countryCode|BM|
-|countryCode|RE|
-|countryCode|KI|
-|countryCode|AG|
-|countryCode|MQ|
-|countryCode|SV|
-|countryCode|JO|
-|countryCode|TH|
-|countryCode|SO|
-|countryCode|MH|
-|countryCode|CG|
-|countryCode|KP|
-|countryCode|GF|
-|countryCode|BA|
-|countryCode|YT|
-|countryCode|GS|
-|countryCode|KE|
-|countryCode|PE|
-|countryCode|BT|
-|countryCode|SZ|
-|countryCode|CR|
-|countryCode|TD|
-|countryCode|DM|
-|countryCode|NC|
-|countryCode|GR|
-|countryCode|GG|
-|countryCode|HN|
-|countryCode|VI|
-|countryCode|CF|
-|countryCode|SN|
-|countryCode|AF|
-|countryCode|MP|
-|countryCode|PH|
-|countryCode|BY|
-|countryCode|LV|
-|countryCode|NO|
-|countryCode|EG|
-|countryCode|KH|
-|countryCode|IQ|
-|countryCode|LC|
-|countryCode|NZ|
-|countryCode|BL|
-|countryCode|UZ|
-|countryCode|ID|
-|countryCode|ER|
-|countryCode|VE|
-|countryCode|FM|
-|countryCode|SB|
-|countryCode|ME|
-|countryCode|AS|
 |locale|fr|
 |locale|nl|
 
@@ -7875,28 +8482,28 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal id of the donation.|
+|type|string|true|none|Resource type - `donation`|
 |attributes|object|true|none|none|
-|» id|string|true|none|Internal id of the donation. Must be unique. Will be generated randomly if not provided|
+|» id|string|true|none|Internal id of the donation. Must be unique. Will be generated randomly if not provided.|
 |» estateAssetId|string|false|none|Id of the asset it relates to.|
 |» name|string|true|none|Name or reference for the donation|
 |» transactionDate|string|true|none|Donation date. YYYY-MM-DD|
-|» donationType|string|true|none|type of donation|
+|» donationType|string|true|none|Type of donation|
 |» amount|number|true|none|Total intrinsic value of the donation. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
-|» currentValue|string|false|none|Current value of the donation. Default to amount|
+|» currentValue|string|false|none|Current value of the donation. Defaults to `amount`|
 |» donorIds|[string]|true|none|Array of donor ids.|
 |» doneeIds|[string]|true|none|Array of donee ids.|
 |» calleeIds|[string]|false|none|Internal IDs of the callee(s). Only in case residuo clause is true.|
-|» ownershipType|string|true|none|Specify if the donation is not for the full ownership. Full property ('fp'), bare ownership ('np') or bare ownership with reserve of usufruct ('np_reserve_us')|
-|» inheritanceTreatment|string|false|none|Treatment at succession. advance = advance on inheritance, no_report = par preciput et hors part, advance_with_no_report = advance on inheritance with no report in nature|
-|» nonTransferabilityClause|string|false|none|type of non transferability clause (inalienability) if any|
-|» nonTransferabilityDuration|integer|false|none|Number of years of inalienability. Required if nonTransferabilityClause is forYears|
+|» ownershipType|string|true|none|Specify if the donation is not for the full ownership. Full property ('fp'), bare ownership ('np') or bare ownership with reserve of usufruct ('np_reserve_us').|
+|» inheritanceTreatment|string|false|none|Treatment at succession. `advance`:- advance on inheritance, `no_report`:- par preciput et hors part, `advance_with_no_report`:- advance on inheritance with no report in nature.|
+|» nonTransferabilityClause|string|false|none|Type of non transferability clause (inalienability) if any|
+|» nonTransferabilityDuration|integer|false|none|Number of years of inalienability. Required if `nonTransferabilityClause` is forYears|
 |» noCommunityCondition|boolean|false|none|Clause preventing to bring the given assets to a community|
 |» returnClause|string|false|none|Clause of conventional return|
 |» returnClauseOptional|boolean|false|none|Is the return clause optional?|
-|» annuityClause|boolean|false|none|Is there a charge/rente (Charge de rente)|
-|» annuityAmount|number|false|none|Annual annuity amount. Required if annuityClause is true|
+|» annuityClause|boolean|false|none|Is there a charge/rent (Charge de rente)?|
+|» annuityAmount|number|false|none|Annual annuity amount. Required if `annuityClause` is *true*|
 |» annuityPc|number|false|none|Annual annuity indexation.|
 |» description|string|false|none|Description|
 |» registered|boolean|true|none|Is the donation registered?|
@@ -7927,544 +8534,6 @@ This operation does not require authentication
 |contractForm|notarial_deed|
 |contractForm|foreign_notarial_deed|
 |contractForm|none|
-|contractForm|null|
-
-<h2 id="tocSdummyuserattributes">DummyUserAttributes</h2>
-
-<a id="schemadummyuserattributes"></a>
-
-```json
-{
-  "id": "123abcde",
-  "firstName": "Luc",
-  "lastName": "Beson",
-  "gender": "F",
-  "birthday": "1970-02-20",
-  "nationality": "BE",
-  "countryCode": "FR",
-  "zipcode": "75008"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|string|false|none|Internal client/person id. Will be generated randomly if not provided|
-|lastName|string|true|none|required|
-|firstName|string|true|none|required|
-|email|string|false|none|Email of the client. Optional.|
-|gender|string|true|none|none|
-|birthday|string|false|none|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
-|nationality|string|true|none|Country code of nationality|
-|countryCode|string|true|none|Country code of residence|
-|zipcode|string|false|none|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|gender|M|
-|gender|F|
-|nationality|TJ|
-|nationality|JM|
-|nationality|HT|
-|nationality|ST|
-|nationality|MS|
-|nationality|AE|
-|nationality|PK|
-|nationality|NL|
-|nationality|LU|
-|nationality|BZ|
-|nationality|IR|
-|nationality|BO|
-|nationality|UY|
-|nationality|GH|
-|nationality|SA|
-|nationality|CI|
-|nationality|MF|
-|nationality|TF|
-|nationality|AI|
-|nationality|QA|
-|nationality|SX|
-|nationality|LY|
-|nationality|BV|
-|nationality|PG|
-|nationality|KG|
-|nationality|GQ|
-|nationality|EH|
-|nationality|NU|
-|nationality|PR|
-|nationality|GD|
-|nationality|KR|
-|nationality|HM|
-|nationality|SM|
-|nationality|SL|
-|nationality|CD|
-|nationality|MK|
-|nationality|TR|
-|nationality|DZ|
-|nationality|GE|
-|nationality|PS|
-|nationality|BB|
-|nationality|UA|
-|nationality|GP|
-|nationality|PF|
-|nationality|NA|
-|nationality|BW|
-|nationality|SY|
-|nationality|TG|
-|nationality|DO|
-|nationality|AQ|
-|nationality|CH|
-|nationality|MG|
-|nationality|FO|
-|nationality|VG|
-|nationality|GI|
-|nationality|BN|
-|nationality|LA|
-|nationality|IS|
-|nationality|EE|
-|nationality|UM|
-|nationality|LT|
-|nationality|RS|
-|nationality|MR|
-|nationality|AD|
-|nationality|HU|
-|nationality|TK|
-|nationality|MY|
-|nationality|AO|
-|nationality|CV|
-|nationality|NF|
-|nationality|PA|
-|nationality|GW|
-|nationality|BE|
-|nationality|PT|
-|nationality|GB|
-|nationality|IM|
-|nationality|US|
-|nationality|YE|
-|nationality|HK|
-|nationality|AZ|
-|nationality|CC|
-|nationality|ML|
-|nationality|SK|
-|nationality|VU|
-|nationality|TL|
-|nationality|HR|
-|nationality|SR|
-|nationality|MU|
-|nationality|CZ|
-|nationality|PM|
-|nationality|LS|
-|nationality|WS|
-|nationality|KM|
-|nationality|IT|
-|nationality|BI|
-|nationality|WF|
-|nationality|GN|
-|nationality|SG|
-|nationality|CO|
-|nationality|CN|
-|nationality|AW|
-|nationality|MA|
-|nationality|FI|
-|nationality|VA|
-|nationality|ZW|
-|nationality|KY|
-|nationality|BH|
-|nationality|PY|
-|nationality|EC|
-|nationality|LR|
-|nationality|RU|
-|nationality|PL|
-|nationality|OM|
-|nationality|MT|
-|nationality|SS|
-|nationality|DE|
-|nationality|TM|
-|nationality|SJ|
-|nationality|MM|
-|nationality|TT|
-|nationality|IL|
-|nationality|BD|
-|nationality|NR|
-|nationality|LK|
-|nationality|UG|
-|nationality|NG|
-|nationality|BQ|
-|nationality|MX|
-|nationality|CW|
-|nationality|SI|
-|nationality|MN|
-|nationality|CA|
-|nationality|AX|
-|nationality|VN|
-|nationality|TW|
-|nationality|JP|
-|nationality|IO|
-|nationality|RO|
-|nationality|BG|
-|nationality|GU|
-|nationality|BR|
-|nationality|AM|
-|nationality|ZM|
-|nationality|DJ|
-|nationality|JE|
-|nationality|AT|
-|nationality|CM|
-|nationality|SE|
-|nationality|FJ|
-|nationality|KZ|
-|nationality|GL|
-|nationality|GY|
-|nationality|CX|
-|nationality|MW|
-|nationality|TN|
-|nationality|ZA|
-|nationality|TO|
-|nationality|CY|
-|nationality|MV|
-|nationality|PN|
-|nationality|RW|
-|nationality|NI|
-|nationality|KN|
-|nationality|BJ|
-|nationality|ET|
-|nationality|GM|
-|nationality|TZ|
-|nationality|VC|
-|nationality|FK|
-|nationality|SD|
-|nationality|MC|
-|nationality|AU|
-|nationality|CL|
-|nationality|DK|
-|nationality|FR|
-|nationality|TC|
-|nationality|CU|
-|nationality|AL|
-|nationality|MZ|
-|nationality|BS|
-|nationality|NE|
-|nationality|GT|
-|nationality|LI|
-|nationality|NP|
-|nationality|BF|
-|nationality|PW|
-|nationality|KW|
-|nationality|IN|
-|nationality|GA|
-|nationality|TV|
-|nationality|MO|
-|nationality|SH|
-|nationality|MD|
-|nationality|CK|
-|nationality|AR|
-|nationality|SC|
-|nationality|IE|
-|nationality|ES|
-|nationality|LB|
-|nationality|BM|
-|nationality|RE|
-|nationality|KI|
-|nationality|AG|
-|nationality|MQ|
-|nationality|SV|
-|nationality|JO|
-|nationality|TH|
-|nationality|SO|
-|nationality|MH|
-|nationality|CG|
-|nationality|KP|
-|nationality|GF|
-|nationality|BA|
-|nationality|YT|
-|nationality|GS|
-|nationality|KE|
-|nationality|PE|
-|nationality|BT|
-|nationality|SZ|
-|nationality|CR|
-|nationality|TD|
-|nationality|DM|
-|nationality|NC|
-|nationality|GR|
-|nationality|GG|
-|nationality|HN|
-|nationality|VI|
-|nationality|CF|
-|nationality|SN|
-|nationality|AF|
-|nationality|MP|
-|nationality|PH|
-|nationality|BY|
-|nationality|LV|
-|nationality|NO|
-|nationality|EG|
-|nationality|KH|
-|nationality|IQ|
-|nationality|LC|
-|nationality|NZ|
-|nationality|BL|
-|nationality|UZ|
-|nationality|ID|
-|nationality|ER|
-|nationality|VE|
-|nationality|FM|
-|nationality|SB|
-|nationality|ME|
-|nationality|AS|
-|countryCode|TJ|
-|countryCode|JM|
-|countryCode|HT|
-|countryCode|ST|
-|countryCode|MS|
-|countryCode|AE|
-|countryCode|PK|
-|countryCode|NL|
-|countryCode|LU|
-|countryCode|BZ|
-|countryCode|IR|
-|countryCode|BO|
-|countryCode|UY|
-|countryCode|GH|
-|countryCode|SA|
-|countryCode|CI|
-|countryCode|MF|
-|countryCode|TF|
-|countryCode|AI|
-|countryCode|QA|
-|countryCode|SX|
-|countryCode|LY|
-|countryCode|BV|
-|countryCode|PG|
-|countryCode|KG|
-|countryCode|GQ|
-|countryCode|EH|
-|countryCode|NU|
-|countryCode|PR|
-|countryCode|GD|
-|countryCode|KR|
-|countryCode|HM|
-|countryCode|SM|
-|countryCode|SL|
-|countryCode|CD|
-|countryCode|MK|
-|countryCode|TR|
-|countryCode|DZ|
-|countryCode|GE|
-|countryCode|PS|
-|countryCode|BB|
-|countryCode|UA|
-|countryCode|GP|
-|countryCode|PF|
-|countryCode|NA|
-|countryCode|BW|
-|countryCode|SY|
-|countryCode|TG|
-|countryCode|DO|
-|countryCode|AQ|
-|countryCode|CH|
-|countryCode|MG|
-|countryCode|FO|
-|countryCode|VG|
-|countryCode|GI|
-|countryCode|BN|
-|countryCode|LA|
-|countryCode|IS|
-|countryCode|EE|
-|countryCode|UM|
-|countryCode|LT|
-|countryCode|RS|
-|countryCode|MR|
-|countryCode|AD|
-|countryCode|HU|
-|countryCode|TK|
-|countryCode|MY|
-|countryCode|AO|
-|countryCode|CV|
-|countryCode|NF|
-|countryCode|PA|
-|countryCode|GW|
-|countryCode|BE|
-|countryCode|PT|
-|countryCode|GB|
-|countryCode|IM|
-|countryCode|US|
-|countryCode|YE|
-|countryCode|HK|
-|countryCode|AZ|
-|countryCode|CC|
-|countryCode|ML|
-|countryCode|SK|
-|countryCode|VU|
-|countryCode|TL|
-|countryCode|HR|
-|countryCode|SR|
-|countryCode|MU|
-|countryCode|CZ|
-|countryCode|PM|
-|countryCode|LS|
-|countryCode|WS|
-|countryCode|KM|
-|countryCode|IT|
-|countryCode|BI|
-|countryCode|WF|
-|countryCode|GN|
-|countryCode|SG|
-|countryCode|CO|
-|countryCode|CN|
-|countryCode|AW|
-|countryCode|MA|
-|countryCode|FI|
-|countryCode|VA|
-|countryCode|ZW|
-|countryCode|KY|
-|countryCode|BH|
-|countryCode|PY|
-|countryCode|EC|
-|countryCode|LR|
-|countryCode|RU|
-|countryCode|PL|
-|countryCode|OM|
-|countryCode|MT|
-|countryCode|SS|
-|countryCode|DE|
-|countryCode|TM|
-|countryCode|SJ|
-|countryCode|MM|
-|countryCode|TT|
-|countryCode|IL|
-|countryCode|BD|
-|countryCode|NR|
-|countryCode|LK|
-|countryCode|UG|
-|countryCode|NG|
-|countryCode|BQ|
-|countryCode|MX|
-|countryCode|CW|
-|countryCode|SI|
-|countryCode|MN|
-|countryCode|CA|
-|countryCode|AX|
-|countryCode|VN|
-|countryCode|TW|
-|countryCode|JP|
-|countryCode|IO|
-|countryCode|RO|
-|countryCode|BG|
-|countryCode|GU|
-|countryCode|BR|
-|countryCode|AM|
-|countryCode|ZM|
-|countryCode|DJ|
-|countryCode|JE|
-|countryCode|AT|
-|countryCode|CM|
-|countryCode|SE|
-|countryCode|FJ|
-|countryCode|KZ|
-|countryCode|GL|
-|countryCode|GY|
-|countryCode|CX|
-|countryCode|MW|
-|countryCode|TN|
-|countryCode|ZA|
-|countryCode|TO|
-|countryCode|CY|
-|countryCode|MV|
-|countryCode|PN|
-|countryCode|RW|
-|countryCode|NI|
-|countryCode|KN|
-|countryCode|BJ|
-|countryCode|ET|
-|countryCode|GM|
-|countryCode|TZ|
-|countryCode|VC|
-|countryCode|FK|
-|countryCode|SD|
-|countryCode|MC|
-|countryCode|AU|
-|countryCode|CL|
-|countryCode|DK|
-|countryCode|FR|
-|countryCode|TC|
-|countryCode|CU|
-|countryCode|AL|
-|countryCode|MZ|
-|countryCode|BS|
-|countryCode|NE|
-|countryCode|GT|
-|countryCode|LI|
-|countryCode|NP|
-|countryCode|BF|
-|countryCode|PW|
-|countryCode|KW|
-|countryCode|IN|
-|countryCode|GA|
-|countryCode|TV|
-|countryCode|MO|
-|countryCode|SH|
-|countryCode|MD|
-|countryCode|CK|
-|countryCode|AR|
-|countryCode|SC|
-|countryCode|IE|
-|countryCode|ES|
-|countryCode|LB|
-|countryCode|BM|
-|countryCode|RE|
-|countryCode|KI|
-|countryCode|AG|
-|countryCode|MQ|
-|countryCode|SV|
-|countryCode|JO|
-|countryCode|TH|
-|countryCode|SO|
-|countryCode|MH|
-|countryCode|CG|
-|countryCode|KP|
-|countryCode|GF|
-|countryCode|BA|
-|countryCode|YT|
-|countryCode|GS|
-|countryCode|KE|
-|countryCode|PE|
-|countryCode|BT|
-|countryCode|SZ|
-|countryCode|CR|
-|countryCode|TD|
-|countryCode|DM|
-|countryCode|NC|
-|countryCode|GR|
-|countryCode|GG|
-|countryCode|HN|
-|countryCode|VI|
-|countryCode|CF|
-|countryCode|SN|
-|countryCode|AF|
-|countryCode|MP|
-|countryCode|PH|
-|countryCode|BY|
-|countryCode|LV|
-|countryCode|NO|
-|countryCode|EG|
-|countryCode|KH|
-|countryCode|IQ|
-|countryCode|LC|
-|countryCode|NZ|
-|countryCode|BL|
-|countryCode|UZ|
-|countryCode|ID|
-|countryCode|ER|
-|countryCode|VE|
-|countryCode|FM|
-|countryCode|SB|
-|countryCode|ME|
-|countryCode|AS|
 
 <h2 id="tocSdummyuser">DummyUser</h2>
 
@@ -8492,14 +8561,26 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal client/person id.|
+|type|string|true|none|Resource type - `dummyUser`|
+|attributes|object|true|none|none|
+|» id|string|false|none|Internal client/person id. Will be generated randomly if not provided|
+|» lastName|string|true|none|Last name of the client.|
+|» firstName|string|true|none|First name of the client.|
+|» email|string|false|none|Email of the client. Optional.|
+|» gender|string|true|none|Gender of the client.|
+|» birthday|string|false|none|YYYY-MM-DD. Must be left empty is unknown. Optional but recommended.|
+|» nationality|string|true|none|Country code of nationality. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|» countryCode|string|true|none|Country code of residence. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|» zipcode|string|false|none|Zipcode in the country of residence. Must be a valid zipcode in the country or empty|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|dummyUser|
+|gender|M|
+|gender|F|
 
 <h2 id="tocSestateliability">EstateLiability</h2>
 
@@ -8507,11 +8588,42 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "12345h",
-  "type": "estateAsset",
+  "id": "abcd1234",
+  "type": "estateLiability",
   "attributes": {
-    "id": "123dfer",
-    "rate": 2
+    "id": "abcd1234",
+    "name": "Birthday gift to my son's 30th",
+    "countryCode": "BE",
+    "currency": "EUR",
+    "contractDate": "1970-02-20",
+    "initialAmount": 5001,
+    "bankName": "Grifindor Vault",
+    "apiOnly": false,
+    "liabilityType": "bank_loan",
+    "repaymentType": "constant_periodicity",
+    "periodicity": "monthly",
+    "periodsDuration": 1,
+    "rate": 0,
+    "sameOwnershipAsAsset": true,
+    "borrowers": [
+      "0",
+      "12345mn",
+      "0"
+    ],
+    "lenders": [
+      "12345mnoo0"
+    ],
+    "linkedToAsset": false,
+    "rateType": "fixed",
+    "balanceInsurance": false,
+    "balanceInsurancePc": 0,
+    "swiftCode": "GEBABEBB00",
+    "guarantee": true,
+    "guaranteeType": "other_guarantee",
+    "guaranteeAmount": 73810,
+    "guarantorInternalId": "estate_asset_id_653",
+    "prepaid": false,
+    "prepaymentDate": "1987-08-16T00:00:00.000Z"
   }
 }
 
@@ -8519,9 +8631,66 @@ This operation does not require authentication
 
 ### Properties
 
-*allOf - discriminator: RefreshValues.type*
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|Internal reference to the liability, must be unique in the group scope.|
+|type|string|true|none|Resource type - `estateLiability`|
+|attributes|object|true|none|none|
+|» id|string|false|none|Internal reference to the liability, must be unique in the group scope. Will be generated randomly if not provided|
+|» apiOnly|boolean|false|none|Can only be edited through the api endpoint|
+|» name|string|true|none|Custom name of the liability. Can also be a reference.|
+|» liabilityType|string|true|none|Type of account|
+|» linkedToAsset|boolean|false|none|Has the liability been used to finance an asset that has already been created within PaxFamilia?|
+|» estateAssetId|string|false|none|Internal reference to asset. Will be ignored if `linkedToAsset` is false. Required if `linkedToAsset` is *true*.|
+|» swiftCode|string|false|none|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|» bankName|string|true|none|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|» countryCode|string|false|none|Country of the applicable law. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|» initialAmount|number|true|none|Initial loan amount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
+|» contractDate|string|true|none|Contract signature date. Must be in the past. *YYYY-MM-DD*|
+|» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|» repaymentType|string|true|none|Type of account|
+|» periodicity|string|true|none|Periodicity of the principal and/or interest payment|
+|» periodsDuration|integer|true|none|Number of repayment periods. Ignored if `repaymentType` has no end date (*no_end_pay_interest* or *no_end_capitalized_interest*)|
+|» rate|number|true|none|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
+|» rateType|string|false|none|Fixed or variable interest rate|
+|» sameOwnershipAsAsset|boolean|false|none|Is the liability held by the same owners of the linked asset and in the same proportions? Ignored if `linkedToAsset` is set to *false*.|
+|» borrowers|[string]|false|none|"Ignored if `sameOwnershipAsAsset` is *true*, otherwise at least one required. Will assume each borrower holds an equivalent share of the loan. Other borrowers, i.e. that do not exist in the PaxFamilia group scope, can be referenced with and ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four borrowers (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan."|
+|» lenders|[string]|false|none|Ignored if `liabilityType` is *bank_loan*. Will assume each lender holds an equivalent share of the loan. Other lenders, i.e. that do not exist in the PaxFamilia group scope, can be referenced with an ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four lenders (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan.|
+|» balanceInsurance|boolean|false|none|Is the liability covered by a balance insurance (ASRD)?|
+|» balanceInsurancePc|number|false|none|Percentage of the loan covered by a balance insurance. Ignored if `balanceInsurance` is *false*|
+|» guarantee|boolean|false|none|Is the liability secured by a guarantee?|
+|» guaranteeType|string|false|none|Type of guarantee. Ignored unless `guarantee` is *true*.|
+|» guaranteeAmount|number|false|none|Amount of the guarantee. Will default to the `initialAmount`. Ignored unless `guarantee` is *true*.|
+|» guarantorInternalId|string|false|none|ID of the asset or person guaranteeing the liability. Will default to the `estateAssetId` if present. Ignored unless `guarantee` is *true*. ID needs to exists within PaxFamilia|
+|» prepaid|boolean|false|none|Has the loan been prepaid? (or is it expected to be prepaid at some future date?)|
+|» prepaymentDate|string|false|none|Prepayment date. Defaults to current date if prepaid is set to true, otherwise ignored. *YYYY-MM-DD*|
 
-*and*
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|estateLiability|
+|liabilityType|bank_loan|
+|liabilityType|private_loan|
+|liabilityType|loan_account|
+|liabilityType|other_type|
+|repaymentType|constant_periodicity|
+|repaymentType|constant_principal|
+|repaymentType|bullet|
+|repaymentType|no_end_pay_interest|
+|repaymentType|no_end_capitalized_interest|
+|repaymentType|bullet_capitalized_interest|
+|periodicity|monthly|
+|periodicity|quarterly|
+|periodicity|semi_annual|
+|periodicity|annual|
+|rateType|fixed|
+|rateType|variable|
+|guaranteeType|mortgage,|
+|guaranteeType|mortgage_mandate,|
+|guaranteeType|personal_guarantee,|
+|guaranteeType|pledge,|
+|guaranteeType|other_guarantee|
 
 <h2 id="tocSestateliabilitywithguarantees">EstateLiabilityWithGuarantees</h2>
 
@@ -8536,7 +8705,7 @@ This operation does not require authentication
     "name": "Birthday gift to my son's 30th",
     "countryCode": "BE",
     "currency": "EUR",
-    "initialDate": "1970-02-20",
+    "contractDate": "1970-02-20",
     "initialAmount": 5001,
     "bankName": "Grifindor Vault",
     "apiOnly": false,
@@ -8582,36 +8751,36 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal reference to the liability, must be unique in the group scope.|
+|type|string|true|none|Resource type - `estateLiability`|
 |attributes|object|true|none|none|
 |» id|string|false|none|Internal reference to the liability, must be unique in the group scope. Will be generated randomly if not provided|
-|» apiOnly|boolean|false|none|can only be edited through the api endpoint|
+|» apiOnly|boolean|false|none|Can only be edited through the api endpoint|
 |» name|string|true|none|Custom name of the liability. Can also be a reference.|
-|» liabilityType|string|true|none|type of account|
+|» liabilityType|string|true|none|Type of account|
 |» linkedToAsset|boolean|false|none|Has the liability been used to finance an asset that has already been created within PaxFamilia?|
-|» estateAssetId|string|false|none|Internal reference to asset. Will be ignored if linkedToAsset is false. Required if linkedToAsset is true.|
-|» swiftCode|string|false|none|Swift code of the bank, eg. 'GEBABEBB'. If not provided, bank will be created from the bankName but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated. Required if liabilityType is bank_loan, otherwise ignored.|
-|» bankName|string|true|none|The name of the bank. The name of the bank will be derived from its swiftCode if a valid one is provided. Required if liabilityType is bank_loan, otherwise ignored.|
-|» countryCode|string|false|none|Country of the applicable law.|
+|» estateAssetId|string|false|none|Internal reference to asset. Will be ignored if `linkedToAsset` is false. Required if `linkedToAsset` is *true*.|
+|» swiftCode|string|false|none|Swift code of the bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|» bankName|string|true|none|The name of the bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided. Required if `liabilityType` is **bank_loan**, otherwise ignored.|
+|» countryCode|string|false|none|Country of the applicable law. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
 |» initialAmount|number|true|none|Initial loan amount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55|
-|» initialDate|string|true|none|Initial date of the loan. YYYY-MM-DD|
-|» currency|string|false|none|Currency of the value(s)|
-|» repaymentType|string|true|none|type of account|
-|» periodicity|string|true|none|periodicity of the principal and/or interest payment|
-|» periodsDuration|integer|true|none|Number of repayment periods. Ignored if repaymentType has no end date (no_end_pay_interest or no_end_capitalized_interest)|
+|» contractDate|string|true|none|Contract signature date. *YYYY-MM-DD*|
+|» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
+|» repaymentType|string|true|none|Type of account|
+|» periodicity|string|true|none|Periodicity of the principal and/or interest payment|
+|» periodsDuration|integer|true|none|Number of repayment periods. Ignored if `repaymentType` has no end date (*no_end_pay_interest* or *no_end_capitalized_interest*)|
 |» rate|number|true|none|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
-|» rateType|string|false|none|fixed or variable interest rate|
-|» sameOwnershipAsAsset|boolean|false|none|Is the liability held by the same owners of the linked asset and in the same proportions? Ignored if linkedToAsset is set to false.|
-|» borrowers|[string]|false|none|Ignored if sameOwnershipAsAsset is true, otherwise at least one required. Will assume each borrower holds an equivalent share of the loan. Other borrowers, i.e. that do not exist in the PaxFamilia group scope, can be referenced with and ID of '0'. => Example "['clientId', 'companyId', '0', '0']" will create four borrowers (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan.|
-|» lenders|[string]|false|none|Ignored if liabilityType is bank_loan. Will assume each lender holds an equivalent share of the loan. Other lenders, i.e. that do not exist in the PaxFamilia group scope, can be referenced with and ID of '0'. => Example "['clientId', 'companyId', '0', '0']" will create four lenders (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan.|
+|» rateType|string|false|none|Fixed or variable interest rate|
+|» sameOwnershipAsAsset|boolean|false|none|Is the liability held by the same owners of the linked asset and in the same proportions? Ignored if `linkedToAsset` is set to *false*.|
+|» borrowers|[string]|false|none|"Ignored if `sameOwnershipAsAsset` is *true*, otherwise at least one required. Will assume each borrower holds an equivalent share of the loan. Other borrowers, i.e. that do not exist in the PaxFamilia group scope, can be referenced with and ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four borrowers (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan."|
+|» lenders|[string]|false|none|Ignored if `liabilityType` is *bank_loan*. Will assume each lender holds an equivalent share of the loan. Other lenders, i.e. that do not exist in the PaxFamilia group scope, can be referenced with an ID of '0'. => Example `[clientId, companyId, 0, 0]` will create four lenders (one linked to a client, one linked to a company and two linked to 'no one') each with 25% of the loan.|
 |» balanceInsurance|boolean|false|none|Is the liability covered by a balance insurance (ASRD)?|
-|» balanceInsurancePc|number|false|none|Percentage of the loan covered by a balance insurance. Ignored if balanceInsurance is false|
+|» balanceInsurancePc|number|false|none|Percentage of the loan covered by a balance insurance. Ignored if `balanceInsurance` is *false*|
 |» guarantees|[object]|false|none|none|
-|»» amount|number|true|none|Amount of the guarantee. Will default to the initialAmount. Ignored unless guarantee is true.|
-|»» guaranteeType|string|true|none|Type of guarantee. Ignored unless guarantee is true.|
-|»» guarantorableId|string|true|none|ID of the asset or person guaranteeing the liability. Will default to the estateAssetId if present. Ignored unless guarantee is true. ID need to exists within PaxFamilia|
-|»» guarantorableType|string|true|none|Resource type of the guarantee, can be GroupMembership or EstateAsset|
+|»» amount|number|true|none|Amount of the guarantee. Will default to the `initialAmount`. Ignored unless `guarantee` is *true*.|
+|»» guaranteeType|string|true|none|Type of guarantee. Ignored unless `guarantee` is *true*.|
+|»» guarantorableId|string|true|none|ID of the asset or person guaranteeing the liability. Will default to the `estateAssetId` if present. Ignored unless `guarantee` is *true*. ID need to exists within PaxFamilia.|
+|»» guarantorableType|string|true|none|Resource type of the guarantee, can be `GroupMembership` or `EstateAsset`.|
 
 #### Enumerated Values
 
@@ -8620,442 +8789,8 @@ This operation does not require authentication
 |type|estateLiability|
 |liabilityType|bank_loan|
 |liabilityType|private_loan|
+|liabilityType|loan_account|
 |liabilityType|other_type|
-|countryCode|TJ|
-|countryCode|JM|
-|countryCode|HT|
-|countryCode|ST|
-|countryCode|MS|
-|countryCode|AE|
-|countryCode|PK|
-|countryCode|NL|
-|countryCode|LU|
-|countryCode|BZ|
-|countryCode|IR|
-|countryCode|BO|
-|countryCode|UY|
-|countryCode|GH|
-|countryCode|SA|
-|countryCode|CI|
-|countryCode|MF|
-|countryCode|TF|
-|countryCode|AI|
-|countryCode|QA|
-|countryCode|SX|
-|countryCode|LY|
-|countryCode|BV|
-|countryCode|PG|
-|countryCode|KG|
-|countryCode|GQ|
-|countryCode|EH|
-|countryCode|NU|
-|countryCode|PR|
-|countryCode|GD|
-|countryCode|KR|
-|countryCode|HM|
-|countryCode|SM|
-|countryCode|SL|
-|countryCode|CD|
-|countryCode|MK|
-|countryCode|TR|
-|countryCode|DZ|
-|countryCode|GE|
-|countryCode|PS|
-|countryCode|BB|
-|countryCode|UA|
-|countryCode|GP|
-|countryCode|PF|
-|countryCode|NA|
-|countryCode|BW|
-|countryCode|SY|
-|countryCode|TG|
-|countryCode|DO|
-|countryCode|AQ|
-|countryCode|CH|
-|countryCode|MG|
-|countryCode|FO|
-|countryCode|VG|
-|countryCode|GI|
-|countryCode|BN|
-|countryCode|LA|
-|countryCode|IS|
-|countryCode|EE|
-|countryCode|UM|
-|countryCode|LT|
-|countryCode|RS|
-|countryCode|MR|
-|countryCode|AD|
-|countryCode|HU|
-|countryCode|TK|
-|countryCode|MY|
-|countryCode|AO|
-|countryCode|CV|
-|countryCode|NF|
-|countryCode|PA|
-|countryCode|GW|
-|countryCode|BE|
-|countryCode|PT|
-|countryCode|GB|
-|countryCode|IM|
-|countryCode|US|
-|countryCode|YE|
-|countryCode|HK|
-|countryCode|AZ|
-|countryCode|CC|
-|countryCode|ML|
-|countryCode|SK|
-|countryCode|VU|
-|countryCode|TL|
-|countryCode|HR|
-|countryCode|SR|
-|countryCode|MU|
-|countryCode|CZ|
-|countryCode|PM|
-|countryCode|LS|
-|countryCode|WS|
-|countryCode|KM|
-|countryCode|IT|
-|countryCode|BI|
-|countryCode|WF|
-|countryCode|GN|
-|countryCode|SG|
-|countryCode|CO|
-|countryCode|CN|
-|countryCode|AW|
-|countryCode|MA|
-|countryCode|FI|
-|countryCode|VA|
-|countryCode|ZW|
-|countryCode|KY|
-|countryCode|BH|
-|countryCode|PY|
-|countryCode|EC|
-|countryCode|LR|
-|countryCode|RU|
-|countryCode|PL|
-|countryCode|OM|
-|countryCode|MT|
-|countryCode|SS|
-|countryCode|DE|
-|countryCode|TM|
-|countryCode|SJ|
-|countryCode|MM|
-|countryCode|TT|
-|countryCode|IL|
-|countryCode|BD|
-|countryCode|NR|
-|countryCode|LK|
-|countryCode|UG|
-|countryCode|NG|
-|countryCode|BQ|
-|countryCode|MX|
-|countryCode|CW|
-|countryCode|SI|
-|countryCode|MN|
-|countryCode|CA|
-|countryCode|AX|
-|countryCode|VN|
-|countryCode|TW|
-|countryCode|JP|
-|countryCode|IO|
-|countryCode|RO|
-|countryCode|BG|
-|countryCode|GU|
-|countryCode|BR|
-|countryCode|AM|
-|countryCode|ZM|
-|countryCode|DJ|
-|countryCode|JE|
-|countryCode|AT|
-|countryCode|CM|
-|countryCode|SE|
-|countryCode|FJ|
-|countryCode|KZ|
-|countryCode|GL|
-|countryCode|GY|
-|countryCode|CX|
-|countryCode|MW|
-|countryCode|TN|
-|countryCode|ZA|
-|countryCode|TO|
-|countryCode|CY|
-|countryCode|MV|
-|countryCode|PN|
-|countryCode|RW|
-|countryCode|NI|
-|countryCode|KN|
-|countryCode|BJ|
-|countryCode|ET|
-|countryCode|GM|
-|countryCode|TZ|
-|countryCode|VC|
-|countryCode|FK|
-|countryCode|SD|
-|countryCode|MC|
-|countryCode|AU|
-|countryCode|CL|
-|countryCode|DK|
-|countryCode|FR|
-|countryCode|TC|
-|countryCode|CU|
-|countryCode|AL|
-|countryCode|MZ|
-|countryCode|BS|
-|countryCode|NE|
-|countryCode|GT|
-|countryCode|LI|
-|countryCode|NP|
-|countryCode|BF|
-|countryCode|PW|
-|countryCode|KW|
-|countryCode|IN|
-|countryCode|GA|
-|countryCode|TV|
-|countryCode|MO|
-|countryCode|SH|
-|countryCode|MD|
-|countryCode|CK|
-|countryCode|AR|
-|countryCode|SC|
-|countryCode|IE|
-|countryCode|ES|
-|countryCode|LB|
-|countryCode|BM|
-|countryCode|RE|
-|countryCode|KI|
-|countryCode|AG|
-|countryCode|MQ|
-|countryCode|SV|
-|countryCode|JO|
-|countryCode|TH|
-|countryCode|SO|
-|countryCode|MH|
-|countryCode|CG|
-|countryCode|KP|
-|countryCode|GF|
-|countryCode|BA|
-|countryCode|YT|
-|countryCode|GS|
-|countryCode|KE|
-|countryCode|PE|
-|countryCode|BT|
-|countryCode|SZ|
-|countryCode|CR|
-|countryCode|TD|
-|countryCode|DM|
-|countryCode|NC|
-|countryCode|GR|
-|countryCode|GG|
-|countryCode|HN|
-|countryCode|VI|
-|countryCode|CF|
-|countryCode|SN|
-|countryCode|AF|
-|countryCode|MP|
-|countryCode|PH|
-|countryCode|BY|
-|countryCode|LV|
-|countryCode|NO|
-|countryCode|EG|
-|countryCode|KH|
-|countryCode|IQ|
-|countryCode|LC|
-|countryCode|NZ|
-|countryCode|BL|
-|countryCode|UZ|
-|countryCode|ID|
-|countryCode|ER|
-|countryCode|VE|
-|countryCode|FM|
-|countryCode|SB|
-|countryCode|ME|
-|countryCode|AS|
-|currency|AED|
-|currency|AFN|
-|currency|ALL|
-|currency|AMD|
-|currency|ANG|
-|currency|AOA|
-|currency|ARS|
-|currency|AUD|
-|currency|AWG|
-|currency|AZN|
-|currency|BAM|
-|currency|BBD|
-|currency|BDT|
-|currency|BGN|
-|currency|BHD|
-|currency|BIF|
-|currency|BMD|
-|currency|BND|
-|currency|BOB|
-|currency|BRL|
-|currency|BSD|
-|currency|BTN|
-|currency|BWP|
-|currency|BYN|
-|currency|BYR|
-|currency|BZD|
-|currency|CAD|
-|currency|CDF|
-|currency|CHF|
-|currency|CLF|
-|currency|CLP|
-|currency|CNY|
-|currency|COP|
-|currency|CRC|
-|currency|CUC|
-|currency|CUP|
-|currency|CVE|
-|currency|CZK|
-|currency|DJF|
-|currency|DKK|
-|currency|DOP|
-|currency|DZD|
-|currency|EGP|
-|currency|ERN|
-|currency|ETB|
-|currency|EUR|
-|currency|FJD|
-|currency|FKP|
-|currency|GBP|
-|currency|GEL|
-|currency|GHS|
-|currency|GIP|
-|currency|GMD|
-|currency|GNF|
-|currency|GTQ|
-|currency|GYD|
-|currency|HKD|
-|currency|HNL|
-|currency|HRK|
-|currency|HTG|
-|currency|HUF|
-|currency|IDR|
-|currency|ILS|
-|currency|INR|
-|currency|IQD|
-|currency|IRR|
-|currency|ISK|
-|currency|JMD|
-|currency|JOD|
-|currency|JPY|
-|currency|KES|
-|currency|KGS|
-|currency|KHR|
-|currency|KMF|
-|currency|KPW|
-|currency|KRW|
-|currency|KWD|
-|currency|KYD|
-|currency|KZT|
-|currency|LAK|
-|currency|LBP|
-|currency|LKR|
-|currency|LRD|
-|currency|LSL|
-|currency|LTL|
-|currency|LVL|
-|currency|LYD|
-|currency|MAD|
-|currency|MDL|
-|currency|MGA|
-|currency|MKD|
-|currency|MMK|
-|currency|MNT|
-|currency|MOP|
-|currency|MRO|
-|currency|MUR|
-|currency|MVR|
-|currency|MWK|
-|currency|MXN|
-|currency|MYR|
-|currency|MZN|
-|currency|NAD|
-|currency|NGN|
-|currency|NIO|
-|currency|NOK|
-|currency|NPR|
-|currency|NZD|
-|currency|OMR|
-|currency|PAB|
-|currency|PEN|
-|currency|PGK|
-|currency|PHP|
-|currency|PKR|
-|currency|PLN|
-|currency|PYG|
-|currency|QAR|
-|currency|RON|
-|currency|RSD|
-|currency|RUB|
-|currency|RWF|
-|currency|SAR|
-|currency|SBD|
-|currency|SCR|
-|currency|SDG|
-|currency|SEK|
-|currency|SGD|
-|currency|SHP|
-|currency|SKK|
-|currency|SLL|
-|currency|SOS|
-|currency|SRD|
-|currency|SSP|
-|currency|STD|
-|currency|SVC|
-|currency|SYP|
-|currency|SZL|
-|currency|THB|
-|currency|TJS|
-|currency|TMT|
-|currency|TND|
-|currency|TOP|
-|currency|TRY|
-|currency|TTD|
-|currency|TWD|
-|currency|TZS|
-|currency|UAH|
-|currency|UGX|
-|currency|USD|
-|currency|UYU|
-|currency|UZS|
-|currency|VEF|
-|currency|VND|
-|currency|VUV|
-|currency|WST|
-|currency|XAF|
-|currency|XAG|
-|currency|XAU|
-|currency|XBA|
-|currency|XBB|
-|currency|XBC|
-|currency|XBD|
-|currency|XCD|
-|currency|XDR|
-|currency|XOF|
-|currency|XPD|
-|currency|XPF|
-|currency|XPT|
-|currency|XTS|
-|currency|YER|
-|currency|ZAR|
-|currency|ZMK|
-|currency|ZMW|
-|currency|BTC|
-|currency|JEP|
-|currency|GGP|
-|currency|IMP|
-|currency|XFU|
-|currency|GBX|
-|currency|CNH|
-|currency|EEK|
-|currency|MTL|
-|currency|TMM|
-|currency|ZWD|
-|currency|ZWL|
-|currency|ZWN|
-|currency|ZWR|
 |repaymentType|constant_periodicity|
 |repaymentType|constant_principal|
 |repaymentType|bullet|
@@ -9076,62 +8811,6 @@ This operation does not require authentication
 |guarantorableType|EstateAsset|
 |guarantorableType|GroupMembership|
 
-<h2 id="tocSgroupmembershipattributes">GroupMembershipAttributes</h2>
-
-<a id="schemagroupmembershipattributes"></a>
-
-```json
-{
-  "sex": "F",
-  "status": "approved",
-  "memberRight": "no_right",
-  "dead": false,
-  "fatherId": "1234acds3",
-  "adoption": "none",
-  "extendedMinority": true,
-  "provisionalAdministration": true,
-  "judicialProtection": false,
-  "extrajudicialProtection": false,
-  "dummyUserId": "Yu1234ac"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|dummyUserId|string|true|none|Id of an existing dummy user.|
-|coHolder|boolean|false|none|Is the person a main data subject of the group|
-|dead|boolean|false|none|Is the person deceased?|
-|fatherId|string|false|none|Internal reference to the father, must be an id of an existing dummy user|
-|motherId|string|false|none|internal reference to the mother, must be an id of an existing dummy user|
-|currentSpouseId|string|false|none|internal reference to the partner, must be an id of an existing dummy user|
-|spouseType|string|false|none|type of partner relationship if current spouse exist|
-|regimeType|string|false|none|type of matrimonial regime if spouse_type is spouse|
-|adoption|string|false|none|type of adoption if any|
-|extendedMinority|boolean|false|none|none|
-|provisionalAdministration|boolean|false|none|none|
-|judicialProtection|boolean|false|none|none|
-|extrajudicialProtection|boolean|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|spouseType|spouse|
-|spouseType|legal_cohabitant|
-|spouseType|simple_cohabitant|
-|regimeType|common_only_acquets|
-|regimeType|separate_ownership|
-|regimeType|separate_ownership_with_participation_clause|
-|regimeType|separate_ownership_with_community_addition|
-|regimeType|conventional_community|
-|regimeType|full_community|
-|adoption|none|
-|adoption|simple|
-|adoption|full|
-
 <h2 id="tocSgroupmembership">GroupMembership</h2>
 
 <a id="schemagroupmembership"></a>
@@ -9141,6 +8820,7 @@ This operation does not require authentication
   "id": "Yu1234ac",
   "type": "groupMembership",
   "attributes": {
+    "dummyUserId": "Yu1234ac",
     "sex": "F",
     "status": "approved",
     "memberRight": "no_right",
@@ -9150,8 +8830,7 @@ This operation does not require authentication
     "extendedMinority": true,
     "provisionalAdministration": true,
     "judicialProtection": false,
-    "extrajudicialProtection": false,
-    "dummyUserId": "Yu1234ac"
+    "extrajudicialProtection": false
   }
 }
 
@@ -9161,14 +8840,40 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|same as dummyUserId below|
-|type|string|true|none|none|
+|id|string|true|none|Same as `dummyUserId` below|
+|type|string|true|none|Resource type - `groupMembership`|
+|attributes|object|true|none|none|
+|» dummyUserId|string|true|none|Id of an existing dummy user.|
+|» coHolder|boolean|false|none|Is the person a main data subject of the group|
+|» dead|boolean|false|none|Is the person deceased?|
+|» fatherId|string|false|none|Internal reference to the father, must be an ID of an existing dummy user.|
+|» motherId|string|false|none|Internal reference to the mother, must be an ID of an existing dummy user.|
+|» currentSpouseId|string|false|none|Internal reference to the partner, must be an ID of an existing dummy user.|
+|» spouseType|string|false|none|Type of partner relationship if current spouse exist.|
+|» regimeType|string|false|none|Type of matrimonial regime if `spouseType` is spouse|
+|» adoption|string|false|none|Type of adoption if any|
+|» extendedMinority|boolean|false|none|Does the group membership have an extended minority?|
+|» provisionalAdministration|boolean|false|none|Does the group membership have a provisional administration?|
+|» judicialProtection|boolean|false|none|Does the group membership have a judicial protection?|
+|» extrajudicialProtection|boolean|false|none|Does the group membership have an extrajudicial protection?|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|groupMembership|
+|spouseType|spouse|
+|spouseType|legal_cohabitant|
+|spouseType|simple_cohabitant|
+|regimeType|legal_regime|
+|regimeType|separate_ownership|
+|regimeType|acquests_participation|
+|regimeType|separate_ownership_with_community_addition|
+|regimeType|conventional_community|
+|regimeType|full_community|
+|adoption|none|
+|adoption|simple|
+|adoption|full|
 
 <h2 id="tocSgroupmembershipwithdummyuser">GroupMembershipWithDummyUser</h2>
 
@@ -9203,54 +8908,21 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|dummyUserId of the family member|
-|type|string|true|none|none|
+|id|string|true|none|`dummyUserId` of the family member|
+|type|string|true|none|Resource type - `groupMembership`|
 |attributes|object|true|none|none|
-|» coHolder|boolean|false|none|Is the person a main data subject of the group|
+|» coHolder|boolean|false|none|Is the person a main data subject of the group.|
 |» dead|boolean|false|none|Is the person deceased?|
-|» fatherId|string|false|none|Internal reference to the father, must be an id of an existing dummy user|
-|» motherId|string|false|none|internal reference to the mother, must be an id of an existing dummy user|
-|» currentSpouseId|string|false|none|internal reference to the partner, must be an id of an existing dummy user|
+|» fatherId|string|false|none|Internal reference to the father, must be an ID of an existing dummy user.|
+|» motherId|string|false|none|Internal reference to the mother, must be an ID of an existing dummy user.|
+|» currentSpouseId|string|false|none|Internal reference to the partner, must be an ID of an existing dummy user.|
+|» dummyUser|[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)|false|none|none|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|groupMembership|
-
-<h2 id="tocSgroupattributes">GroupAttributes</h2>
-
-<a id="schemagroupattributes"></a>
-
-```json
-{
-  "internalName": "Lucas Niets",
-  "id": "acbdj6472",
-  "clientId": "a675742",
-  "state": "active",
-  "companyAdvisorId": "987gfr"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|string|true|none|Internal group id. Must be unique. Will be generated randomly if not provided|
-|internalName|string|false|none|Internal client name, won't be visible to client|
-|companyAdvisorId|string|true|none|Id of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
-|clientId|string|true|none|Id of the 'main' client. Must be an existing dummy user.|
-|state|string|false|none|state of the group|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|state|draft|
-|state|active|
-|state|suspended|
-|state|marked_for_deletion|
 
 <h2 id="tocSgroup">Group</h2>
 
@@ -9261,8 +8933,9 @@ This operation does not require authentication
   "id": "acbdj6472",
   "type": "group",
   "attributes": {
-    "internalName": "Lucas Niets",
     "id": "acbdj6472",
+    "internalName": "Lucas Niets",
+    "state": "active",
     "clientId": "a675742",
     "companyAdvisorId": "987gfr"
   }
@@ -9274,18 +8947,32 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal group ID.|
+|type|string|true|none|Resource type - `group`|
+|attributes|object|true|none|none|
+|» id|string|true|none|Internal group ID. Must be unique. Will be generated randomly if not provided.|
+|» internalName|string|false|none|Internal client name, won't be visible to client|
+|» companyAdvisorId|string|true|none|ID of the employee that will be assigned the relationship manager role for this group, must be existing user that is authorized to create client. Will default to company admin.|
+|» clientId|string|true|none|ID of the 'main' client. Must be an existing dummy user.|
+|» locale|string|false|none|Default language for the group. Defaults to the locale of the company advisor.|
+|» state|string|false|none|State of the group|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|group|
+|locale|fr|
+|locale|nl|
+|locale|en|
+|state|draft|
+|state|active|
+|state|suspended|
+|state|marked_for_deletion|
 
-<h2 id="tocSinsuranceobject">InsuranceObject</h2>
+<h2 id="tocSinsurance">Insurance</h2>
 
-<a id="schemainsuranceobject"></a>
+<a id="schemainsurance"></a>
 
 ```json
 {
@@ -9353,49 +9040,49 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal ID of the insurance.|
+|type|string|true|none|Resource type - `insurance`|
 |attributes|object|true|none|none|
-|» id|string|false|none|Internal id to the insurance, must be unique in the group scope. Will be generated randomly if not provided|
-|» apiOnly|string|false|none|can only be edited through the api endpoint|
-|» name|string|false|none|Custom name of the policy/insurance. If left empty will be constructed from the reference|
-|» reference|string|true|none|Reference of the policy|
-|» insuranceType|string|true|none|type of insurance contract|
-|» startDate|string|true|none|Start date of the contract. YYYY-MM-DD|
+|» id|string|false|none|Internal ID of the insurance, must be unique in the group scope. Will be generated randomly if not provided.|
+|» apiOnly|boolean|false|none|Can only be edited through the API endpoint.|
+|» name|string|false|none|Custom name of the policy/insurance. If left empty will be constructed from the reference.|
+|» reference|string|true|none|Reference of the policy.|
+|» insuranceType|string|true|none|Type of insurance contract.|
+|» startDate|string|true|none|Start date of the contract. *YYYY-MM-DD*.|
 |» noTerm|boolean|false|none|Is the contract without term?|
-|» endDate|string|true|none|End date of the contract. Required if no_term is false. Ignored if no_term is true. YYYY-MM-DD|
-|» fixedTerm|boolean|false|none|Is it a fixed term contract? Ignored if no_term is true.|
-|» situationDate|string|false|none|Date at which the amounts where calculated. Defaults to the begining of the current year. YYYY-MM-DD|
-|» currency|string|false|none|Currency of the value(s)|
+|» endDate|string|true|none|End date of the contract. Required if `noTerm` is **false**. Ignored if `noTerm` is **true**. *YYYY-MM-DD*.|
+|» fixedTerm|boolean|false|none|Is it a fixed term contract? Ignored if `noTerm` is *true*.|
+|» situationDate|string|false|none|Date at which the amounts where calculated. Defaults to the begining of the current year. *YYYY-MM-DD*.|
+|» currency|string|false|none|Currency of the value(s). Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#currencies) for the complete list of allowed currencies.|
 |» onlyDeathCover|boolean|false|none|Does the contract only include death insurance, ie. no capital is paid in case of life at term.|
-|» acquiredReserve|number|true|none|Acquired reserve / current contract value. Ignored if onlyDeathCover is true. Decimals must be separated by a dot. Eg. 200000.55|
-|» deathPayout|string|false|none|Payout in case of death. Degressive is assumed linear over the contract duration, fixed_amount if onlyDeathCover, reserve otherwise|
-|» deathValue|number|false|none|Death cover amount. Only if deathPayout is 'fixed_amount' or 'degressive'.|
-|» acquiredLifeValue|number|false|none|Acquired value in case of life at term (assuming no additional premiums are paid). Ignored if onlyDeathCover is true. Defaults to same as acquiredReserve|
-|» reduced|boolean|false|none|answer 'true' if the contract was reduced or the premium was unique|
+|» acquiredReserve|number|true|none|Acquired reserve / current contract value. Ignored if `onlyDeathCover` is *true*. Decimals must be separated by a dot. Eg. 200000.55|
+|» deathPayout|string|false|none|Payout in case of death. Degressive is assumed linear over the contract duration, **fixed_amount** if `onlyDeathCover`, **reserve** otherwise.|
+|» deathValue|number|false|none|Death cover amount. Only if `deathPayout` is *'fixed_amount'* or *'degressive'*.|
+|» acquiredLifeValue|number|false|none|Acquired value in case of life at term (assuming no additional premiums are paid). Ignored if `onlyDeathCover` is *true*. Defaults to same as `acquiredReserve`.|
+|» reduced|boolean|false|none|Answer *'true'* if the contract was reduced or the premium was unique.|
 |» premiumsPaid|number|false|none|Premiums paid up to the situation date (net of taxes, fees...).|
-|» premiumPeriodicity|string|false|none|Periodicity of the premiums. Ignored if reduced is 'true'|
-|» premiumEndDate|string|false|none|Date until premiums are to be paid. Ignored if reduced is 'true'. Default contract end_date if any YYYY-MM-DD|
-|» premium|number|false|none|Periodic premium expected to be paid. Ignored if reduced is 'true'|
-|» lifeValue|number|false|none|Expected capital in case of life at term (including additional premiums). Ignored if only_death_cover is true. Default to acquiredLifeValue if reduced.|
-|» enumPolicyholder|string|true|none|Is the policyholder a company or a physical person (other)|
-|» employerId|string|false|none|Id of the company (group asset) in case the policyholder is a company. eg. group insurance. Ignored if enumPolicyholder is 'other'.|
-|» employerName|string|false|none|Name of the employer in case the policyholder is a company. eg. group insurance. Ignored if enumPolicyholder is 'other'.|
-|» policyholderIds|[string]|false|none|Ignored if enumPolicyholder is 'company'. Will assume each borrower holds an equivalent share of the policy.|
-|» enumInsuredParty|string|false|none|Is the insured the 'policyholders' or other designated person(s)?|
-|» insuredPartyIds|[string]|false|none|Ignored if enumInsuredParty is 'policyholders'.|
-|» beneficiaryIsCompany|boolean|false|none|In case a company is the policyholder, is the company the beneficiary of the contract? Ignored unless enumPolicyholder is 'company'|
-|» enumLifeBeneficiary|string|false|none|Who is(are) the life beneficiary(ies)? Ignored if company is 'beneficiaryIsCompany'|
-|» lifeBeneficiaryIds|[string]|false|none|Ignored if enumLifeBeneficiary is not 'other'.|
-|» enumDeathBeneficiary|string|false|none|Who is(are) the death beneficiary(ies)? Ignored if company is 'beneficiaryIsCompany'|
-|» deathBeneficiaryIds|[string]|false|none|Ignored if enumDeathBeneficiary is not 'other'.|
-|» insuranceCompanyName|string|true|none|The name of the insurance company. Use existing company id in PaxFamilia to ensure consistency?.|
-|» ecbCode|string|false|none|ECB code of the insurance company. If not provided, insurance company will be created from the insuranceCompanyName but accounts won't therefore be linked to proper insurance info and reconciliation and aggregation will therefore be more complicated.|
-|» countryCode|string|false|none|Country of the policy.|
-|» category|string|false|none|category/type of insurance|
-|» managerName|string|false|none|Name of the asset manager|
-|» swiftCode|string|false|none|Swift code of the depository bank, eg. 'GEBABEBB'. If not provided, bank will be created from the bankName but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated.|
-|» bankName|string|false|none|The name of the depository bank. The name of the bank will be derived from its swiftCode if a valid one is provided.|
+|» premiumPeriodicity|string|false|none|Periodicity of the premiums. Ignored if reduced is *'true'*|
+|» premiumEndDate|string|false|none|Date until premiums are to be paid. Ignored if reduced is *'true'*. Default contract end_date if any *YYYY-MM-DD*.|
+|» premium|number|false|none|Periodic premium expected to be paid. Ignored if reduced is *'true'*.|
+|» lifeValue|number|false|none|Expected capital in case of life at term (including additional premiums). Ignored if `onlyDeathCover` is *'true'*. Default to `acquiredLifeValue` if reduced.|
+|» enumPolicyholder|string|true|none|Is the policyholder a company or a physical person (other).|
+|» employerId|string|false|none|Id of the company (group asset) in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|» employerName|string|false|none|Name of the employer in case the policyholder is a *'company'*. eg. group insurance. Ignored if `enumPolicyholder` is *'other'*.|
+|» policyholderIds|[string]|false|none|Ignored if `enumPolicyholder` is *'company'*. Will assume each borrower holds an equivalent share of the policy.|
+|» enumInsuredParty|string|false|none|Is the insured the *'policyholders'* or other designated person(s)?|
+|» insuredPartyIds|[string]|false|none|Ignored if `enumInsuredParty` is *'policyholders'*.|
+|» beneficiaryIsCompany|boolean|false|none|In case a company is the policyholder, is the company the beneficiary of the contract? Ignored unless `enumPolicyholder` is *'company'*.|
+|» enumLifeBeneficiary|string|false|none|Who is(are) the life beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|» lifeBeneficiaryIds|[string]|false|none|Ignored if `enumLifeBeneficiary` is not *'other'*.|
+|» enumDeathBeneficiary|string|false|none|Who is(are) the death beneficiary(ies)? Ignored if company is *'beneficiaryIsCompany'*.|
+|» deathBeneficiaryIds|[string]|false|none|Ignored if `enumDeathBeneficiary` is not *'other'*.|
+|» insuranceCompanyName|string|true|none|The name of the insurance company. Use existing company ID in PaxFamilia to ensure consistency?.|
+|» ecbCode|string|false|none|ECB code of the insurance company. If not provided, insurance company will be created from the `insuranceCompanyName` but accounts won't therefore be linked to proper insurance info and reconciliation and aggregation will therefore be more complicated.|
+|» countryCode|string|false|none|Country of the policy. Refer to the following [link](https://github.com/mlrcbsousa/paxfamilia-enums#country-codes) for the complete list of allowed country codes.|
+|» category|string|false|none|Category/type of insurance.|
+|» managerName|string|false|none|Name of the asset manager.|
+|» swiftCode|string|false|none|Swift code of the depository bank, eg. *'GEBABEBB'*. If not provided, bank will be created from the `bankName` but accounts won't therefore be linked to proper bank info and reconciliation and aggregation will therefore be more complicated.|
+|» bankName|string|false|none|The name of the depository bank. The name of the bank will be derived from its `swiftCode` if a valid one is provided.|
 |» listedRealEstateUnderlyingShare|number|false|none|Underlying portfolio asset composition - listed real estate share|
 |» equityUnderlyingShare|number|false|none|Underlying portfolio asset composition - participations in listed companies share|
 |» privateEquityUnderlyingShare|number|false|none|Underlying portfolio asset composition - participations in non listed companies share|
@@ -9417,193 +9104,11 @@ This operation does not require authentication
 |insuranceType|branch23|
 |insuranceType|branch44|
 |insuranceType|branch26|
+|insuranceType|euro_fund|
+|insuranceType|unit_linked|
+|insuranceType|multi_vehicle|
+|insuranceType|capitalization|
 |insuranceType|other_insurance|
-|currency|AED|
-|currency|AFN|
-|currency|ALL|
-|currency|AMD|
-|currency|ANG|
-|currency|AOA|
-|currency|ARS|
-|currency|AUD|
-|currency|AWG|
-|currency|AZN|
-|currency|BAM|
-|currency|BBD|
-|currency|BDT|
-|currency|BGN|
-|currency|BHD|
-|currency|BIF|
-|currency|BMD|
-|currency|BND|
-|currency|BOB|
-|currency|BRL|
-|currency|BSD|
-|currency|BTN|
-|currency|BWP|
-|currency|BYN|
-|currency|BYR|
-|currency|BZD|
-|currency|CAD|
-|currency|CDF|
-|currency|CHF|
-|currency|CLF|
-|currency|CLP|
-|currency|CNY|
-|currency|COP|
-|currency|CRC|
-|currency|CUC|
-|currency|CUP|
-|currency|CVE|
-|currency|CZK|
-|currency|DJF|
-|currency|DKK|
-|currency|DOP|
-|currency|DZD|
-|currency|EGP|
-|currency|ERN|
-|currency|ETB|
-|currency|EUR|
-|currency|FJD|
-|currency|FKP|
-|currency|GBP|
-|currency|GEL|
-|currency|GHS|
-|currency|GIP|
-|currency|GMD|
-|currency|GNF|
-|currency|GTQ|
-|currency|GYD|
-|currency|HKD|
-|currency|HNL|
-|currency|HRK|
-|currency|HTG|
-|currency|HUF|
-|currency|IDR|
-|currency|ILS|
-|currency|INR|
-|currency|IQD|
-|currency|IRR|
-|currency|ISK|
-|currency|JMD|
-|currency|JOD|
-|currency|JPY|
-|currency|KES|
-|currency|KGS|
-|currency|KHR|
-|currency|KMF|
-|currency|KPW|
-|currency|KRW|
-|currency|KWD|
-|currency|KYD|
-|currency|KZT|
-|currency|LAK|
-|currency|LBP|
-|currency|LKR|
-|currency|LRD|
-|currency|LSL|
-|currency|LTL|
-|currency|LVL|
-|currency|LYD|
-|currency|MAD|
-|currency|MDL|
-|currency|MGA|
-|currency|MKD|
-|currency|MMK|
-|currency|MNT|
-|currency|MOP|
-|currency|MRO|
-|currency|MUR|
-|currency|MVR|
-|currency|MWK|
-|currency|MXN|
-|currency|MYR|
-|currency|MZN|
-|currency|NAD|
-|currency|NGN|
-|currency|NIO|
-|currency|NOK|
-|currency|NPR|
-|currency|NZD|
-|currency|OMR|
-|currency|PAB|
-|currency|PEN|
-|currency|PGK|
-|currency|PHP|
-|currency|PKR|
-|currency|PLN|
-|currency|PYG|
-|currency|QAR|
-|currency|RON|
-|currency|RSD|
-|currency|RUB|
-|currency|RWF|
-|currency|SAR|
-|currency|SBD|
-|currency|SCR|
-|currency|SDG|
-|currency|SEK|
-|currency|SGD|
-|currency|SHP|
-|currency|SKK|
-|currency|SLL|
-|currency|SOS|
-|currency|SRD|
-|currency|SSP|
-|currency|STD|
-|currency|SVC|
-|currency|SYP|
-|currency|SZL|
-|currency|THB|
-|currency|TJS|
-|currency|TMT|
-|currency|TND|
-|currency|TOP|
-|currency|TRY|
-|currency|TTD|
-|currency|TWD|
-|currency|TZS|
-|currency|UAH|
-|currency|UGX|
-|currency|USD|
-|currency|UYU|
-|currency|UZS|
-|currency|VEF|
-|currency|VND|
-|currency|VUV|
-|currency|WST|
-|currency|XAF|
-|currency|XAG|
-|currency|XAU|
-|currency|XBA|
-|currency|XBB|
-|currency|XBC|
-|currency|XBD|
-|currency|XCD|
-|currency|XDR|
-|currency|XOF|
-|currency|XPD|
-|currency|XPF|
-|currency|XPT|
-|currency|XTS|
-|currency|YER|
-|currency|ZAR|
-|currency|ZMK|
-|currency|ZMW|
-|currency|BTC|
-|currency|JEP|
-|currency|GGP|
-|currency|IMP|
-|currency|XFU|
-|currency|GBX|
-|currency|CNH|
-|currency|EEK|
-|currency|MTL|
-|currency|TMM|
-|currency|ZWD|
-|currency|ZWL|
-|currency|ZWN|
-|currency|ZWR|
 |deathPayout|premium|
 |deathPayout|reserve|
 |deathPayout|fixed_amount|
@@ -9637,255 +9142,6 @@ This operation does not require authentication
 |enumDeathBeneficiary|foundation|
 |enumDeathBeneficiary|bank|
 |enumDeathBeneficiary|other|
-|countryCode|TJ|
-|countryCode|JM|
-|countryCode|HT|
-|countryCode|ST|
-|countryCode|MS|
-|countryCode|AE|
-|countryCode|PK|
-|countryCode|NL|
-|countryCode|LU|
-|countryCode|BZ|
-|countryCode|IR|
-|countryCode|BO|
-|countryCode|UY|
-|countryCode|GH|
-|countryCode|SA|
-|countryCode|CI|
-|countryCode|MF|
-|countryCode|TF|
-|countryCode|AI|
-|countryCode|QA|
-|countryCode|SX|
-|countryCode|LY|
-|countryCode|BV|
-|countryCode|PG|
-|countryCode|KG|
-|countryCode|GQ|
-|countryCode|EH|
-|countryCode|NU|
-|countryCode|PR|
-|countryCode|GD|
-|countryCode|KR|
-|countryCode|HM|
-|countryCode|SM|
-|countryCode|SL|
-|countryCode|CD|
-|countryCode|MK|
-|countryCode|TR|
-|countryCode|DZ|
-|countryCode|GE|
-|countryCode|PS|
-|countryCode|BB|
-|countryCode|UA|
-|countryCode|GP|
-|countryCode|PF|
-|countryCode|NA|
-|countryCode|BW|
-|countryCode|SY|
-|countryCode|TG|
-|countryCode|DO|
-|countryCode|AQ|
-|countryCode|CH|
-|countryCode|MG|
-|countryCode|FO|
-|countryCode|VG|
-|countryCode|GI|
-|countryCode|BN|
-|countryCode|LA|
-|countryCode|IS|
-|countryCode|EE|
-|countryCode|UM|
-|countryCode|LT|
-|countryCode|RS|
-|countryCode|MR|
-|countryCode|AD|
-|countryCode|HU|
-|countryCode|TK|
-|countryCode|MY|
-|countryCode|AO|
-|countryCode|CV|
-|countryCode|NF|
-|countryCode|PA|
-|countryCode|GW|
-|countryCode|BE|
-|countryCode|PT|
-|countryCode|GB|
-|countryCode|IM|
-|countryCode|US|
-|countryCode|YE|
-|countryCode|HK|
-|countryCode|AZ|
-|countryCode|CC|
-|countryCode|ML|
-|countryCode|SK|
-|countryCode|VU|
-|countryCode|TL|
-|countryCode|HR|
-|countryCode|SR|
-|countryCode|MU|
-|countryCode|CZ|
-|countryCode|PM|
-|countryCode|LS|
-|countryCode|WS|
-|countryCode|KM|
-|countryCode|IT|
-|countryCode|BI|
-|countryCode|WF|
-|countryCode|GN|
-|countryCode|SG|
-|countryCode|CO|
-|countryCode|CN|
-|countryCode|AW|
-|countryCode|MA|
-|countryCode|FI|
-|countryCode|VA|
-|countryCode|ZW|
-|countryCode|KY|
-|countryCode|BH|
-|countryCode|PY|
-|countryCode|EC|
-|countryCode|LR|
-|countryCode|RU|
-|countryCode|PL|
-|countryCode|OM|
-|countryCode|MT|
-|countryCode|SS|
-|countryCode|DE|
-|countryCode|TM|
-|countryCode|SJ|
-|countryCode|MM|
-|countryCode|TT|
-|countryCode|IL|
-|countryCode|BD|
-|countryCode|NR|
-|countryCode|LK|
-|countryCode|UG|
-|countryCode|NG|
-|countryCode|BQ|
-|countryCode|MX|
-|countryCode|CW|
-|countryCode|SI|
-|countryCode|MN|
-|countryCode|CA|
-|countryCode|AX|
-|countryCode|VN|
-|countryCode|TW|
-|countryCode|JP|
-|countryCode|IO|
-|countryCode|RO|
-|countryCode|BG|
-|countryCode|GU|
-|countryCode|BR|
-|countryCode|AM|
-|countryCode|ZM|
-|countryCode|DJ|
-|countryCode|JE|
-|countryCode|AT|
-|countryCode|CM|
-|countryCode|SE|
-|countryCode|FJ|
-|countryCode|KZ|
-|countryCode|GL|
-|countryCode|GY|
-|countryCode|CX|
-|countryCode|MW|
-|countryCode|TN|
-|countryCode|ZA|
-|countryCode|TO|
-|countryCode|CY|
-|countryCode|MV|
-|countryCode|PN|
-|countryCode|RW|
-|countryCode|NI|
-|countryCode|KN|
-|countryCode|BJ|
-|countryCode|ET|
-|countryCode|GM|
-|countryCode|TZ|
-|countryCode|VC|
-|countryCode|FK|
-|countryCode|SD|
-|countryCode|MC|
-|countryCode|AU|
-|countryCode|CL|
-|countryCode|DK|
-|countryCode|FR|
-|countryCode|TC|
-|countryCode|CU|
-|countryCode|AL|
-|countryCode|MZ|
-|countryCode|BS|
-|countryCode|NE|
-|countryCode|GT|
-|countryCode|LI|
-|countryCode|NP|
-|countryCode|BF|
-|countryCode|PW|
-|countryCode|KW|
-|countryCode|IN|
-|countryCode|GA|
-|countryCode|TV|
-|countryCode|MO|
-|countryCode|SH|
-|countryCode|MD|
-|countryCode|CK|
-|countryCode|AR|
-|countryCode|SC|
-|countryCode|IE|
-|countryCode|ES|
-|countryCode|LB|
-|countryCode|BM|
-|countryCode|RE|
-|countryCode|KI|
-|countryCode|AG|
-|countryCode|MQ|
-|countryCode|SV|
-|countryCode|JO|
-|countryCode|TH|
-|countryCode|SO|
-|countryCode|MH|
-|countryCode|CG|
-|countryCode|KP|
-|countryCode|GF|
-|countryCode|BA|
-|countryCode|YT|
-|countryCode|GS|
-|countryCode|KE|
-|countryCode|PE|
-|countryCode|BT|
-|countryCode|SZ|
-|countryCode|CR|
-|countryCode|TD|
-|countryCode|DM|
-|countryCode|NC|
-|countryCode|GR|
-|countryCode|GG|
-|countryCode|HN|
-|countryCode|VI|
-|countryCode|CF|
-|countryCode|SN|
-|countryCode|AF|
-|countryCode|MP|
-|countryCode|PH|
-|countryCode|BY|
-|countryCode|LV|
-|countryCode|NO|
-|countryCode|EG|
-|countryCode|KH|
-|countryCode|IQ|
-|countryCode|LC|
-|countryCode|NZ|
-|countryCode|BL|
-|countryCode|UZ|
-|countryCode|ID|
-|countryCode|ER|
-|countryCode|VE|
-|countryCode|FM|
-|countryCode|SB|
-|countryCode|ME|
-|countryCode|AS|
 |category|protection|
 |category|investment|
 
@@ -9917,11 +9173,11 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |id|string|true|none|Internal ID of group|
-|type|string|true|none|none|
+|type|string|true|none|Resource type - `group`|
 |attributes|object|true|none|none|
 |» id|string|true|none|Internal ID of group|
-|» companyAdvisorId|string|true|none|Internal ID of company advisor for this group. Must be an existing companyMembership.|
-|» authorizedCompanyUserIds|[string]|true|none|Internal IDs of other company employees allowed access to the group. Must be existing companyMemberships.|
+|» companyAdvisorId|string|true|none|Internal ID of company advisor for this group. Must be an existing `companyMembership`.|
+|» authorizedCompanyUserIds|[string]|true|none|Internal IDs of other company employees allowed access to the group. Must be existing `companyMemberships`.|
 
 #### Enumerated Values
 
@@ -9929,14 +9185,18 @@ This operation does not require authentication
 |---|---|
 |type|group|
 
-<h2 id="tocSrefreshvalues">RefreshValues</h2>
+<h2 id="tocSrefreshvaluesestateasset">RefreshValuesEstateAsset</h2>
 
-<a id="schemarefreshvalues"></a>
+<a id="schemarefreshvaluesestateasset"></a>
 
 ```json
 {
-  "id": "12345h",
-  "type": "estateAsset"
+  "id": "123dfer",
+  "type": "estateAsset",
+  "attributes": {
+    "id": "123dfer",
+    "currentValue": 2344
+  }
 }
 
 ```
@@ -9945,25 +9205,85 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
-|type|string|true|none|none|
+|id|string|true|none|Internal ID reference to the asset|
+|type|string|true|none|Resource type|
+|attributes|object|true|none|none|
+|» id|string|true|none|Internal ID reference to the asset|
+|» currentValue|number|true|none|Current value of the asset|
+|» situationDate|string|false|none|Date at which the amounts where calculated. Must be in the past. Defaults to the refresh date. *YYYY-MM-DD*.|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|estateAsset|
-|type|estateLiability|
-|type|insurance|
 
-<h2 id="tocSinsurance">insurance</h2>
+<h2 id="tocSrefreshvaluesestateliability">RefreshValuesEstateLiability</h2>
 
-<a id="schemainsurance"></a>
+<a id="schemarefreshvaluesestateliability"></a>
 
 ```json
 {
-  "id": "12345h",
-  "type": "estateAsset",
+  "id": "123dfer",
+  "type": "estateLiability",
+  "attributes": {
+    "id": "123dfer",
+    "rate": 2,
+    "rateType": "fixed",
+    "repaymentStart": "custom_date",
+    "customRepaymentStartDate": "1987-08-16",
+    "amountAtRepaymentStart": 38626,
+    "periodicity": "monthly",
+    "periodsDuration": 28,
+    "prepaid": false,
+    "prepaymentDate": "2007-08-16"
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|Internal reference to the liability|
+|type|string|true|none|Resource type|
+|attributes|object|true|none|none|
+|» id|string|true|none|Internal reference to the liability|
+|» rate|number|true|none|Annual interest rate. Up to two decimals. Decimals must be separated by a dot. Eg. 2.25|
+|» rateType|string|false|none|Fixed or variable interest rate|
+|» repaymentStart|string|false|none|Repayment start|
+|» customRepaymentStartDate|string|false|none|First repayment date. YYYY-MM-DD. Ignored unless `repaymentStart` is *custom_date*.|
+|» amountAtRepaymentStart|number|false|none|Loan balance on the repayment start date. Defaults to initialAmount. Up to two decimals. Decimals must be separated by a dot. Eg. 200000.55,|
+|» periodicity|string|false|none|Periodicity of the principal and/or interest payment.|
+|» periodsDuration|integer|false|none|Number of repayment periods. Ignored if `repaymentType` has no end date (no_end_pay_interest or no_end_capitalized_interest)|
+|» prepaid|boolean|false|none|Has the loan been prepaid? (or is it expected to be prepaid at some future date?)|
+|» prepaymentDate|string|false|none|Prepayment date. Defaults to current date if prepaid is set to true, otherwise ignored. *'YYYY-MM-DD'*|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|estateLiability|
+|rateType|fixed|
+|rateType|variable|
+|repaymentStart|one_period_after_contract_date|
+|repaymentStart|first_day_of_next_period|
+|repaymentStart|last_day_of_current_period|
+|repaymentStart|custom_date|
+|periodicity|monthly|
+|periodicity|quarterly|
+|periodicity|semi_annual|
+|periodicity|annual|
+
+<h2 id="tocSrefreshvaluesinsurance">RefreshValuesInsurance</h2>
+
+<a id="schemarefreshvaluesinsurance"></a>
+
+```json
+{
+  "id": "123dfer",
+  "type": "insurance",
   "attributes": {
     "id": "123dfer",
     "acquiredReserve": 2344,
@@ -9976,9 +9296,22 @@ This operation does not require authentication
 
 ### Properties
 
-*allOf - discriminator: RefreshValues.type*
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|Internal reference to the insurance|
+|type|string|true|none|Resource type|
+|attributes|object|true|none|none|
+|» id|string|true|none|Internal reference to the insurance|
+|» acquiredReserve|number|false|none|Acquired reserve / current contract value. Decimals must be separated by a dot. Eg. 200000.55|
+|» acquiredLifeValue|number|false|none|Acquired value in case of life at term (assuming no additional premiums are paid).|
+|» deathValue|number|false|none|Death cover amount.|
+|» situationDate|string|false|none|Date at which the amounts where calculated. Must be in the past. Defaults to the begining of the current year. *YYYY-MM-DD*.|
 
-*and*
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|insurance|
 
 <h2 id="tocSestateobjectidsfilter">EstateObjectIdsFilter</h2>
 
@@ -10002,9 +9335,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|apiOnly|boolean|false|none|filter for 'api_only' true or not|
-|type|string|true|none|filter for estate object type to search for|
-|groupIds|[string]|false|none|group ids to filter for|
+|apiOnly|boolean|false|none|Filter for *'api_only'* *true* or not.|
+|type|string|true|none|Filter for estate object type to search for.|
+|groupIds|[string]|false|none|Group IDs to filter for.|
 
 #### Enumerated Values
 
@@ -10049,9 +9382,9 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |data|[object]|true|none|none|
-|» groupId|string|false|none|none|
-|» type|string|false|none|none|
-|» ids|[string]|false|none|none|
+|» groupId|string|false|none|Internal ID of a group|
+|» type|string|false|none|Resource type|
+|» ids|[string]|false|none|Internal IDs of estate objects (`estateAsset`, `estateLiability`, `insurance`)|
 
 #### Enumerated Values
 
@@ -10083,9 +9416,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|groupId|string|true|none|none|
-|type|string|true|none|type of estate objects to be deleted|
-|ids|[string]|true|none|estate objects ids to be deleted|
+|groupId|string|true|none|Internal ID of a group|
+|type|string|true|none|Type of estate objects to be deleted|
+|ids|[string]|true|none|Estate objects ids to be deleted|
 
 #### Enumerated Values
 
@@ -10129,6 +9462,7 @@ This operation does not require authentication
       "internalName": "Lucas Niets Beson",
       "id": "group_id_123",
       "clientId": "family_head_id_123",
+      "locale": "nl",
       "companyAdvisorId": "987gfr"
     },
     "groupMembership": {
@@ -10153,9 +9487,11 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|true|none|none|
+|type|string|true|none|Resource type, not the same as `group` to not confuse with that one, this includes `group`, `groupMembership` and `dummyUser` as a whole|
 |attributes|object|true|none|none|
-|» dummyUsers|[[DummyUserAttributes](#schemadummyuserattributes)]|true|none|DummyUser objects that represent the familyHead and optionally, the partner|
+|» dummyUsers|[[DummyUser/properties/attributes](#schemadummyuser/properties/attributes)]|true|none|DummyUser objects that represent the `familyHead` and optionally, the `partner`|
+|» group|[Group/properties/attributes](#schemagroup/properties/attributes)|true|none|Attributes for the Group|
+|» groupMembership|[GroupMembership/properties/attributes](#schemagroupmembership/properties/attributes)|false|none|GroupMembership of the `familyHead` current spouse|
 
 #### Enumerated Values
 
@@ -10183,7 +9519,7 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |data|object|true|none|none|
-|» id|string|true|none|Internal ID of the resource to be updated|
+|» id|string|true|none|Internal ID of the resource to be updated.|
 |» type|string|true|none|Type of the resource to be updated|
 |» newId|string|true|none|New ID of the resource to be updated to|
 
@@ -10206,11 +9542,11 @@ This operation does not require authentication
 
 ```json
 {
-  "self": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
-  "first": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
-  "prev": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
-  "next": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
-  "last": "http://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
+  "self": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=3&page%5Bsize%5D=50",
+  "first": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=1&page%5Bsize%5D=50",
+  "prev": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=2&page%5Bsize%5D=50",
+  "next": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=4&page%5Bsize%5D=50",
+  "last": "https://subdomain.paxfamilia.com/api/v1/company-units?page%5Bnumber%5D=5&page%5Bsize%5D=50"
 }
 
 ```
@@ -10219,11 +9555,11 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|self|string|true|none|Link to the current page of the collection|
-|first|string|true|none|Link to the first page of the collection|
-|prev|string|true|none|Link to the previous page of the collection|
-|next|string|true|none|Link to the next page of the collection|
-|last|string|true|none|Link to the last page of the collection|
+|self|string|true|none|Link to the current page of the collection.|
+|first|string|true|none|Link to the first page of the collection.|
+|prev|string|true|none|Link to the previous page of the collection.|
+|next|string|true|none|Link to the next page of the collection.|
+|last|string|true|none|Link to the last page of the collection.|
 
 <h2 id="tocSpaginationmeta">PaginationMeta</h2>
 
@@ -10246,7 +9582,7 @@ This operation does not require authentication
 {
   "@context": "http://schema.org/",
   "@type": "WebAPI",
-  "description": "This is the first version of the PaxFamilia 'public' API. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/).",
+  "description": "This is the first version of the **PaxFamilia API**. You can find out more about **PaxFamilia** at our [website](https://www.paxfamilia.com/).",
   "documentation": "https://www.paxfamilia.com/",
   "termsOfService": "https://www.paxfamilia.com/hubfs/Conditions%20g%C3%A9n%C3%A9rales/CGU_PaxFamilia_B2B_V3_clean%2026112018.pdf?hsLang=fr-fr",
 
